@@ -1,5 +1,5 @@
-import {makeNumericFormula} from 'coda-packs-sdk';
-import {makeNumericParameter} from 'coda-packs-sdk';
+import {makeNumericFormula} from 'packs-sdk';
+import {makeNumericParameter} from 'packs-sdk';
 
 const DegreesParameter = makeNumericParameter('angle', 'An angle measured in degrees.');
 const RadiansParameter = makeNumericParameter('angle', 'An angle measured in radians.');

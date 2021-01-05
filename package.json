@@ -17,6 +17,11 @@
   },
   "homepage": "https://github.com/kr-project/packs-examples#readme",
   "dependencies": {
-    "coda-packs-sdk": "git+https://266b5c97c3bef1359cc7094b4726e2da447538e0:x-oauth-basic@github.com/kr-project/packs-sdk.git#e79bbd196bf080b266f038ddd2bceb83b45e1270"
+    "packs-sdk": "git+https://266b5c97c3bef1359cc7094b4726e2da447538e0:x-oauth-basic@github.com/kr-project/packs-sdk.git#36256d05fe0490488f1bb579011ccb3357537cf4",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.3"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.20"
   }
 }
