@@ -5,7 +5,7 @@ https://github.com/kr-project/packs-sdk
 
 ## Prerequisites
 
-Make sure you have `node`, `typescript`, and `npm` installed. TODO: flesh out recommended steps for installin these.
+Make sure you have `node`, `typescript`, and `npm` installed. TODO: flesh out recommended steps for installing these.
 
 ## One-time Setup
 
@@ -13,7 +13,7 @@ To be able to work with the examples in this repo, simply run `npm install` to i
 
 ## Setting Up Your Own Project
 
-When setting up your own project, install the `coda-packs-sdk` npm packge and then run `coda init`
+When setting up your own project, install the `packs-sdk` npm packge and then run `coda init`
 to set up a skeleton project based on the `template` example in this repo.
 
 TODO: Implement `coda init`
@@ -23,7 +23,12 @@ TODO: Implement `coda init`
 The simplest way to get started with the SDK is to install it globally:
 
 ```bash
+# Install the Coda Packs SDK globally on your system.
 npm install --global https://266b5c97c3bef1359cc7094b4726e2da447538e0:x-oauth-basic@github.com/kr-project/packs-sdk#e79bbd196bf080b266f038ddd2bceb83b45e1270
+# Install typescript and ts-node, if using.
+npm install --global typescript
+npm install --global ts-node
+npm install --global @types/node
 ```
 
 ### Single-Project Install (Recommended)
