@@ -1,0 +1,22 @@
+{
+  "name": "coda-packs-examples",
+  "version": "0.0.1",
+  "description": "Examples of Coda (coda.io) packs.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kr-project/packs-examples.git"
+  },
+  "author": "Jonathan Goldman (jonathan@coda.io)",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/kr-project/packs-examples/issues"
+  },
+  "homepage": "https://github.com/kr-project/packs-examples#readme",
+  "dependencies": {
+    "coda-packs-sdk": "git+https://266b5c97c3bef1359cc7094b4726e2da447538e0:x-oauth-basic@github.com/kr-project/packs-sdk.git#e79bbd196bf080b266f038ddd2bceb83b45e1270"
+  }
+}
