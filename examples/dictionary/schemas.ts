@@ -15,9 +15,7 @@ export const definitionSchema = makeObjectSchema({
     headword: {type: ValueType.String, required: true},
     partOfSpeech: {type: ValueType.String},
     firstUse: {type: ValueType.String},
-    // TODO: Make required again once SDK is updated.
-    // offensive: {type: ValueType.Boolean, required: true},
-    offensive: {type: ValueType.Boolean},
+    offensive: {type: ValueType.Boolean, required: true},
   },
 });
 
