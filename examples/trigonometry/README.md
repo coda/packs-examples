@@ -8,3 +8,11 @@ The `execute` implementation, which is the substance of the formula, is very sim
 delegating to a built-in JavaScript `Math` function or performing a simple calculation.
 
 As always, these formulas are bundled into a `manifest.ts` file to complete the pack definition.
+
+## Running the Tests
+
+Run the test just for this pack by using:
+
+```bash
+mocha --require ts-node/register examples/trigonometry/test/trigonometry_test.ts
+```

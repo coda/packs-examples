@@ -4,7 +4,7 @@
   "description": "Examples of Coda (coda.io) packs.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --require ts-node/register examples/**/*_test.ts"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,17 @@
   },
   "homepage": "https://github.com/kr-project/packs-examples#readme",
   "dependencies": {
-    "coda-packs-sdk": "git+https://266b5c97c3bef1359cc7094b4726e2da447538e0:x-oauth-basic@github.com/kr-project/packs-sdk.git#e79bbd196bf080b266f038ddd2bceb83b45e1270"
+    "packs-sdk": "git+https://e348902eb3982eb6f9593b2dcecfea5393b11d90:x-oauth-basic@github.com/kr-project/packs-sdk.git#2ce558eac5b76e29ba98ba108a489027100245dc"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.14",
+    "@types/mocha": "^8.2.0",
+    "@types/node": "^14.14.20",
+    "@types/sinon": "^9.0.10",
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1",
+    "sinon": "^9.2.2",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.3"
   }
 }
