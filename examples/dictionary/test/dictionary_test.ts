@@ -41,6 +41,8 @@ describe('Dictionary pack', () => {
     const response = await executeFormulaFromPackDef(manifest, 'Dictionary::Define', ['foo'], context);
 
     assert.equal(1, response.length);
+    // The response object has gone through normalization, standardizing the capitalization and
+    // formatting of object propery names to be consistent across packs.
     assert.deepEqual(response[0], {
       Id: 'foo',
       Definitions: ['definition of foo'],
