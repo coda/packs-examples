@@ -1,16 +1,27 @@
-import {makeObjectSchema} from 'coda-packs-sdk';
-import {ValueType} from 'coda-packs-sdk';
+import {makeObjectSchema} from 'packs-sdk';
+import {makeSchema} from 'packs-sdk';
+import {ValueType} from 'packs-sdk';
 
 export const definitionSchema = makeObjectSchema({
   type: ValueType.Object,
-  identity: {
-    packId: 1892,
-    name: 'Definition',
-  },
-  primary: 'word',
-  id: 'id',
+  // The "primary" property tells Coda which of your object's properties
+  // should be used as a label for your object. Pack objects will be rendered
+  // as a chip showing the label, and the rest of the fields will show up
+  // when hovering over the chip.
+  primary: 'headword',
   properties: {
-    url: {type: ValueType.String, codaType: ValueType.Url},
-    ahrefs_rank: {type: ValueType.Number},
+    id: {type: ValueType.String, required: true},
+    definitions: {type: ValueType.Array, items: {type: ValueType.String}, required: true},
+    headword: {type: ValueType.String, required: true},
+    partOfSpeech: {type: ValueType.String},
+    firstUse: {type: ValueType.String},
+    // TODO: Make required again once SDK is updated.
+    // offensive: {type: ValueType.Boolean, required: true},
+    offensive: {type: ValueType.Boolean},
   },
+});
+
+export const definitionArraySchema = makeSchema({
+  type: ValueType.Array,
+  items: definitionSchema,
 });

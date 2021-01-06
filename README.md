@@ -65,6 +65,11 @@ Use the `coda` commandline tool to execute formulas directly. For example:
 coda execute examples/trigonometry/manifest.ts Trig::Cosine 0
 ```
 
+## Running Example Tests
+
+Each of the accompanying examples include sample unittests. You can run them all with `npm test`.
+Each example's readme explains how to run those tests individually.
+
 ## Building Examples: TODO
 
 ## Example Walkthroughs
