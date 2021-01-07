@@ -27,6 +27,14 @@ export const formulas = {
       response: {
         schema: schemas.definitionArraySchema,
       },
+      network: {
+        // This indicates that the user must register a "connection" (account) with the pack
+        // to successfully call this formula, i.e. the user needs to have entered an API
+        // key and associate that API key with usage of this formula.
+        requiresConnection: true,
+        // Since this is a read-only formula, it has no side effect.
+        hasSideEffect: false,
+      },
       examples: [
         {
           params: ['hello'],

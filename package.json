@@ -4,7 +4,8 @@
   "description": "Examples of Coda (coda.io) packs.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require ts-node/register examples/**/*_test.ts"
+    "test": "mocha --require ts-node/register examples/**/*_test.ts",
+    "integration": "mocha --require ts-node/register examples/**/*_integration.ts"
   },
   "repository": {
     "type": "git",
