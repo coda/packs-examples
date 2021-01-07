@@ -28,7 +28,7 @@ export const formulas = {
         schema: schemas.definitionArraySchema,
       },
       network: {
-        // This indicates that the user must register a "connection" (account) with the
+        // This indicates that the user must register a "connection" (account) with the pack
         // to successfully call this formula, i.e. the user needs to have entered an API
         // key and associate that API key with usage of this formula.
         requiresConnection: true,
