@@ -1,5 +1,5 @@
-import {PackCategory} from '../../types';
-import type {PackDefinition} from '../../types';
+import {PackCategory} from 'packs-sdk';
+import type {PackDefinition} from 'packs-sdk';
 import {formats} from './formulas';
 import {formulas} from './formulas';
 import {syncTables} from './formulas';

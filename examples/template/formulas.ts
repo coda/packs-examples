@@ -1,6 +1,6 @@
-import type {Format} from '../../types';
-import type {PackFormulas} from '../../api';
-import type {SyncTable} from '../../api';
+import type {Format} from 'packs-sdk';
+import type {PackFormulas} from 'packs-sdk';
+import type {GenericSyncTable} from 'packs-sdk';
 
 export const formulas: PackFormulas = {
   MyPack: [
@@ -9,7 +9,7 @@ export const formulas: PackFormulas = {
   ],
 };
 
-export const syncTables: SyncTable[] = [
+export const syncTables: GenericSyncTable[] = [
   // Sync table definitions go here, e.g.
   // makeSyncTable({...}),
 ];
