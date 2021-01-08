@@ -16,8 +16,6 @@ To be able to work with the examples in this repo, simply run `npm install` to i
 When setting up your own project, install the `packs-sdk` npm packge and then run `coda init`
 to set up a skeleton project based on the `template` example in this repo.
 
-TODO: Implement `coda init`
-
 ### Global Install (Quick)
 
 The simplest way to get started with the SDK is to install it globally:
