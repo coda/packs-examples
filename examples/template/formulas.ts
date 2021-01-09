@@ -1,6 +1,6 @@
 import type {Format} from 'packs-sdk';
-import type {PackFormulas} from 'packs-sdk';
 import type {GenericSyncTable} from 'packs-sdk';
+import type {PackFormulas} from 'packs-sdk';
 
 export const formulas: PackFormulas = {
   MyPack: [
