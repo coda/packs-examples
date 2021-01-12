@@ -1,12 +1,20 @@
+import type {Continuation} from 'packs-sdk';
 import type {FetchRequest} from 'packs-sdk';
 import type {GenericSyncTable} from 'packs-sdk';
+import type {GitHubRepo} from './types';
 import {GitHubReviewEvent} from './types';
 import type {PackFormulas} from 'packs-sdk';
+import {PullRequestStateFilter} from './types';
 import {UserVisibleError} from 'packs-sdk';
 import {makeObjectFormula} from 'packs-sdk';
 import {makeStringParameter} from 'packs-sdk';
 import {apiUrl} from './helpers';
+import {autocompleteSearchObjects} from 'packs-sdk';
+import {getPullRequests} from './helpers';
+import {getRepos} from './helpers';
+import {makeMetadataFormula} from 'packs-sdk';
 import {makeSimpleAutocompleteMetadataFormula} from 'packs-sdk';
+import {makeSyncTable} from 'packs-sdk';
 import {parsePullUrl} from './helpers';
 import * as schemas from './schemas';
 
@@ -103,13 +111,100 @@ export const formulas: PackFormulas = {
       },
       parameters: [pullRequestUrlParameter, pullRequestReviewActionTypeParameter, pullRequestReviewCommentParameter],
       examples: [
-        {params: ['https://github.com/kr-project/packs-examples/pull/123', 'COMMENT', 'Some comment'], result: 'TODO'},
+        {
+          params: ['https://github.com/kr-project/packs-examples/pull/123', 'COMMENT', 'Some comment'],
+          result: {
+            Id: 12345,
+            User: {
+              Login: 'someuser',
+              Id: 98765,
+              Avatar: 'https://avatars2.githubusercontent.com/u/12345',
+              Url: 'https://github.com/someuser',
+            },
+            Body: 'Some comment',
+            State: 'COMMENTED',
+            Url: 'https://github.com/kr-project/packs-examples/pull/123',
+            CommitId: 'ff3d90e1d62c37b93994078fad0dad37d3e',
+          },
+        },
       ],
     }),
   ],
 };
 
+// A parameter that identifies a repo to sync data from using the repo's url.
+// For each sync configuration, the user must select a single repo from which to sync, since GitHub's API
+// does not return entities across repos. However, a user can set up multiple sync configurations
+// and each one can individually sync from a separate repo.
+const repoUrlParameter = makeStringParameter(
+  'repoUrl',
+  'The URL of the repository to list pull requests from. For example "https://github.com/[org]/[repo]".',
+  {
+    // This autocomplete formula will list all of the repos that the current user has access to
+    // and expose them as a searchable dropdown in the UI.
+    // It fetches the GitHub repo objects and then runs a simple text search over the repo name.
+    autocomplete: makeMetadataFormula(async (context, search) => {
+      let results: GitHubRepo[] = [];
+      let continuation: Continuation | undefined;
+      do {
+        const response = await getRepos(context, continuation);
+        results = results.concat(...response.result);
+        ({continuation} = response);
+      } while (continuation && continuation.nextUrl);
+      // This helper function can implement most autocomplete use cases. It takes the user's current
+      // search (if any) and an array of arbitrary objects. The final arguments are the property name of
+      // a label field to search over, and finally the property name that should be used as the value
+      // when a user selects a result.
+      // So here, this is saying "search the `name` field of reach result, and use the html_url as the
+      // value once selected".
+      return autocompleteSearchObjects(search, results, 'name', 'html_url');
+    }),
+  },
+);
+
+const baseParameterOptional = makeStringParameter('base', 'The name of the base branch. For example, "master".', {
+  optional: true,
+});
+
+const pullRequestStateOptional = makeStringParameter(
+  'state',
+  'Returns pull requests in the given state. If unspecified, defaults to "open".',
+  {
+    optional: true,
+    autocomplete: makeSimpleAutocompleteMetadataFormula([
+      {display: 'Open pull requests only', value: PullRequestStateFilter.Open},
+      {display: 'Closed pull requests only', value: PullRequestStateFilter.Closed},
+      {display: 'All pull requests', value: PullRequestStateFilter.All},
+    ]),
+  },
+);
+
 export const syncTables: GenericSyncTable[] = [
-  // Sync table definitions go here, e.g.
-  // makeSyncTable({...}),
+  makeSyncTable(
+    // This is the name of the sync table, which will show in the UI.
+    'PullRequests',
+    // This is the schema of a single entity (row) being synced. The formula that implements
+    // this sync must return an array of objects matching this schema. Each such object
+    // will be a row in the resulting table.
+    schemas.pullRequestSchema,
+    {
+      // This is the name of the formula that implements the sync. By convention it should be the
+      // same as the name of the sync table. This will be removed in a future version of the SDK.
+      name: 'PullRequests',
+      // A description to show in the UI.
+      description: 'Sync pull requests from GitHub.',
+      // The implementation of the sync, which must return an array of objects that fit
+      // the pullRequestSchema above, representing a single page of results, and optionally a
+      // `continuation` if there are subsequent pages of results to fetch.
+      execute: (params, context) => getPullRequests(params, context, context.sync.continuation),
+      examples: [],
+      network: {
+        // A sync is a read-only action so there are no side effects.
+        hasSideEffect: false,
+        // Syncing from GitHub obviously requires a user account to be configured and selected.
+        requiresConnection: true,
+      },
+      parameters: [repoUrlParameter, baseParameterOptional, pullRequestStateOptional],
+    },
+  ),
 ];

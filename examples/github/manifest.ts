@@ -1,22 +1,9 @@
 import {AuthenticationType} from 'packs-sdk';
-import {FetchRequest} from 'packs-sdk';
 import {PackCategory} from 'packs-sdk';
 import type {PackDefinition} from 'packs-sdk';
 import {formulas} from './formulas';
-import {makeMetadataFormula} from 'packs-sdk';
+import {getConnectionName} from './helpers';
 import {syncTables} from './formulas';
-
-const getConnectionName = makeMetadataFormula(async context => {
-  const request: FetchRequest = {
-    method: 'GET',
-    url: 'https://api.github.com/user',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-  const response = await context.fetcher.fetch(request);
-  return response.body.login;
-});
 
 export const manifest: PackDefinition = {
   id: 1483,

@@ -35,6 +35,18 @@ coda execute examples/github/manifest.ts GitHub::ReviewPullRequest https://githu
 Note that this will actually update your pull request in GitHub! So be careful and make
 sure you don't inadvertently e.g. approve a real PR if you're just exploring.
 
+To execute the example `PullRequests` table sync, run:
+
+```bash
+coda execute examples/github/manifest.ts PullRequests https://github.com/<your-org>/<your-repo> --fetch
+```
+
+This will fetch all of the pull requests in that repo, using multiple requests if there are multiple result
+pages, combine them into one big array, and log them to the console.
+
+(By default, it will request only open PRs. You can request all PRs or closed PRs using the optional third
+parameter to the sync.)
+
 ## Running the Tests
 
 Run the unittests just for this pack by using:

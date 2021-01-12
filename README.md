@@ -67,3 +67,26 @@ Each example's readme explains how to run those tests individually.
 ## Building Examples: TODO
 
 ## Example Walkthroughs
+
+Several example packs are provided in the `examples` directory. Each example has its
+own readme with more details.
+
+The [`template`](examples/template/README.md) pack is minimal boilerplate for creating
+a new pack from scratch. The contents of this example are automatically copied to your
+working directory if you run the `coda init` command, which is our recommended way to get
+started, rather than manually copying this example.
+
+The [`trigonometry`](examples/trigonometry/README.md) pack is one of the simplest meaningful
+packs. It exposes formulas for common trigonometric functions like sine and cosine by wrapping
+the existing JavaScript implementations of these functions. It's a good way to ease into
+understanding the structure and execution of a pack.
+
+The [`dictionary`](examples/dictionary/README.md) pack is a simple example that uses authentication
+(an API key in this case) and make http requests to a third-party API service. It's a good
+starting point for understanding how packs make http requests and use authentication,
+and to try out the `coda auth` command for setting up authentication locally for development.
+
+The [`github`](examples/github/README.md) pack is a relatively full-featured pack that uses
+OAuth authentication to get user-specific data, and implements both an action formula
+(a formula that can be connected to Coda button that updates a third-party service)
+as well as a sync table.
