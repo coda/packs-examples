@@ -18,7 +18,7 @@ import {makeSyncTable} from 'packs-sdk';
 import {parsePullUrl} from './helpers';
 import * as schemas from './schemas';
 
-// A parameter the identifies a PR to review using its url.
+// A parameter that identifies a PR to review using its url.
 const pullRequestUrlParameter = makeStringParameter(
   'pullRequestUrl',
   'The URL of the pull request. For example, "https://github.com/[org]/[repo]/pull/[id]".',
@@ -197,6 +197,9 @@ export const syncTables: GenericSyncTable[] = [
       // the pullRequestSchema above, representing a single page of results, and optionally a
       // `continuation` if there are subsequent pages of results to fetch.
       execute: (params, context) => getPullRequests(params, context, context.sync.continuation),
+      // Sync table formulas don't require examples, as these formulas are called internally
+      // by the sync infrastructure, so these examples won't be shown to users.
+      // This will be removed in a future version of the SDK.
       examples: [],
       network: {
         // A sync is a read-only action so there are no side effects.

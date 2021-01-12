@@ -8,7 +8,7 @@ const {ValueType, makeObjectSchema} = schema;
 export const userSchema = makeObjectSchema({
   type: ValueType.Object,
   id: 'id',
-  // This is property that will render as a label on the object in the UI.
+  // This is the property that will render as a label on the object in the UI.
   primary: 'login',
   // We list only the subset of fields we care about, the actual user objects are much larger.
   properties: {
@@ -35,7 +35,7 @@ export const userSchema = makeObjectSchema({
 export const teamSchema = makeObjectSchema({
   type: ValueType.Object,
   id: 'id',
-  // This is property that will render as a label on the object in the UI.
+  // This is the property that will render as a label on the object in the UI.
   primary: 'name',
   // We list only the subset of fields we care about, the actual team objects are much larger.
   properties: {
@@ -50,7 +50,7 @@ export const teamSchema = makeObjectSchema({
 export const pullRequestReviewResponseSchema = makeObjectSchema({
   type: ValueType.Object,
   id: 'id',
-  // This is property that will render as a label on the object in the UI.
+  // This is the property that will render as a label on the object in the UI.
   primary: 'body',
   // We list only the subset of fields we care about.
   properties: {
@@ -94,7 +94,7 @@ export const pullRequestSchema = makeObjectSchema({
   // When this table is re-synced any row that matches this id will be replaced, rather
   // than appending the object as a new row.
   id: 'url',
-  // This is property that will render as a label on the object in the UI.
+  // This is the property that will render as a label on the object in the UI.
   primary: 'title',
   // Giving an object an identity means that it can be referenced by other tables.
   // For example, suppose you defined another table listing the pending PRs that have

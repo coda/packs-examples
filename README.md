@@ -71,7 +71,7 @@ Each example's readme explains how to run those tests individually.
 Several example packs are provided in the `examples` directory. Each example has its
 own readme with more details.
 
-The [`template`](examples/template/README.md) pack is minimal boilerplate for creating
+The `template` pack is minimal boilerplate for creating
 a new pack from scratch. The contents of this example are automatically copied to your
 working directory if you run the `coda init` command, which is our recommended way to get
 started, rather than manually copying this example.

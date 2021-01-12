@@ -2,7 +2,7 @@
 
 This is a more substantive example pack that connects to GitHub using OAuth2 authentication,
 and implements a table that syncs various pull requests for one or more repos that the
-user has access to.
+user has access to, as well as an action formula to post a pull request review.
 
 To run the example code and actually connect to GitHub, you'll need to create an OAuth app
 with GitHub and get a client id and client secret. GitHub's documentation for OAuth apps

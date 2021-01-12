@@ -18,6 +18,7 @@ export enum PullRequestStateFilter {
 // Below are types for GitHub object responses. These only include the subset of fields we
 // care about for this pack. The actual responses are much larger.
 
+// https://docs.github.com/en/free-pro-team@latest/rest/reference/pulls#get-a-pull-request
 export interface GitHubPullRequest {
   title: string;
   user: GitHubUser;
@@ -46,6 +47,7 @@ interface GitHubCommit {
   ref: string;
 }
 
+// https://docs.github.com/en/free-pro-team@latest/rest/reference/repos#get-a-repository
 export interface GitHubRepo {
   id: number;
   name: string;
@@ -58,6 +60,7 @@ interface GitHubLabel {
   name: string;
 }
 
+// https://docs.github.com/en/free-pro-team@latest/rest/reference/users#get-a-user
 export interface GitHubUser {
   id: number;
   login: string;
@@ -65,6 +68,7 @@ export interface GitHubUser {
   html_url: string;
 }
 
+// https://docs.github.com/en/free-pro-team@latest/rest/reference/teams#get-a-team-by-name
 interface GitHubTeam {
   id: number;
   name: string;
