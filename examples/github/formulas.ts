@@ -4,6 +4,7 @@ import type {GenericSyncTable} from 'packs-sdk';
 import type {GitHubRepo} from './types';
 import {GitHubReviewEvent} from './types';
 import type {PackFormulas} from 'packs-sdk';
+import {PullRequestReviewResponse} from './types';
 import {PullRequestStateFilter} from './types';
 import {UserVisibleError} from 'packs-sdk';
 import {makeObjectFormula} from 'packs-sdk';
@@ -77,7 +78,7 @@ export const formulas: PackFormulas = {
           // The response is useful to return almost as-is. Our schema definition in the `response` property
           // below will re-map some fields to clearer names and remove extraneous properties without us having
           // to do that manually in code here though.
-          return result.body;
+          return result.body as PullRequestReviewResponse;
         } catch (e) {
           if (e.statusCode === 422) {
             // Some http errors are common usage mistakes that we wish to surface to the user in a clear
@@ -136,7 +137,8 @@ export const formulas: PackFormulas = {
 // For each sync configuration, the user must select a single repo from which to sync, since GitHub's API
 // does not return entities across repos. However, a user can set up multiple sync configurations
 // and each one can individually sync from a separate repo.
-const repoUrlParameter = makeStringParameter(
+// (This is exported so that we can unittest the autocomplete formula.)
+export const repoUrlParameter = makeStringParameter(
   'repoUrl',
   'The URL of the repository to list pull requests from. For example "https://github.com/[org]/[repo]".',
   {

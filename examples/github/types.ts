@@ -25,12 +25,13 @@ export interface GitHubPullRequest {
   number: number;
   html_url: string;
   created_at: string;
-  modified_at: string;
+  updated_at: string;
   closed_at?: string;
   merged_at?: string;
   merge_commit_sha?: string;
   body: string;
   labels: GitHubLabel[];
+  state: string;
   additions: number;
   deletions: number;
   changed_files: number;
@@ -72,5 +73,15 @@ export interface GitHubUser {
 interface GitHubTeam {
   id: number;
   name: string;
+  html_url: string;
+}
+
+// https://docs.github.com/en/free-pro-team@latest/rest/reference/pulls#create-a-review-for-a-pull-request
+export interface PullRequestReviewResponse {
+  id: number;
+  user: GitHubUser;
+  body: string;
+  commit_id: string;
+  state: string;
   html_url: string;
 }
