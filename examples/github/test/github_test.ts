@@ -176,6 +176,7 @@ describe('Github pack', () => {
       );
 
       // Make sure the sync actually pulled in our fake objects from the fetcher.
+      // The result object fields have gone through normalization, which is why they're capitalized.
       assert.equal(syncedObjects.length, 2);
       assert.equal(syncedObjects[0].Title, 'pull request 1');
       assert.equal(syncedObjects[1].Title, 'pull request 2');
