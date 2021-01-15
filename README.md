@@ -1,6 +1,6 @@
 # Coda Packs Examples
 
-This repository provides example code and templates of Coda Packs built with Coda's Packs SDK:
+This repository provides example code and templates for Coda Packs built with Coda's Packs SDK:
 https://github.com/kr-project/packs-sdk
 
 ## Prerequisites
@@ -49,7 +49,8 @@ live in `./node_modules/.bin` and so are more easily used by updating your path.
 
 ### Initialize an Empty Project
 
-After you install in the SDK, run `coda init` to create the structure for a new project and install the necessary dependencies.
+Regardless of whether you install globally or locally, after you install in the SDK,
+run `coda init` to create the structure for a new project and install the necessary dependencies.
 
 ## Running Examples
 
@@ -64,7 +65,11 @@ coda execute examples/trigonometry/manifest.ts Trig::Cosine 0
 Each of the accompanying examples include sample unittests. You can run them all with `npm test`.
 Each example's readme explains how to run those tests individually.
 
-## Building Examples: TODO
+There is also an integration test suite that runs tests that actually connect to the
+APIs used in the example packs. You can run this with `npm run integration`. For this
+to run successfully, you must have set up credentials for each pack. See the readme
+for each example for instructions on how to set up credentials, and how to
+run that example's integration test individually.
 
 ## Example Walkthroughs
 
