@@ -22,7 +22,7 @@ The simplest way to get started with the SDK is to install it globally:
 
 ```bash
 # Install the Coda Packs SDK globally on your system.
-npm install --global https://e348902eb3982eb6f9593b2dcecfea5393b11d90:x-oauth-basic@github.com/kr-project/packs-sdk
+npm install --global git+ssh://github.com/kr-project/packs-sdk.git
 ```
 
 ### Single-Project Install (Recommended)
@@ -35,7 +35,7 @@ Create a new project directory if you haven't already and initialize your projec
 
 ```bash
 # Install the Coda Packs SDK locally in your project.
-npm install --save https://e348902eb3982eb6f9593b2dcecfea5393b11d90:x-oauth-basic@github.com/kr-project/packs-sdk
+npm install --save git+ssh://github.com/kr-project/packs-sdk.git
 ```
 
 Update your path so you can easily use the `coda` commandline (CLI) that ships with the SDK:
