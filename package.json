@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/kr-project/packs-examples#readme",
   "dependencies": {
-    "packs-sdk": "git+ssh://github.com/kr-project/packs-sdk.git#acb6aeb093fe8090c9db32cf0c5254edbef6daf9"
+    "packs-sdk": "git+ssh://github.com/kr-project/packs-sdk.git#3f410f116e5e7b343e258f93904fde686a024c35"
   },
   "devDependencies": {
     "@types/chai": "^4.2.14",
