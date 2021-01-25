@@ -20,5 +20,6 @@ export const manifest: PackDefinition = {
     type: AuthenticationType.QueryParamToken,
     paramName: 'key',
   },
+  formulaNamespace: 'Dictionary',
   formulas,
 };
