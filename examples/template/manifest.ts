@@ -14,7 +14,8 @@ export const manifest: PackDefinition = {
   providerId: 456,
   category: PackCategory.Fun,
   logoPath: 'logo.png',
-
+  formulaNamespace: 'MyPack',
+  // The substance of the pack, imported from other files.
   formulas,
   syncTables,
   formats,

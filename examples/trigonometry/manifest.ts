@@ -12,5 +12,6 @@ export const manifest: PackDefinition = {
   providerId: 2002,
   category: PackCategory.Mathematics,
   logoPath: 'trig.png',
+  formulaNamespace: 'Trig',
   formulas,
 };

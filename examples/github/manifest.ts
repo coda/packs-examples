@@ -43,6 +43,7 @@ export const manifest: PackDefinition = {
     // direct input from the user.
     getConnectionName,
   },
+  formulaNamespace: 'GitHub',
   formulas,
   syncTables,
 };
