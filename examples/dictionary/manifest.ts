@@ -1,6 +1,6 @@
-import {AuthenticationType} from 'packs-sdk';
-import {PackCategory} from 'packs-sdk';
-import type {PackDefinition} from 'packs-sdk';
+import {AuthenticationType} from 'coda-packs-sdk';
+import {PackCategory} from 'coda-packs-sdk';
+import type {PackDefinition} from 'coda-packs-sdk';
 import {formulas} from './formulas';
 
 export const manifest: PackDefinition = {

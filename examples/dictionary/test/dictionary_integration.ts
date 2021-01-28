@@ -1,7 +1,7 @@
 import {assert} from 'chai';
 import {describe} from 'mocha';
 import {it} from 'mocha';
-import {executeFormulaFromPackDef} from 'packs-sdk/dist/development';
+import {executeFormulaFromPackDef} from 'coda-packs-sdk/dist/development';
 import {manifest} from '../manifest';
 
 describe('Dictionary pack integration test', () => {

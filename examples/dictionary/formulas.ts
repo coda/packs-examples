@@ -1,8 +1,8 @@
 import {APIEntry} from './types';
 import {CodaDefinition} from './types';
-import {TypedStandardFormula} from 'packs-sdk';
-import {makeObjectFormula} from 'packs-sdk';
-import {makeStringParameter} from 'packs-sdk';
+import {TypedStandardFormula} from 'coda-packs-sdk';
+import {makeObjectFormula} from 'coda-packs-sdk';
+import {makeStringParameter} from 'coda-packs-sdk';
 import * as schemas from './schemas';
 
 const API_VERSION = 'v3';

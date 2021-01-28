@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/kr-project/packs-examples#readme",
   "dependencies": {
-    "packs-sdk": "git+ssh://github.com/kr-project/packs-sdk.git#3f410f116e5e7b343e258f93904fde686a024c35"
+    "coda-packs-sdk": "git+ssh://git@github.com/kr-project/packs-sdk.git"
   },
   "devDependencies": {
     "@types/chai": "^4.2.14",

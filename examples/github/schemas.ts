@@ -1,4 +1,4 @@
-import {schema} from 'packs-sdk';
+import {schema} from 'coda-packs-sdk';
 
 const {ValueType, makeObjectSchema} = schema;
 

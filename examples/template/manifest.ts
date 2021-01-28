@@ -1,5 +1,5 @@
-import {PackCategory} from 'packs-sdk';
-import type {PackDefinition} from 'packs-sdk';
+import {PackCategory} from 'coda-packs-sdk';
+import type {PackDefinition} from 'coda-packs-sdk';
 import {formats} from './formulas';
 import {formulas} from './formulas';
 import {syncTables} from './formulas';
