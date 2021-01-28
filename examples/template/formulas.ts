@@ -1,6 +1,6 @@
-import type {Format} from 'packs-sdk';
-import type {GenericSyncTable} from 'packs-sdk';
-import type {TypedStandardFormula} from 'packs-sdk';
+import type {Format} from 'coda-packs-sdk';
+import type {GenericSyncTable} from 'coda-packs-sdk';
+import type {TypedStandardFormula} from 'coda-packs-sdk';
 
 export const formulas: TypedStandardFormula[] = [
   // Formula defintions go here, e.g.

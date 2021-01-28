@@ -1,5 +1,5 @@
-import {PackCategory} from 'packs-sdk';
-import {PackDefinition} from 'packs-sdk';
+import {PackCategory} from 'coda-packs-sdk';
+import {PackDefinition} from 'coda-packs-sdk';
 import {formulas} from './formulas';
 
 export const manifest: PackDefinition = {
