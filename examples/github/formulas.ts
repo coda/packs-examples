@@ -112,7 +112,7 @@ export const formulas: TypedStandardFormula[] = [
     parameters: [pullRequestUrlParameter, pullRequestReviewActionTypeParameter, pullRequestReviewCommentParameter],
     examples: [
       {
-        params: ['https://github.com/kr-project/packs-examples/pull/123', 'COMMENT', 'Some comment'],
+        params: ['https://github.com/coda-hq/packs-examples/pull/123', 'COMMENT', 'Some comment'],
         result: {
           Id: 12345,
           User: {
@@ -123,7 +123,7 @@ export const formulas: TypedStandardFormula[] = [
           },
           Body: 'Some comment',
           State: 'COMMENTED',
-          Url: 'https://github.com/kr-project/packs-examples/pull/123',
+          Url: 'https://github.com/coda-hq/packs-examples/pull/123',
           CommitId: 'ff3d90e1d62c37b93994078fad0dad37d3e',
         },
       },
