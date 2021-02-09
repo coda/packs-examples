@@ -41,7 +41,8 @@ npm install --save git+ssh://github.com/coda-hq/packs-sdk.git
 Update your path so you can easily use the `coda` commandline (CLI) that ships with the SDK:
 
 ```bash
-export PATH=./node_modules/.bin:$PATH
+# Make sure to run this from the root directory of your project.
+export PATH=$(pwd)/node_modules/.bin:$PATH
 ```
 
 (Globally-installed npm packages link CLI scripts into your system path. Locally installed packages
