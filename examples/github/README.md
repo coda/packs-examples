@@ -23,7 +23,7 @@ becomes invalid.
 To sync pull requests and output them to the console, you can run:
 
 ```bash
-coda execute examples/github/manifest.ts PullRequests --fetch
+coda execute examples/github/manifest.ts PullRequests https://github.com/<your-org>/<your-repo> --fetch
 ```
 
 To create a review on a pull request, you can run:
