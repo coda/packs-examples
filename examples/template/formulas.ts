@@ -3,7 +3,7 @@ import type {GenericSyncTable} from 'coda-packs-sdk';
 import type {TypedStandardFormula} from 'coda-packs-sdk';
 
 export const formulas: TypedStandardFormula[] = [
-  // Formula defintions go here, e.g.
+  // Formula definitions go here, e.g.
   // makeStringFormula({ ... }),
 ];
 
