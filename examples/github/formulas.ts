@@ -95,11 +95,6 @@ export const formulas: TypedStandardFormula[] = [
     },
     response: {
       schema: schemas.pullRequestReviewResponseSchema,
-      // Since we returned GitHub's response body as-is, this declares that we wish any response property
-      // that is not explicitly declared in our schema to removed from the response. This keeps responses
-      // manageable and understandable, filtering out extraneous fields that may be confusing or unhelpful
-      // to the user.
-      excludeExtraneous: true,
     },
     network: {
       // This formula has a side effect: it changes the status of PR in GitHub.
