@@ -34,6 +34,8 @@ locally.
 Create a new project directory if you haven't already and initialize your project:
 
 ```bash
+# Initialize npm and follow prompts.
+npm init
 # Install the Coda Packs SDK locally in your project.
 npm install --save git+ssh://github.com/coda-hq/packs-sdk.git
 ```
