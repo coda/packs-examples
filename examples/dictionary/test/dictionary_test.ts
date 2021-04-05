@@ -38,7 +38,7 @@ describe('Dictionary pack', () => {
 
     // This is the heart of the test, where we actually execute the formula on a given set of parameters,
     // using our mock execution context.
-    const response = await executeFormulaFromPackDef(manifest, 'Dictionary::Define', ['foo'], context);
+    const response = await executeFormulaFromPackDef(manifest, 'Define', ['foo'], context);
 
     assert.equal(1, response.length);
     // The response object has gone through normalization, standardizing the capitalization and
@@ -62,7 +62,7 @@ describe('Dictionary pack', () => {
   // and make sure that our implementation doesn't throw any errors.
   it('executes with an empty response', async () => {
     context.fetcher.fetch.returns(newJsonFetchResponse([]));
-    const response = await executeFormulaFromPackDef(manifest, 'Dictionary::Define', ['unknown'], context);
+    const response = await executeFormulaFromPackDef(manifest, 'Define', ['unknown'], context);
     assert.deepEqual([], response);
   });
 });

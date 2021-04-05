@@ -9,7 +9,7 @@ describe('Dictionary pack integration test', () => {
     // Here we execute the formula using a real http fetcher. Since this pack requires authentication,
     // this requires that you've already run `coda auth examples/dictionary/manifest.ts` to set up
     // an API key.
-    const response = await executeFormulaFromPackDef(manifest, 'Dictionary::Define', ['coda'], undefined, undefined, {
+    const response = await executeFormulaFromPackDef(manifest, 'Define', ['coda'], undefined, undefined, {
       useRealFetcher: true,
     });
 

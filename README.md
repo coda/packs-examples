@@ -60,7 +60,7 @@ run `coda init` to create the structure for a new project and install the necess
 Use the `coda` commandline tool to execute formulas directly. For example:
 
 ```bash
-coda execute examples/trigonometry/manifest.ts Trig::Cosine 0
+coda execute examples/trigonometry/manifest.ts Cosine 0
 ```
 
 ## Running Example Tests
