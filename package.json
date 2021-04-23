@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/coda-hq/packs-examples#readme",
   "dependencies": {
-    "coda-packs-sdk": "git+ssh://git@github.com/coda-hq/packs-sdk.git#27f9894240895dd56d5e65cf3c1e463a491078a0"
+    "coda-packs-sdk": "git+ssh://git@github.com/coda-hq/packs-sdk.git"
   },
   "devDependencies": {
     "@types/chai": "^4.2.16",
