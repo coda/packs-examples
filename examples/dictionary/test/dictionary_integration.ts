@@ -11,6 +11,7 @@ describe('Dictionary pack integration test', () => {
     // an API key.
     const response = await executeFormulaFromPackDef(manifest, 'Define', ['coda'], undefined, undefined, {
       useRealFetcher: true,
+      manifestPath: require.resolve('../manifest'),
     });
 
     assert.isAtLeast(response.length, 1);

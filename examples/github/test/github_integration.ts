@@ -20,6 +20,7 @@ describe('GitHub pack integration test', () => {
       undefined,
       {
         useRealFetcher: true,
+        manifestPath: require.resolve('../manifest'),
       },
     );
 
