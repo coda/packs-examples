@@ -3,7 +3,7 @@ import type {PackVersionDefinition} from 'coda-packs-sdk';
 import {formulas} from './formulas';
 
 export const manifest: PackVersionDefinition = {
-  version: '1.1',
+  version: '1.0',
   // The Merriam-Webster API uses an API token, which should be included in request urls
   // in a "key=" parameter, so we configure that here. When running `coda auth examples/dictionary/manifest.ts`
   // you will be prompted to enter your API key to use when using `coda execute` to exercise formulas

@@ -5,7 +5,7 @@ import {getConnectionName} from './helpers';
 import {syncTables} from './formulas';
 
 export const manifest: PackVersionDefinition = {
-  version: '0.0.1',
+  version: '1.0',
   // The GitHub pack uses OAuth authentication, to allow each user to login to GitHub via
   // the browser when installing the pack. The pack will operate on their personal data.
   defaultAuthentication: {
@@ -34,6 +34,9 @@ export const manifest: PackVersionDefinition = {
     // direct input from the user.
     getConnectionName,
   },
+  // This tells Coda which domain the pack make requests to. Any fetcher requests to other domains
+  // won't be allowed.
+  networkDomains: ['github.com'],
   formulaNamespace: 'GitHub',
   formulas,
   syncTables,
