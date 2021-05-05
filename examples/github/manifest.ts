@@ -1,20 +1,11 @@
 import {AuthenticationType} from 'coda-packs-sdk';
-import {PackCategory} from 'coda-packs-sdk';
-import type {PackDefinition} from 'coda-packs-sdk';
+import type {PackVersionDefinition} from 'coda-packs-sdk';
 import {formulas} from './formulas';
 import {getConnectionName} from './helpers';
 import {syncTables} from './formulas';
 
-export const manifest: PackDefinition = {
-  id: 1483,
-  name: 'GitHub',
-  shortDescription: 'Sync and update GitHub pull requests.',
-  description: 'Sync and update GitHub pull requests.',
+export const manifest: PackVersionDefinition = {
   version: '0.0.1',
-  exampleImages: [],
-  providerId: 2010,
-  category: PackCategory.DataStorage,
-  logoPath: 'logo.png',
   // The GitHub pack uses OAuth authentication, to allow each user to login to GitHub via
   // the browser when installing the pack. The pack will operate on their personal data.
   defaultAuthentication: {

@@ -1,17 +1,9 @@
 import {AuthenticationType} from 'coda-packs-sdk';
-import {PackCategory} from 'coda-packs-sdk';
-import type {PackDefinition} from 'coda-packs-sdk';
+import type {PackVersionDefinition} from 'coda-packs-sdk';
 import {formulas} from './formulas';
 
-export const manifest: PackDefinition = {
-  id: 1892,
-  name: 'Dictionary',
-  shortDescription: 'Look up definitions from a dictionary.',
-  description: "Look up definitions for English words from Merriam-Webster's Collegiate Dictionary.",
-  version: '1.0',
-  providerId: 2002,
-  category: PackCategory.Fun,
-  logoPath: 'merriam-webster.png',
+export const manifest: PackVersionDefinition = {
+  version: '1.1',
   // The Merriam-Webster API uses an API token, which should be included in request urls
   // in a "key=" parameter, so we configure that here. When running `coda auth examples/dictionary/manifest.ts`
   // you will be prompted to enter your API key to use when using `coda execute` to exercise formulas
@@ -20,6 +12,9 @@ export const manifest: PackDefinition = {
     type: AuthenticationType.QueryParamToken,
     paramName: 'key',
   },
+  // This tells Coda which domain the pack make requests to. Any fetcher requests to other domains
+  // won't be allowed.
+  networkDomains: ['dictionaryapi.com'],
   formulaNamespace: 'Dictionary',
   formulas,
 };
