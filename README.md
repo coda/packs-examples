@@ -1,7 +1,7 @@
 # Coda Packs Examples
 
 This repository provides example code and templates for Coda Packs built with Coda's Packs SDK:
-https://github.com/coda-hq/packs-sdk
+https://github.com/coda/packs-sdk
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ The simplest way to get started with the SDK is to install it globally:
 
 ```bash
 # Install the Coda Packs SDK globally on your system.
-npm install --global git+ssh://github.com/coda-hq/packs-sdk.git
+npm install --global git+ssh://github.com/coda/packs-sdk.git
 ```
 
 ### Single-Project Install (Recommended)
@@ -37,7 +37,7 @@ Create a new project directory if you haven't already and initialize your projec
 # Initialize npm and follow prompts.
 npm init
 # Install the Coda Packs SDK locally in your project.
-npm install --save git+ssh://github.com/coda-hq/packs-sdk.git
+npm install --save git+ssh://github.com/coda/packs-sdk.git
 ```
 
 Update your path so you can easily use the `coda` commandline (CLI) that ships with the SDK:

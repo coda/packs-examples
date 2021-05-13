@@ -10,16 +10,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/coda-hq/packs-examples.git"
+    "url": "git+https://github.com/coda/packs-examples.git"
   },
   "author": "Jonathan Goldman (jonathan@coda.io)",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/coda-hq/packs-examples/issues"
+    "url": "https://github.com/coda/packs-examples/issues"
   },
-  "homepage": "https://github.com/coda-hq/packs-examples#readme",
+  "homepage": "https://github.com/coda/packs-examples#readme",
   "dependencies": {
-    "coda-packs-sdk": "git+ssh://git@github.com/coda-hq/packs-sdk.git"
+    "coda-packs-sdk": "git+ssh://git@github.com/coda/packs-sdk.git"
   },
   "devDependencies": {
     "@types/chai": "^4.2.17",
