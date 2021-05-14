@@ -15,7 +15,7 @@ describe('GitHub pack integration test', () => {
       'PullRequests',
       // This integration test assumes you have access to the packs-examples repo, which you should
       // if you're looking at this example!
-      ['https://github.com/coda-hq/packs-examples', undefined, PullRequestStateFilter.All],
+      ['https://github.com/coda/packs-examples', undefined, PullRequestStateFilter.All],
       undefined,
       undefined,
       {
