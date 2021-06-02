@@ -1,6 +1,6 @@
 import {APIEntry} from './types';
 import {CodaDefinition} from './types';
-import {TypedStandardFormula} from 'coda-packs-sdk';
+import {NetworkConnection, TypedStandardFormula} from 'coda-packs-sdk';
 import {makeObjectFormula} from 'coda-packs-sdk';
 import {makeStringParameter} from 'coda-packs-sdk';
 import * as schemas from './schemas';
@@ -31,7 +31,7 @@ export const formulas: TypedStandardFormula[] = [
       // This indicates that the user must register a "connection" (account) with the pack
       // to successfully call this formula, i.e. the user needs to have entered an API
       // key and associate that API key with usage of this formula.
-      requiresConnection: true,
+      connection: NetworkConnection.Required,
       // Since this is a read-only formula, it has no side effect.
       hasSideEffect: false,
     },
