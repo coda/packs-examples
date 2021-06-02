@@ -1,4 +1,4 @@
-import type {Continuation} from 'coda-packs-sdk';
+import {Continuation, NetworkConnection} from 'coda-packs-sdk';
 import type {FetchRequest} from 'coda-packs-sdk';
 import type {GenericSyncTable} from 'coda-packs-sdk';
 import type {GitHubRepo} from './types';
@@ -102,7 +102,7 @@ export const formulas: TypedStandardFormula[] = [
       // in the Coda UI.
       hasSideEffect: true,
       // This formula requires a user account.
-      requiresConnection: true,
+      connection: NetworkConnection.Required,
     },
     parameters: [pullRequestUrlParameter, pullRequestReviewActionTypeParameter, pullRequestReviewCommentParameter],
     examples: [
@@ -200,7 +200,7 @@ export const syncTables: GenericSyncTable[] = [
         // A sync is a read-only action so there are no side effects.
         hasSideEffect: false,
         // Syncing from GitHub obviously requires a user account to be configured and selected.
-        requiresConnection: true,
+        connection: NetworkConnection.Required,
       },
       parameters: [repoUrlParameter, baseParameterOptional, pullRequestStateOptional],
     },
