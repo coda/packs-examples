@@ -1,7 +1,6 @@
 .coda
 .coda.json
 .coda-credentials.json
-.coda-pack.json
 .DS_Store
 .vscode
 node_modules
