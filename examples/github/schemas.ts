@@ -1,6 +1,6 @@
-import {schema} from 'coda-packs-sdk';
-
-const {ValueType, makeObjectSchema} = schema;
+import {ValueHintType} from 'coda-packs-sdk';
+import {ValueType} from 'coda-packs-sdk';
+import {makeObjectSchema} from 'coda-packs-sdk';
 
 // A user associated with an entity or action. This is a child property
 // in many other GitHub objects.
@@ -23,9 +23,9 @@ export const userSchema = makeObjectSchema({
       fromKey: 'avatar_url',
       // We return the image url of the GitHub user's avatar but declare it as codaType: ImageAttachment,
       // which instructs Coda to download the image and host it from Coda for use in Coda docs.
-      codaType: ValueType.ImageAttachment,
+      codaType: ValueHintType.ImageAttachment,
     },
-    url: {type: ValueType.String, fromKey: 'html_url', codaType: ValueType.Url, required: true},
+    url: {type: ValueType.String, fromKey: 'html_url', codaType: ValueHintType.Url, required: true},
   },
 });
 
@@ -41,7 +41,7 @@ export const teamSchema = makeObjectSchema({
   properties: {
     id: {type: ValueType.Number, required: true},
     name: {type: ValueType.String, required: true},
-    url: {type: ValueType.String, fromKey: 'html_url', codaType: ValueType.Url, required: true},
+    url: {type: ValueType.String, fromKey: 'html_url', codaType: ValueHintType.Url, required: true},
   },
 });
 
@@ -59,7 +59,7 @@ export const pullRequestReviewResponseSchema = makeObjectSchema({
     body: {type: ValueType.String, required: true},
     commitId: {type: ValueType.String, fromKey: 'commit_id', required: true},
     state: {type: ValueType.String, required: true},
-    url: {type: ValueType.String, codaType: ValueType.Url, fromKey: 'html_url', required: true},
+    url: {type: ValueType.String, codaType: ValueHintType.Url, fromKey: 'html_url', required: true},
   },
 });
 
@@ -74,7 +74,7 @@ export const repoSchema = makeObjectSchema({
     name: {type: ValueType.String, required: true},
     fullName: {type: ValueType.String, fromKey: 'full_name', required: true},
     description: {type: ValueType.String},
-    url: {type: ValueType.String, fromKey: 'html_url', codaType: ValueType.Url, required: true},
+    url: {type: ValueType.String, fromKey: 'html_url', codaType: ValueHintType.Url, required: true},
   },
 });
 
@@ -119,13 +119,13 @@ export const pullRequestSchema = makeObjectSchema({
       fromKey: 'user',
     },
     pullRequestNumber: {type: ValueType.Number, fromKey: 'number', required: true},
-    url: {type: ValueType.String, fromKey: 'html_url', codaType: ValueType.Url, required: true},
-    created: {type: ValueType.String, fromKey: 'created_at', codaType: ValueType.Date, required: true},
-    modified: {type: ValueType.String, fromKey: 'updated_at', codaType: ValueType.Date, required: true},
-    closed: {type: ValueType.String, fromKey: 'closed_at', codaType: ValueType.Date},
-    merged: {type: ValueType.String, fromKey: 'merged_at', codaType: ValueType.Date},
+    url: {type: ValueType.String, fromKey: 'html_url', codaType: ValueHintType.Url, required: true},
+    created: {type: ValueType.String, fromKey: 'created_at', codaType: ValueHintType.Date, required: true},
+    modified: {type: ValueType.String, fromKey: 'updated_at', codaType: ValueHintType.Date, required: true},
+    closed: {type: ValueType.String, fromKey: 'closed_at', codaType: ValueHintType.Date},
+    merged: {type: ValueType.String, fromKey: 'merged_at', codaType: ValueHintType.Date},
     mergeCommitSha: {type: ValueType.String, fromKey: 'merge_commit_sha'},
-    body: {type: ValueType.String, codaType: ValueType.Markdown},
+    body: {type: ValueType.String, codaType: ValueHintType.Markdown},
     labels: {type: ValueType.Array, items: {type: ValueType.String}},
     state: {type: ValueType.String, required: true},
     sourceBranch: {type: ValueType.String, required: true},
