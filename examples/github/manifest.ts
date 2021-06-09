@@ -20,9 +20,6 @@ export const manifest: PackVersionDefinition = {
     // `Authorization: token <OAUTH-TOKEN>`
     // so we specify a non-default tokenPrefix here.
     tokenPrefix: 'token',
-    // These are deprecated. You will provide your client id and client secret in the Coda developers UI.
-    clientIdEnvVarName: 'PACKS_GITHUB_CLIENT_ID', // DEPRECATED, ignore
-    clientSecretEnvVarName: 'PACKS_GITHUB_CLIENT_SECRET', // DEPRECATED, ignore
     // These are the GitHub-specific scopes the user will be prompted to authorize in order for
     // the functionality in this pack to succeed.
     scopes: ['read:user', 'repo'],

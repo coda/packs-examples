@@ -9,6 +9,6 @@
 //   properties: {
 //     email: {type: ValueType.String},
 //     name: {type: ValueType.String},
-//     dateOfBirth: {type: ValueType.String, codaType: ValueType.Date, fromKey: 'dob'},
+//     dateOfBirth: {type: ValueType.String, codaType: ValueHintType.Date, fromKey: 'dob'},
 //   },
 // });
