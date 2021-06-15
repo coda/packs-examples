@@ -1,4 +1,4 @@
-import {Continuation, NetworkConnection} from 'coda-packs-sdk';
+import {ConnectionRequirement, Continuation, Type} from 'coda-packs-sdk';
 import type {FetchRequest} from 'coda-packs-sdk';
 import type {GenericSyncTable} from 'coda-packs-sdk';
 import type {GitHubRepo} from './types';
@@ -8,7 +8,7 @@ import {PullRequestStateFilter} from './types';
 import {TypedStandardFormula} from 'coda-packs-sdk';
 import {UserVisibleError} from 'coda-packs-sdk';
 import {makeObjectFormula} from 'coda-packs-sdk';
-import {makeStringParameter} from 'coda-packs-sdk';
+import {makeParameter} from 'coda-packs-sdk';
 import {apiUrl} from './helpers';
 import {autocompleteSearchObjects} from 'coda-packs-sdk';
 import {getPullRequests} from './helpers';
@@ -20,36 +20,37 @@ import {parsePullUrl} from './helpers';
 import * as schemas from './schemas';
 
 // A parameter that identifies a PR to review using its url.
-const pullRequestUrlParameter = makeStringParameter(
-  'pullRequestUrl',
-  'The URL of the pull request. For example, "https://github.com/[org]/[repo]/pull/[id]".',
-);
+const pullRequestUrlParameter = makeParameter({
+  type: Type.string,
+  name: 'pullRequestUrl',
+  description: 'The URL of the pull request. For example, "https://github.com/[org]/[repo]/pull/[id]".',
+});
 
 // A parameter that indicates what action to take on the review.
-const pullRequestReviewActionTypeParameter = makeStringParameter(
-  'actionType',
-  'Type of review action. One of Approve, Comment or Request Changes',
-  {
-    // Since there are only an enumerated set of valid values that GitHub
-    // allows, we add an autocomplete function to populate a searchable
-    // dropdown in the Coda UI. This helper function generates an autocomplete
-    // formula when there is a hardcoded set of options. The `display` value
-    // will be shown to users in the UI, while the `value` will be what is
-    // passed to the formula.
-    autocomplete: makeSimpleAutocompleteMetadataFormula([
-      {display: 'Approve', value: GitHubReviewEvent.Approve},
-      {display: 'Comment', value: GitHubReviewEvent.Comment},
-      {display: 'Request Changes', value: GitHubReviewEvent.RequestChanges},
-    ]),
-  },
-);
+const pullRequestReviewActionTypeParameter = makeParameter({
+  type: Type.string,
+  name: 'actionType',
+  description: 'Type of review action. One of Approve, Comment or Request Changes',
+  // Since there are only an enumerated set of valid values that GitHub
+  // allows, we add an autocomplete function to populate a searchable
+  // dropdown in the Coda UI. This helper function generates an autocomplete
+  // formula when there is a hardcoded set of options. The `display` value
+  // will be shown to users in the UI, while the `value` will be what is
+  // passed to the formula.
+  autocomplete: makeSimpleAutocompleteMetadataFormula([
+    {display: 'Approve', value: GitHubReviewEvent.Approve},
+    {display: 'Comment', value: GitHubReviewEvent.Comment},
+    {display: 'Request Changes', value: GitHubReviewEvent.RequestChanges},
+  ]),
+});
 
 // Free-form text to be included as the review comment, if this is a Comment or Request Changes action.
-const pullRequestReviewCommentParameter = makeStringParameter(
-  'comment',
-  'Comment for review. Required if review action type is Comment or Request Changes.',
-  {optional: true},
-);
+const pullRequestReviewCommentParameter = makeParameter({
+  type: Type.string,
+  name: 'comment',
+  description: 'Comment for review. Required if review action type is Comment or Request Changes.',
+  optional: true,
+});
 
 export const formulas: TypedStandardFormula[] = [
   // We use makeObjectFormula because this formula will return a structured object with multiple pieces of
@@ -96,14 +97,12 @@ export const formulas: TypedStandardFormula[] = [
     response: {
       schema: schemas.pullRequestReviewResponseSchema,
     },
-    network: {
-      // This formula has a side effect: it changes the status of PR in GitHub.
-      // Declaring this means this formula will be made available as a button action
-      // in the Coda UI.
-      hasSideEffect: true,
-      // This formula requires a user account.
-      connection: NetworkConnection.Required,
-    },
+    // This formaula requires a user account.
+    connectionRequirement: ConnectionRequirement.Required,
+    // This formula is an action: it changes the status of PR in GitHub.
+    // Declaring this means this formula will be made available as a button action
+    // in the Coda UI.
+    isAction: true,
     parameters: [pullRequestUrlParameter, pullRequestReviewActionTypeParameter, pullRequestReviewCommentParameter],
     examples: [
       {
@@ -131,48 +130,49 @@ export const formulas: TypedStandardFormula[] = [
 // does not return entities across repos. However, a user can set up multiple sync configurations
 // and each one can individually sync from a separate repo.
 // (This is exported so that we can unittest the autocomplete formula.)
-export const repoUrlParameter = makeStringParameter(
-  'repoUrl',
-  'The URL of the repository to list pull requests from. For example "https://github.com/[org]/[repo]".',
-  {
-    // This autocomplete formula will list all of the repos that the current user has access to
-    // and expose them as a searchable dropdown in the UI.
-    // It fetches the GitHub repo objects and then runs a simple text search over the repo name.
-    autocomplete: makeMetadataFormula(async (context, search) => {
-      let results: GitHubRepo[] = [];
-      let continuation: Continuation | undefined;
-      do {
-        const response = await getRepos(context, continuation);
-        results = results.concat(...response.result);
-        ({continuation} = response);
-      } while (continuation && continuation.nextUrl);
-      // This helper function can implement most autocomplete use cases. It takes the user's current
-      // search (if any) and an array of arbitrary objects. The final arguments are the property name of
-      // a label field to search over, and finally the property name that should be used as the value
-      // when a user selects a result.
-      // So here, this is saying "search the `name` field of reach result, and use the html_url as the
-      // value once selected".
-      return autocompleteSearchObjects(search, results, 'name', 'html_url');
-    }),
-  },
-);
+export const repoUrlParameter = makeParameter({
+  type: Type.string,
+  name: 'repoUrl',
+  description: 'The URL of the repository to list pull requests from. For example "https://github.com/[org]/[repo]".',
+  // This autocomplete formula will list all of the repos that the current user has access to
+  // and expose them as a searchable dropdown in the UI.
+  // It fetches the GitHub repo objects and then runs a simple text search over the repo name.
+  autocomplete: makeMetadataFormula(async (context, search) => {
+    let results: GitHubRepo[] = [];
+    let continuation: Continuation | undefined;
+    do {
+      const response = await getRepos(context, continuation);
+      results = results.concat(...response.result);
+      ({continuation} = response);
+    } while (continuation && continuation.nextUrl);
+    // This helper function can implement most autocomplete use cases. It takes the user's current
+    // search (if any) and an array of arbitrary objects. The final arguments are the property name of
+    // a label field to search over, and finally the property name that should be used as the value
+    // when a user selects a result.
+    // So here, this is saying "search the `name` field of reach result, and use the html_url as the
+    // value once selected".
+    return autocompleteSearchObjects(search, results, 'name', 'html_url');
+  }),
+});
 
-const baseParameterOptional = makeStringParameter('base', 'The name of the base branch. For example, "master".', {
+const baseParameterOptional = makeParameter({
+  type: Type.string,
+  name: 'base',
+  description: 'The name of the base branch. For example, "master".',
   optional: true,
 });
 
-const pullRequestStateOptional = makeStringParameter(
-  'state',
-  'Returns pull requests in the given state. If unspecified, defaults to "open".',
-  {
-    optional: true,
-    autocomplete: makeSimpleAutocompleteMetadataFormula([
-      {display: 'Open pull requests only', value: PullRequestStateFilter.Open},
-      {display: 'Closed pull requests only', value: PullRequestStateFilter.Closed},
-      {display: 'All pull requests', value: PullRequestStateFilter.All},
-    ]),
-  },
-);
+const pullRequestStateOptional = makeParameter({
+  type: Type.string,
+  name: 'state',
+  description: 'Returns pull requests in the given state. If unspecified, defaults to "open".',
+  optional: true,
+  autocomplete: makeSimpleAutocompleteMetadataFormula([
+    {display: 'Open pull requests only', value: PullRequestStateFilter.Open},
+    {display: 'Closed pull requests only', value: PullRequestStateFilter.Closed},
+    {display: 'All pull requests', value: PullRequestStateFilter.All},
+  ]),
+});
 
 export const syncTables: GenericSyncTable[] = [
   makeSyncTable(
@@ -195,13 +195,8 @@ export const syncTables: GenericSyncTable[] = [
       // Sync table formulas don't require examples, as these formulas are called internally
       // by the sync infrastructure, so these examples won't be shown to users.
       // This will be removed in a future version of the SDK.
-      examples: [],
-      network: {
-        // A sync is a read-only action so there are no side effects.
-        hasSideEffect: false,
-        // Syncing from GitHub obviously requires a user account to be configured and selected.
-        connection: NetworkConnection.Required,
-      },
+      // Syncing from GitHub obviously requires a user account to be configured and selected.
+      connectionRequirement: ConnectionRequirement.Required,
       parameters: [repoUrlParameter, baseParameterOptional, pullRequestStateOptional],
     },
   ),

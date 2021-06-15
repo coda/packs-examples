@@ -1,9 +1,17 @@
-import {TypedStandardFormula} from 'coda-packs-sdk';
+import {Type, TypedStandardFormula} from 'coda-packs-sdk';
 import {makeNumericFormula} from 'coda-packs-sdk';
-import {makeNumericParameter} from 'coda-packs-sdk';
+import {makeParameter} from 'coda-packs-sdk';
 
-const DegreesParameter = makeNumericParameter('angle', 'An angle measured in degrees.');
-const RadiansParameter = makeNumericParameter('angle', 'An angle measured in radians.');
+const DegreesParameter = makeParameter({
+  type: Type.number,
+  name: 'angle',
+  description: 'An angle measured in degrees.',
+});
+const RadiansParameter = makeParameter({
+  type: Type.number,
+  name: 'angle',
+  description: 'An angle measured in radians.',
+});
 
 export const formulas: TypedStandardFormula[] = [
   makeNumericFormula({

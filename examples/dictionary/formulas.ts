@@ -1,8 +1,8 @@
 import {APIEntry} from './types';
 import {CodaDefinition} from './types';
-import {NetworkConnection, TypedStandardFormula} from 'coda-packs-sdk';
+import {ConnectionRequirement, Type, TypedStandardFormula} from 'coda-packs-sdk';
 import {makeObjectFormula} from 'coda-packs-sdk';
-import {makeStringParameter} from 'coda-packs-sdk';
+import {makeParameter} from 'coda-packs-sdk';
 import * as schemas from './schemas';
 
 const API_VERSION = 'v3';
@@ -23,18 +23,14 @@ export const formulas: TypedStandardFormula[] = [
       // to a more user-friendly structure that we have defined ourselves.
       return entries.map(parseEntry);
     },
-    parameters: [makeStringParameter('word', 'A word to define.')],
+    parameters: [makeParameter({type: Type.string, name: 'word', description: 'A word to define.'})],
     response: {
       schema: schemas.definitionArraySchema,
     },
-    network: {
-      // This indicates that the user must register a "connection" (account) with the pack
-      // to successfully call this formula, i.e. the user needs to have entered an API
-      // key and associate that API key with usage of this formula.
-      connection: NetworkConnection.Required,
-      // Since this is a read-only formula, it has no side effect.
-      hasSideEffect: false,
-    },
+    // This indicates that the user must register a "connection" (account) with the pack
+    // to successfully call this formula, i.e. the user needs to have entered an API
+    // key and associate that API key with usage of this formula.
+    connectionRequirement: ConnectionRequirement.Required,
     examples: [
       {
         params: ['hello'],
