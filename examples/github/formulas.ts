@@ -1,4 +1,4 @@
-import {ConnectionRequirement, Continuation, Type} from 'coda-packs-sdk';
+import {ConnectionRequirement, Continuation, ParameterType, ValueType} from 'coda-packs-sdk';
 import type {FetchRequest} from 'coda-packs-sdk';
 import type {GenericSyncTable} from 'coda-packs-sdk';
 import type {GitHubRepo} from './types';
@@ -7,7 +7,7 @@ import {PullRequestReviewResponse} from './types';
 import {PullRequestStateFilter} from './types';
 import {TypedStandardFormula} from 'coda-packs-sdk';
 import {UserVisibleError} from 'coda-packs-sdk';
-import {makeObjectFormula} from 'coda-packs-sdk';
+import {makeFormula} from 'coda-packs-sdk';
 import {makeParameter} from 'coda-packs-sdk';
 import {apiUrl} from './helpers';
 import {autocompleteSearchObjects} from 'coda-packs-sdk';
@@ -21,14 +21,14 @@ import * as schemas from './schemas';
 
 // A parameter that identifies a PR to review using its url.
 const pullRequestUrlParameter = makeParameter({
-  type: Type.string,
+  type: ParameterType.String,
   name: 'pullRequestUrl',
   description: 'The URL of the pull request. For example, "https://github.com/[org]/[repo]/pull/[id]".',
 });
 
 // A parameter that indicates what action to take on the review.
 const pullRequestReviewActionTypeParameter = makeParameter({
-  type: Type.string,
+  type: ParameterType.String,
   name: 'actionType',
   description: 'Type of review action. One of Approve, Comment or Request Changes',
   // Since there are only an enumerated set of valid values that GitHub
@@ -46,18 +46,18 @@ const pullRequestReviewActionTypeParameter = makeParameter({
 
 // Free-form text to be included as the review comment, if this is a Comment or Request Changes action.
 const pullRequestReviewCommentParameter = makeParameter({
-  type: Type.string,
+  type: ParameterType.String,
   name: 'comment',
   description: 'Comment for review. Required if review action type is Comment or Request Changes.',
   optional: true,
 });
 
 export const formulas: TypedStandardFormula[] = [
-  // We use makeObjectFormula because this formula will return a structured object with multiple pieces of
-  // data about the submitted rview.
-  makeObjectFormula({
+  makeFormula({
+    resultType: ValueType.Object,
     name: 'ReviewPullRequest',
     description: 'Review a pull request.',
+    schema: schemas.pullRequestReviewResponseSchema,
     async execute([pullRequestUrl, actionType, comment], context) {
       if (actionType !== GitHubReviewEvent.Approve && !comment) {
         // You can throw a UserVisibleError at any point in a formula to provide an error message
@@ -94,9 +94,6 @@ export const formulas: TypedStandardFormula[] = [
         throw e;
       }
     },
-    response: {
-      schema: schemas.pullRequestReviewResponseSchema,
-    },
     // This formaula requires a user account.
     connectionRequirement: ConnectionRequirement.Required,
     // This formula is an action: it changes the status of PR in GitHub.
@@ -131,7 +128,7 @@ export const formulas: TypedStandardFormula[] = [
 // and each one can individually sync from a separate repo.
 // (This is exported so that we can unittest the autocomplete formula.)
 export const repoUrlParameter = makeParameter({
-  type: Type.string,
+  type: ParameterType.String,
   name: 'repoUrl',
   description: 'The URL of the repository to list pull requests from. For example "https://github.com/[org]/[repo]".',
   // This autocomplete formula will list all of the repos that the current user has access to
@@ -156,14 +153,14 @@ export const repoUrlParameter = makeParameter({
 });
 
 const baseParameterOptional = makeParameter({
-  type: Type.string,
+  type: ParameterType.String,
   name: 'base',
   description: 'The name of the base branch. For example, "master".',
   optional: true,
 });
 
 const pullRequestStateOptional = makeParameter({
-  type: Type.string,
+  type: ParameterType.String,
   name: 'state',
   description: 'Returns pull requests in the given state. If unspecified, defaults to "open".',
   optional: true,
@@ -175,14 +172,14 @@ const pullRequestStateOptional = makeParameter({
 });
 
 export const syncTables: GenericSyncTable[] = [
-  makeSyncTable(
+  makeSyncTable({
     // This is the name of the sync table, which will show in the UI.
-    'PullRequests',
+    name: 'PullRequests',
     // This is the schema of a single entity (row) being synced. The formula that implements
     // this sync must return an array of objects matching this schema. Each such object
     // will be a row in the resulting table.
-    schemas.pullRequestSchema,
-    {
+    schema: schemas.pullRequestSchema,
+    formula: {
       // This is the name of the formula that implements the sync. By convention it should be the
       // same as the name of the sync table. This will be removed in a future version of the SDK.
       name: 'PullRequests',
@@ -199,5 +196,5 @@ export const syncTables: GenericSyncTable[] = [
       connectionRequirement: ConnectionRequirement.Required,
       parameters: [repoUrlParameter, baseParameterOptional, pullRequestStateOptional],
     },
-  ),
+  }),
 ];
