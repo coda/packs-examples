@@ -1,14 +1,15 @@
 import {APIEntry} from './types';
 import {CodaDefinition} from './types';
-import {ConnectionRequirement, Type, TypedStandardFormula} from 'coda-packs-sdk';
-import {makeObjectFormula} from 'coda-packs-sdk';
+import {ConnectionRequirement, ParameterType, TypedStandardFormula, ValueType} from 'coda-packs-sdk';
+import {makeFormula} from 'coda-packs-sdk';
 import {makeParameter} from 'coda-packs-sdk';
 import * as schemas from './schemas';
 
 const API_VERSION = 'v3';
 
 export const formulas: TypedStandardFormula[] = [
-  makeObjectFormula({
+  makeFormula({
+    resultType: ValueType.Object,
     name: 'Define',
     description: 'Returns the definition and other metadata for a given word.',
     execute: async ([word], context) => {
@@ -23,10 +24,8 @@ export const formulas: TypedStandardFormula[] = [
       // to a more user-friendly structure that we have defined ourselves.
       return entries.map(parseEntry);
     },
-    parameters: [makeParameter({type: Type.string, name: 'word', description: 'A word to define.'})],
-    response: {
-      schema: schemas.definitionArraySchema,
-    },
+    parameters: [makeParameter({type: ParameterType.String, name: 'word', description: 'A word to define.'})],
+    schema: schemas.definitionArraySchema,
     // This indicates that the user must register a "connection" (account) with the pack
     // to successfully call this formula, i.e. the user needs to have entered an API
     // key and associate that API key with usage of this formula.
