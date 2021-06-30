@@ -96,16 +96,6 @@ export const pullRequestSchema = makeObjectSchema({
   id: 'url',
   // This is the property that will render as a label on the object in the UI.
   primary: 'title',
-  // Giving an object an identity means that it can be referenced by other tables.
-  // For example, suppose you defined another table listing the pending PRs that have
-  // as a reviewer. Rather than listing the full data of those PRs inline, you could
-  // simply sync their ids, and return references to the corresponding rows in this
-  // PullRequests sync table. Those references are achieved using an `identity`, though
-  // we do not currently demonstrate that here.
-  identity: {
-    packId: 1892,
-    name: 'PullRequest',
-  },
   // These are the subset of the `properties` below that should be automatically created
   // as columns when this table is first created in the UI. The remainder of the fields can
   // be easily added as columns manually by the user at any time. We choose only to feature

@@ -175,6 +175,12 @@ export const syncTables: GenericSyncTable[] = [
   makeSyncTable({
     // This is the name of the sync table, which will show in the UI.
     name: 'PullRequests',
+    // This the unique id of the table, used internally. By convention, it's often the singular
+    // form the display name defined right above.
+    // Other sync tables and formulas can return references to rows in this table, by defining
+    // an `Identity` object in their response schemas that points to this value, e.g.
+    // `identity: {name: 'PullRequest'}`.
+    identityName: 'PullRequest',
     // This is the schema of a single entity (row) being synced. The formula that implements
     // this sync must return an array of objects matching this schema. Each such object
     // will be a row in the resulting table.
