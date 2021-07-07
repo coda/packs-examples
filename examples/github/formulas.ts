@@ -1,7 +1,12 @@
-import {ConnectionRequirement, Continuation, ParameterType, ValueType} from 'coda-packs-sdk';
+import {ConnectionRequirement} from 'coda-packs-sdk';
+import {Continuation} from 'coda-packs-sdk';
+import {ParameterType} from 'coda-packs-sdk';
+import {Type} from 'coda-packs-sdk';
+import {ValueType} from 'coda-packs-sdk';
 import type {FetchRequest} from 'coda-packs-sdk';
 import type {GenericSyncTable} from 'coda-packs-sdk';
 import type {GitHubRepo} from './types';
+import type {GithubSSHKey} from './types';
 import {GitHubReviewEvent} from './types';
 import {PullRequestReviewResponse} from './types';
 import {PullRequestStateFilter} from './types';
@@ -52,75 +57,112 @@ const pullRequestReviewCommentParameter = makeParameter({
   optional: true,
 });
 
-export const formulas: TypedStandardFormula[] = [
-  makeFormula({
-    resultType: ValueType.Object,
-    name: 'ReviewPullRequest',
-    description: 'Review a pull request.',
-    schema: schemas.pullRequestReviewResponseSchema,
-    async execute([pullRequestUrl, actionType, comment], context) {
-      if (actionType !== GitHubReviewEvent.Approve && !comment) {
-        // You can throw a UserVisibleError at any point in a formula to provide an error message
-        // to be displayed to the user in the UI.
-        throw new UserVisibleError('Comment parameter must be provided for Comment or Request Changes actions.');
-      }
+// We use makeObjectFormula because this formula will return a structured object with multiple pieces of
+// data about the submitted rview.
+const reviewPullRequestFormula = makeFormula({
+  resultType: ValueType.Object,
+  name: 'ReviewPullRequest',
+  description: 'Review a pull request.',
+  schema: schemas.pullRequestReviewResponseSchema,
+  async execute([pullRequestUrl, actionType, comment], context) {
+    if (actionType !== GitHubReviewEvent.Approve && !comment) {
+      // You can throw a UserVisibleError at any point in a formula to provide an error message
+      // to be displayed to the user in the UI.
+      throw new UserVisibleError('Comment parameter must be provided for Comment or Request Changes actions.');
+    }
 
-      const payload = {body: comment, event: actionType};
-      const {owner, repo, pullNumber} = parsePullUrl(pullRequestUrl);
-      const request: FetchRequest = {
-        method: 'POST',
-        url: apiUrl(`/repos/${owner}/${repo}/pulls/${pullNumber}/reviews`),
-        body: JSON.stringify(payload),
-      };
+    const payload = {body: comment, event: actionType};
+    const {owner, repo, pullNumber} = parsePullUrl(pullRequestUrl);
+    const request: FetchRequest = {
+      method: 'POST',
+      url: apiUrl(`/repos/${owner}/${repo}/pulls/${pullNumber}/reviews`),
+      body: JSON.stringify(payload),
+    };
 
-      try {
-        const result = await context.fetcher.fetch(request);
-        // The response is useful to return almost as-is. Our schema definition in the `response` property
-        // below will re-map some fields to clearer names and remove extraneous properties without us having
-        // to do that manually in code here though.
-        return result.body as PullRequestReviewResponse;
-      } catch (e) {
-        if (e.statusCode === 422) {
-          // Some http errors are common usage mistakes that we wish to surface to the user in a clear
-          // way, so we detect those and re-map them to user-visible errors, rather than letting
-          // these fall through as uncaught errors.
-          if (e.message.includes('Can not approve your own pull request')) {
-            throw new UserVisibleError('Can not approve your own pull request');
-          } else if (e.message.includes('Can not request changes on your own pull request')) {
-            throw new UserVisibleError('Can not request changes on your own pull request');
-          }
+    try {
+      const result = await context.fetcher.fetch(request);
+      // The response is useful to return almost as-is. Our schema definition in the `response` property
+      // below will re-map some fields to clearer names and remove extraneous properties without us having
+      // to do that manually in code here though.
+      return result.body as PullRequestReviewResponse;
+    } catch (e) {
+      if (e.statusCode === 422) {
+        // Some http errors are common usage mistakes that we wish to surface to the user in a clear
+        // way, so we detect those and re-map them to user-visible errors, rather than letting
+        // these fall through as uncaught errors.
+        if (e.message.includes('Can not approve your own pull request')) {
+          throw new UserVisibleError('Can not approve your own pull request');
+        } else if (e.message.includes('Can not request changes on your own pull request')) {
+          throw new UserVisibleError('Can not request changes on your own pull request');
         }
-
-        throw e;
       }
-    },
-    // This formaula requires a user account.
-    connectionRequirement: ConnectionRequirement.Required,
-    // This formula is an action: it changes the status of PR in GitHub.
-    // Declaring this means this formula will be made available as a button action
-    // in the Coda UI.
-    isAction: true,
-    parameters: [pullRequestUrlParameter, pullRequestReviewActionTypeParameter, pullRequestReviewCommentParameter],
-    examples: [
-      {
-        params: ['https://github.com/coda/packs-examples/pull/123', 'COMMENT', 'Some comment'],
-        result: {
-          Id: 12345,
-          User: {
-            Login: 'someuser',
-            Id: 98765,
-            Avatar: 'https://avatars2.githubusercontent.com/u/12345',
-            Url: 'https://github.com/someuser',
-          },
-          Body: 'Some comment',
-          State: 'COMMENTED',
-          Url: 'https://github.com/coda/packs-examples/pull/123',
-          CommitId: 'ff3d90e1d62c37b93994078fad0dad37d3e',
+      throw e;
+    }
+  },
+  // This formaula requires a user account.
+  connectionRequirement: ConnectionRequirement.Required,
+  // This formula is an action: it changes the status of PR in GitHub.
+  // Declaring this means this formula will be made available as a button action
+  // in the Coda UI.
+  isAction: true,
+  parameters: [pullRequestUrlParameter, pullRequestReviewActionTypeParameter, pullRequestReviewCommentParameter],
+  examples: [
+    {
+      params: ['https://github.com/coda/packs-examples/pull/123', 'COMMENT', 'Some comment'],
+      result: {
+        Id: 12345,
+        User: {
+          Login: 'someuser',
+          Id: 98765,
+          Avatar: 'https://avatars2.githubusercontent.com/u/12345',
+          Url: 'https://github.com/someuser',
         },
+        Body: 'Some comment',
+        State: 'COMMENTED',
+        Url: 'https://github.com/coda/packs-examples/pull/123',
+        CommitId: 'ff3d90e1d62c37b93994078fad0dad37d3e',
       },
-    ],
-  }),
-];
+    },
+  ],
+});
+
+const sshKeyIndexParameter = makeParameter({
+  name: 'index',
+  type: Type.number,
+  description: 'Of the SSH keys, which to use? Use 1 to get the first.',
+});
+
+// This formula demonstrates the use of incremental/progressive OAuth scopes.
+// Calling this formula requires more permissions from GitHub than the pack requests
+// at its initial installation, and Coda will guide a user through an additional
+// authorization when they try to use a formula with greater permissions like this
+// for the first time.
+const getSSHKeyFormula = makeFormula({
+  name: 'SSHKeys',
+  description: 'Gets one of the public SSH keys of the user.',
+  resultType: ValueType.Object,
+  schema: schemas.SSHKey,
+  // This formula will need these additional OAuth permissions that other formulas in the pack don't.
+  extraOAuthScopes: ['read:public_key'],
+  async execute([index], context) {
+    if (index === 0) {
+      throw new UserVisibleError('The first position is 1, not 0.');
+    }
+    const request: FetchRequest = {
+      method: 'GET',
+      url: apiUrl(`/user/keys`),
+    };
+    const result = await context.fetcher.fetch(request);
+    // We only return 1 of the SSH keys returned because today Coda doesn't support returning
+    // arrays of objects from a formula.
+    return (result.body as GithubSSHKey[])[index - 1];
+  },
+  // This formaula requires a user account.
+  connectionRequirement: ConnectionRequirement.Required,
+  parameters: [sshKeyIndexParameter],
+});
+
+export const formulas: TypedStandardFormula[] = [reviewPullRequestFormula, getSSHKeyFormula];
 
 // A parameter that identifies a repo to sync data from using the repo's url.
 // For each sync configuration, the user must select a single repo from which to sync, since GitHub's API

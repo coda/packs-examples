@@ -5,7 +5,7 @@ import {getConnectionName} from './helpers';
 import {syncTables} from './formulas';
 
 export const manifest: PackVersionDefinition = {
-  version: '1.0',
+  version: '2.2',
   // The GitHub pack uses OAuth authentication, to allow each user to login to GitHub via
   // the browser when installing the pack. The pack will operate on their personal data.
   defaultAuthentication: {
