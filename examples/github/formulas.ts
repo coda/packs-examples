@@ -128,7 +128,7 @@ const reviewPullRequestFormula = makeFormula({
 
 const sshKeyIndexParameter = makeParameter({
   name: 'index',
-  type: Type.number,
+  type: ParameterType.Number,
   description: 'Of the SSH keys, which to use? Use 1 to get the first.',
 });
 
