@@ -5,7 +5,7 @@ import {getConnectionName} from './helpers';
 import {syncTables} from './formulas';
 
 export const manifest: PackVersionDefinition = {
-  version: '2.2',
+  version: '1.0',
   // The GitHub pack uses OAuth authentication, to allow each user to login to GitHub via
   // the browser when installing the pack. The pack will operate on their personal data.
   defaultAuthentication: {
@@ -22,7 +22,7 @@ export const manifest: PackVersionDefinition = {
     tokenPrefix: 'token',
     // These are the GitHub-specific scopes the user will be prompted to authorize in order for
     // the functionality in this pack to succeed.
-    scopes: ['read:user', 'repo'],
+    scopes: ['repo'],
     // This is a simple formula that makes an API call to GitHub to find the name of the
     // user associated with the OAuth access token. This name is used to label the Coda account
     // connection associated with these credentials throughout the Coda UI.

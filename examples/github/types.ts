@@ -85,13 +85,3 @@ export interface PullRequestReviewResponse {
   state: string;
   html_url: string;
 }
-
-export interface GithubSSHKey {
-  key: string;
-  id: number;
-  url: string;
-  title: string;
-  created_at: string;
-  verified: boolean;
-  read_only: boolean;
-}

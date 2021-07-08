@@ -141,16 +141,3 @@ export const pullRequestSchema = makeObjectSchema({
     },
   },
 });
-
-export const SSHKey = makeObjectSchema({
-  type: ValueType.Object,
-  id: 'id',
-  // This is the property that will render as a label on the object in the UI.
-  primary: 'title',
-  // We list only the subset of fields we care about.
-  properties: {
-    id: {type: ValueType.Number, required: true},
-    key: {type: ValueType.String, required: true},
-    title: {type: ValueType.String, required: true},
-  },
-});

@@ -6,7 +6,6 @@ import {ValueType} from 'coda-packs-sdk';
 import type {FetchRequest} from 'coda-packs-sdk';
 import type {GenericSyncTable} from 'coda-packs-sdk';
 import type {GitHubRepo} from './types';
-import type {GithubSSHKey} from './types';
 import {GitHubReviewEvent} from './types';
 import {PullRequestReviewResponse} from './types';
 import {PullRequestStateFilter} from './types';
@@ -81,9 +80,9 @@ const reviewPullRequestFormula = makeFormula({
 
     try {
       const result = await context.fetcher.fetch(request);
-      // The response is useful to return almost as-is. Our schema definition in the `response` property
-      // below will re-map some fields to clearer names and remove extraneous properties without us having
-      // to do that manually in code here though.
+      // The response is useful to return almost as-is. Our schema definition above will re-map
+      // some fields to clearer names and remove extraneous properties without us having to do
+      // that manually in code here though.
       return result.body as PullRequestReviewResponse;
     } catch (e) {
       if (e.statusCode === 422) {
@@ -126,43 +125,40 @@ const reviewPullRequestFormula = makeFormula({
   ],
 });
 
-const sshKeyIndexParameter = makeParameter({
-  name: 'index',
-  type: ParameterType.Number,
-  description: 'Of the SSH keys, which to use? Use 1 to get the first.',
-});
-
 // This formula demonstrates the use of incremental/progressive OAuth scopes.
 // Calling this formula requires more permissions from GitHub than the pack requests
 // at its initial installation, and Coda will guide a user through an additional
 // authorization when they try to use a formula with greater permissions like this
-// for the first time.
-const getSSHKeyFormula = makeFormula({
-  name: 'SSHKeys',
-  description: 'Gets one of the public SSH keys of the user.',
-  resultType: ValueType.Object,
-  schema: schemas.SSHKey,
-  // This formula will need these additional OAuth permissions that other formulas in the pack don't.
-  extraOAuthScopes: ['read:public_key'],
+// and get an error.
+const getUserFormula = makeFormula({
+  name: 'UserEmail',
+  description: `Returns the primary email address used on this user's github account.`,
+  resultType: ValueType.String,
+  // This formula will need this additional OAuth permission to get the email address of the user.
+  extraOAuthScopes: ['user:email'],
+  parameters: [],
   async execute([index], context) {
-    if (index === 0) {
-      throw new UserVisibleError('The first position is 1, not 0.');
-    }
     const request: FetchRequest = {
       method: 'GET',
-      url: apiUrl(`/user/keys`),
+      url: apiUrl(`/user/emails`),
     };
     const result = await context.fetcher.fetch(request);
-    // We only return 1 of the SSH keys returned because today Coda doesn't support returning
-    // arrays of objects from a formula.
-    return (result.body as GithubSSHKey[])[index - 1];
+    if (!result.body?.length) {
+      // When Coda sees a formula throwing an error, it looks at the scopes the user is currently
+      // authenticated with compared to what scopes are requested by the pack's manifest and the formula.
+      // Here, Coda will see the extraOAuthScopes field on this formula and replace this error
+      // with an instruction to the user to sign in again.
+      throw new Error(
+        'Github did not return an array of emails as expected, probably due to limited scope authorization.',
+      );
+    }
+    // Return only the one email marked as primary.
+    return result.body.find((emailObject: any) => emailObject.primary).email;
   },
-  // This formaula requires a user account.
   connectionRequirement: ConnectionRequirement.Required,
-  parameters: [sshKeyIndexParameter],
 });
 
-export const formulas: TypedStandardFormula[] = [reviewPullRequestFormula, getSSHKeyFormula];
+export const formulas: TypedStandardFormula[] = [reviewPullRequestFormula, getUserFormula];
 
 // A parameter that identifies a repo to sync data from using the repo's url.
 // For each sync configuration, the user must select a single repo from which to sync, since GitHub's API
