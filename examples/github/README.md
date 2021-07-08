@@ -9,7 +9,10 @@ with GitHub and get a client id and client secret. GitHub's documentation for OA
 lives at https://docs.github.com/en/free-pro-team@latest/developers/apps/creating-an-oauth-app.
 
 When creating a GitHub OAuth app you'll need to set **`http://localhost:3000/oauth`**
-as your "Authorization callback URL" in order to run these examples locally.
+as your "Authorization callback URL" in order to run these examples locally. To run them from
+on Coda after uploading & releasing, your authorization callback URL must change to be
+**`https://coda.io/packsAuth/oauth2`** (or https://packs.adhoc.coda.io/packsAuth/oauth2
+during our private alpha).
 
 ## Running the Example
 
