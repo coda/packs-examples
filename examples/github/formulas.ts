@@ -132,7 +132,7 @@ const reviewPullRequestFormula = makeFormula({
 // and get an error.
 const getUserFormula = makeFormula({
   name: 'UserEmail',
-  description: `Returns the primary email address used on this user's github account.`,
+  description: `Returns the primary email address used on this user's GitHub account.`,
   resultType: ValueType.String,
   // This formula will need this additional OAuth permission to get the email address of the user.
   extraOAuthScopes: ['user:email'],
@@ -142,16 +142,13 @@ const getUserFormula = makeFormula({
       method: 'GET',
       url: apiUrl(`/user/emails`),
     };
+    // If this fetch is attempted without the extra OAuth scope, GitHub will give a 404 error,
+    // which will bubble up to Coda because there is no try/catch on this fetch.
+    // When Coda sees an error from a formula like that, it looks at the scopes the user is currently
+    // authenticated with compared to what scopes are requested by the pack's manifest and the formula.
+    // Here, Coda will see the extraOAuthScopes field on this formula and replace the 404 error
+    // with an instruction to the user to sign in again.
     const result = await context.fetcher.fetch(request);
-    if (!result.body?.length) {
-      // When Coda sees a formula throwing an error, it looks at the scopes the user is currently
-      // authenticated with compared to what scopes are requested by the pack's manifest and the formula.
-      // Here, Coda will see the extraOAuthScopes field on this formula and replace this error
-      // with an instruction to the user to sign in again.
-      throw new Error(
-        'Github did not return an array of emails as expected, probably due to limited scope authorization.',
-      );
-    }
     // Return only the one email marked as primary.
     return result.body.find((emailObject: any) => emailObject.primary).email;
   },

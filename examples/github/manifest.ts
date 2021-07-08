@@ -22,7 +22,7 @@ export const manifest: PackVersionDefinition = {
     tokenPrefix: 'token',
     // These are the GitHub-specific scopes the user will be prompted to authorize in order for
     // the functionality in this pack to succeed.
-    scopes: ['repo'],
+    scopes: ['read:user', 'repo'],
     // This is a simple formula that makes an API call to GitHub to find the name of the
     // user associated with the OAuth access token. This name is used to label the Coda account
     // connection associated with these credentials throughout the Coda UI.
