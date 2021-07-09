@@ -1,4 +1,4 @@
-import {ParameterType, TypedStandardFormula, ValueType} from 'coda-packs-sdk';
+import {ParameterType, Formula, ValueType} from 'coda-packs-sdk';
 import {makeFormula} from 'coda-packs-sdk';
 import {makeParameter} from 'coda-packs-sdk';
 
@@ -13,7 +13,7 @@ const RadiansParameter = makeParameter({
   description: 'An angle measured in radians.',
 });
 
-export const formulas: TypedStandardFormula[] = [
+export const formulas: Formula[] = [
   makeFormula({
     resultType: ValueType.Number,
     name: 'Sine',

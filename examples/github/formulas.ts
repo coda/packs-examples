@@ -1,7 +1,7 @@
 import {ConnectionRequirement} from 'coda-packs-sdk';
 import {Continuation} from 'coda-packs-sdk';
+import {Formula} from 'coda-packs-sdk';
 import {ParameterType} from 'coda-packs-sdk';
-import {Type} from 'coda-packs-sdk';
 import {ValueType} from 'coda-packs-sdk';
 import type {FetchRequest} from 'coda-packs-sdk';
 import type {GenericSyncTable} from 'coda-packs-sdk';
@@ -9,7 +9,6 @@ import type {GitHubRepo} from './types';
 import {GitHubReviewEvent} from './types';
 import {PullRequestReviewResponse} from './types';
 import {PullRequestStateFilter} from './types';
-import {TypedStandardFormula} from 'coda-packs-sdk';
 import {UserVisibleError} from 'coda-packs-sdk';
 import {makeFormula} from 'coda-packs-sdk';
 import {makeParameter} from 'coda-packs-sdk';
@@ -155,7 +154,7 @@ const getUserFormula = makeFormula({
   connectionRequirement: ConnectionRequirement.Required,
 });
 
-export const formulas: TypedStandardFormula[] = [reviewPullRequestFormula, getUserFormula];
+export const formulas: Formula[] = [reviewPullRequestFormula, getUserFormula];
 
 // A parameter that identifies a repo to sync data from using the repo's url.
 // For each sync configuration, the user must select a single repo from which to sync, since GitHub's API
