@@ -1,13 +1,13 @@
 import {APIEntry} from './types';
 import {CodaDefinition} from './types';
-import {ConnectionRequirement, ParameterType, TypedStandardFormula, ValueType} from 'coda-packs-sdk';
+import {ConnectionRequirement, ParameterType, Formula, ValueType} from 'coda-packs-sdk';
 import {makeFormula} from 'coda-packs-sdk';
 import {makeParameter} from 'coda-packs-sdk';
 import * as schemas from './schemas';
 
 const API_VERSION = 'v3';
 
-export const formulas: TypedStandardFormula[] = [
+export const formulas: Formula[] = [
   makeFormula({
     resultType: ValueType.Object,
     name: 'Define',
