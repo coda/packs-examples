@@ -1,6 +1,6 @@
-import {makeObjectSchema} from 'coda-packs-sdk';
-import {makeSchema} from 'coda-packs-sdk';
-import {ValueType} from 'coda-packs-sdk';
+import {makeObjectSchema} from '@codahq/packs-sdk';
+import {makeSchema} from '@codahq/packs-sdk';
+import {ValueType} from '@codahq/packs-sdk';
 
 export const definitionSchema = makeObjectSchema({
   type: ValueType.Object,

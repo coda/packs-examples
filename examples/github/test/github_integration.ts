@@ -2,7 +2,7 @@ import {PullRequestStateFilter} from '../types';
 import {assert} from 'chai';
 import {describe} from 'mocha';
 import {it} from 'mocha';
-import {executeSyncFormulaFromPackDef} from 'coda-packs-sdk/dist/development';
+import {executeSyncFormulaFromPackDef} from '@codahq/packs-sdk/dist/development';
 import {manifest} from '../manifest';
 
 describe('GitHub pack integration test', () => {
