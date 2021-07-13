@@ -1,4 +1,4 @@
-import {PackVersionDefinition} from 'coda-packs-sdk';
+import {PackVersionDefinition} from '@codahq/packs-sdk';
 import {formulas} from './formulas';
 
 export const manifest: PackVersionDefinition = {

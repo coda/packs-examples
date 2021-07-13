@@ -1,4 +1,4 @@
-import type {PackVersionDefinition} from 'coda-packs-sdk';
+import type {PackVersionDefinition} from '@codahq/packs-sdk';
 import {formats} from './formulas';
 import {formulas} from './formulas';
 import {syncTables} from './formulas';

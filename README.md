@@ -13,7 +13,7 @@ To be able to work with the examples in this repo, simply run `npm install` to i
 
 ## Setting Up Your Own Project
 
-When setting up your own project, install the `coda-packs-sdk` npm packge and then run `coda init`
+When setting up your own project, install the `@codahq/packs-sdk` npm packge and then run `coda init`
 to set up a skeleton project based on the `template` example in this repo.
 
 ### Global Install (Quick)

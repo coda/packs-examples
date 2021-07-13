@@ -1,12 +1,12 @@
 import {APIEntry} from '../types';
-import type {MockExecutionContext} from 'coda-packs-sdk/dist/development';
+import type {MockExecutionContext} from '@codahq/packs-sdk/dist/development';
 import {assert} from 'chai';
 import {describe} from 'mocha';
 import {it} from 'mocha';
-import {executeFormulaFromPackDef} from 'coda-packs-sdk/dist/development';
+import {executeFormulaFromPackDef} from '@codahq/packs-sdk/dist/development';
 import {manifest} from '../manifest';
-import {newJsonFetchResponse} from 'coda-packs-sdk/dist/development';
-import {newMockExecutionContext} from 'coda-packs-sdk/dist/development';
+import {newJsonFetchResponse} from '@codahq/packs-sdk/dist/development';
+import {newMockExecutionContext} from '@codahq/packs-sdk/dist/development';
 import * as sinon from 'sinon';
 
 describe('Dictionary pack', () => {

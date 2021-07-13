@@ -1,6 +1,6 @@
-import {ValueHintType} from 'coda-packs-sdk';
-import {ValueType} from 'coda-packs-sdk';
-import {makeObjectSchema} from 'coda-packs-sdk';
+import {ValueHintType} from '@codahq/packs-sdk';
+import {ValueType} from '@codahq/packs-sdk';
+import {makeObjectSchema} from '@codahq/packs-sdk';
 
 // A user associated with an entity or action. This is a child property
 // in many other GitHub objects.

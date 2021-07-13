@@ -1,14 +1,14 @@
-import type {Continuation} from 'coda-packs-sdk';
-import type {ExecutionContext} from 'coda-packs-sdk';
-import type {FetchRequest} from 'coda-packs-sdk';
-import type {FetchResponse} from 'coda-packs-sdk';
-import type {GenericSyncFormulaResult} from 'coda-packs-sdk';
+import type {Continuation} from '@codahq/packs-sdk';
+import type {ExecutionContext} from '@codahq/packs-sdk';
+import type {FetchRequest} from '@codahq/packs-sdk';
+import type {FetchResponse} from '@codahq/packs-sdk';
+import type {GenericSyncFormulaResult} from '@codahq/packs-sdk';
 import type {GitHubPullRequest} from './types';
 import type {GitHubRepo} from './types';
 import type {GitHubUser} from './types';
-import {ensureExists} from 'coda-packs-sdk';
-import {makeMetadataFormula} from 'coda-packs-sdk';
-import {withQueryParams} from 'coda-packs-sdk';
+import {ensureExists} from '@codahq/packs-sdk';
+import {makeMetadataFormula} from '@codahq/packs-sdk';
+import {withQueryParams} from '@codahq/packs-sdk';
 
 const PULL_REQUEST_URL_REGEX = /^https:\/\/github\.com\/([^\/]+)\/([^\/]+)\/pull\/(\d+)/;
 const REPO_URL_REGEX = /^https:\/\/github\.com\/([^\/]+)\/([^\/]+)$/;

@@ -1,5 +1,5 @@
-import {AuthenticationType} from 'coda-packs-sdk';
-import type {PackVersionDefinition} from 'coda-packs-sdk';
+import {AuthenticationType} from '@codahq/packs-sdk';
+import type {PackVersionDefinition} from '@codahq/packs-sdk';
 import {formulas} from './formulas';
 import {getConnectionName} from './helpers';
 import {syncTables} from './formulas';

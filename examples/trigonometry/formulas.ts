@@ -1,6 +1,6 @@
-import {ParameterType, Formula, ValueType} from 'coda-packs-sdk';
-import {makeFormula} from 'coda-packs-sdk';
-import {makeParameter} from 'coda-packs-sdk';
+import {ParameterType, Formula, ValueType} from '@codahq/packs-sdk';
+import {makeFormula} from '@codahq/packs-sdk';
+import {makeParameter} from '@codahq/packs-sdk';
 
 const DegreesParameter = makeParameter({
   type: ParameterType.Number,
