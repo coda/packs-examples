@@ -1,5 +1,5 @@
 {
-  "name": "coda-packs-examples",
+  "name": "@codahq/packs-examples",
   "version": "0.0.1",
   "description": "Examples of Coda (coda.io) packs.",
   "main": "index.js",
@@ -12,14 +12,13 @@
     "type": "git",
     "url": "git+https://github.com/coda/packs-examples.git"
   },
-  "author": "Jonathan Goldman (jonathan@coda.io)",
-  "license": "UNLICENSED",
+  "license": "SEE LICENSE IN LICENSE.txt",
   "bugs": {
     "url": "https://github.com/coda/packs-examples/issues"
   },
   "homepage": "https://github.com/coda/packs-examples#readme",
   "dependencies": {
-    "@codahq/packs-sdk": "git+ssh://git@github.com/coda/packs-sdk.git"
+    "@codahq/packs-sdk": "0.4.1"
   },
   "devDependencies": {
     "@types/chai": "^4.2.17",
