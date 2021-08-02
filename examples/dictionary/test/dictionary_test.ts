@@ -1,4 +1,4 @@
-import {APIEntry} from '../types';
+import {APIEntry, CodaDefinition} from '../types';
 import type {MockExecutionContext} from '@codahq/packs-sdk/dist/development';
 import {assert} from 'chai';
 import {describe} from 'mocha';
@@ -38,7 +38,7 @@ describe('Dictionary pack', () => {
 
     // This is the heart of the test, where we actually execute the formula on a given set of parameters,
     // using our mock execution context.
-    const response = await executeFormulaFromPackDef(manifest, 'Define', ['foo'], context);
+    const response = (await executeFormulaFromPackDef(manifest, 'Define', ['foo'], context)) as any[];
 
     assert.equal(1, response.length);
     // The response object has gone through normalization, standardizing the capitalization and
