@@ -21,7 +21,7 @@
     "npm": ">=7"
   },
   "dependencies": {
-    "@codahq/packs-sdk": "https://606a300d76eac0b760cf0a1bac1b6dbd41ae5977:x-oauth-basic@github.com/coda/packs-sdk#2975191618258661147c8a1da45bb3ca42098a15"
+    "@codahq/packs-sdk": "https://github.com/coda/packs-sdk#4081175aeda6ce2a22e828453977d4e69aa66c3a"
   },
   "devDependencies": {
     "@types/chai": "^4.2.17",

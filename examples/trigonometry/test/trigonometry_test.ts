@@ -11,7 +11,7 @@ describe('Trigonometry pack', () => {
     assert.equal(1, await executeFormulaFromPackDef(manifest, 'Cosine', [0]));
     assert.approximately(
       1 / Math.sqrt(2),
-      (await executeFormulaFromPackDef(manifest, 'Cosine', [Math.PI / 4])) as number,
+      await executeFormulaFromPackDef<number>(manifest, 'Cosine', [Math.PI / 4]),
       1e6,
     );
   });
