@@ -1,4 +1,4 @@
-import {APIEntry, CodaDefinition} from '../types';
+import {APIEntry} from '../types';
 import type {MockExecutionContext} from '@codahq/packs-sdk/dist/development';
 import {assert} from 'chai';
 import {describe} from 'mocha';

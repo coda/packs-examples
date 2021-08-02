@@ -3,7 +3,6 @@ import {describe} from 'mocha';
 import {it} from 'mocha';
 import {executeFormulaFromPackDef} from '@codahq/packs-sdk/dist/development';
 import {manifest} from '../manifest';
-import {CodaDefinition} from '../types';
 
 describe('Dictionary pack integration test', () => {
   it('executes Define', async () => {
