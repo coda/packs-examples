@@ -17,8 +17,11 @@
     "url": "https://github.com/coda/packs-examples/issues"
   },
   "homepage": "https://github.com/coda/packs-examples#readme",
+  "engines": {
+    "npm": ">=7"
+  },
   "dependencies": {
-    "@codahq/packs-sdk": "0.4.1"
+    "@codahq/packs-sdk": "0.4.5"
   },
   "devDependencies": {
     "@types/chai": "^4.2.17",

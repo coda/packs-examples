@@ -38,7 +38,7 @@ describe('Dictionary pack', () => {
 
     // This is the heart of the test, where we actually execute the formula on a given set of parameters,
     // using our mock execution context.
-    const response = await executeFormulaFromPackDef(manifest, 'Define', ['foo'], context);
+    const response = await executeFormulaFromPackDef<any[]>(manifest, 'Define', ['foo'], context);
 
     assert.equal(1, response.length);
     // The response object has gone through normalization, standardizing the capitalization and

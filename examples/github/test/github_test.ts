@@ -53,7 +53,7 @@ describe('Github pack', () => {
       // using our mock execution context.
       const response = await executeFormulaFromPackDef(
         manifest,
-        'GitHub::ReviewPullRequest',
+        'ReviewPullRequest',
         ['https://github.com/some-org/some-repo/pull/234', GitHubReviewEvent.RequestChanges, 'review body'],
         context,
       );
@@ -87,7 +87,7 @@ describe('Github pack', () => {
       // you actually send a comment body, so we make sure that validation is working as expected.
       const responsePromise = executeFormulaFromPackDef(
         manifest,
-        'GitHub::ReviewPullRequest',
+        'ReviewPullRequest',
         ['https://github.com/some-org/some-repo/pull/234', GitHubReviewEvent.Comment],
         context,
       );

@@ -32,7 +32,7 @@ coda execute examples/github/manifest.ts PullRequests --fetch
 To create a review on a pull request, you can run:
 
 ```bash
-coda execute examples/github/manifest.ts GitHub::ReviewPullRequest https://github.com/<your-org>/<your-repo>/pull/<your-pr> COMMENT "Some comment" --fetch
+coda execute examples/github/manifest.ts ReviewPullRequest https://github.com/<your-org>/<your-repo>/pull/<your-pr> COMMENT "Some comment" --fetch
 ```
 
 Note that this will actually update your pull request in GitHub! So be careful and make
