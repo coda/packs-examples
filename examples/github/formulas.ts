@@ -20,6 +20,7 @@ import {makeMetadataFormula} from '@codahq/packs-sdk';
 import {makeSimpleAutocompleteMetadataFormula} from '@codahq/packs-sdk';
 import {makeSyncTable} from '@codahq/packs-sdk';
 import {parsePullUrl} from './helpers';
+import {getVulnerabilityAlerts} from './helpers';
 import * as schemas from './schemas';
 
 // A parameter that identifies a PR to review using its url.
@@ -233,6 +234,18 @@ export const syncTables: GenericSyncTable[] = [
       // by the sync infrastructure, so these examples won't be shown to users.
       // This will be removed in a future version of the SDK.
       // Syncing from GitHub obviously requires a user account to be configured and selected.
+      connectionRequirement: ConnectionRequirement.Required,
+      parameters: [repoUrlParameter, baseParameterOptional, pullRequestStateOptional],
+    },
+  }),
+  makeSyncTable({
+    name: 'VulnerabilityAlerts',
+    identityName: 'VulnerabilityAlert',
+    schema: schemas.vulnerabilitySchema,
+    formula: {
+      name: 'VulnerabilityAlerts',
+      description: 'Sync vulnerability alertsfrom GitHub.',
+      execute: (params, context) => getVulnerabilityAlerts(params, context, context.sync.continuation),
       connectionRequirement: ConnectionRequirement.Required,
       parameters: [repoUrlParameter, baseParameterOptional, pullRequestStateOptional],
     },

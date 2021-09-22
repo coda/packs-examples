@@ -141,3 +141,28 @@ export const pullRequestSchema = makeObjectSchema({
     },
   },
 });
+
+export const vulnerabilitySchema = makeObjectSchema({
+  type: ValueType.Object,
+  id: 'id',
+  primary: 'title',
+  featured: ['id', 'title', 'severity', 'ecosystem', 'packageName', 'vulnerableVersion', 'patchedVersion'],
+  properties: {
+    id: {type: ValueType.String, required: true},
+    title: {type: ValueType.String, required: true},
+    severity: {type: ValueType.String, required: true},
+    description: {type: ValueType.String, required: true},
+    ecosystem: {type: ValueType.String, required: true},
+    packageName: {type: ValueType.String, required: true},
+    vulnerableManifestPath: {type: ValueType.String, required: true},
+    vulnerableVersion: {type: ValueType.String, required: true},
+    patchedVersion: {type: ValueType.String},
+    createdAt: {type: ValueType.String, required: true, codaType: ValueHintType.Date},
+    updatedAt: {type: ValueType.String, codaType: ValueHintType.Date},
+    withdrawnAt: {type: ValueType.String, codaType: ValueHintType.Date},
+    dismissedAt: {type: ValueType.String, codaType: ValueHintType.Date},
+    dismissReason: {type: ValueType.String},
+    dismissedByLogin: {type: ValueType.String},
+    dismissedByName: {type: ValueType.String},
+  },
+});

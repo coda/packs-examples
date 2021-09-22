@@ -6,6 +6,8 @@ import type {GenericSyncFormulaResult} from '@codahq/packs-sdk';
 import type {GitHubPullRequest} from './types';
 import type {GitHubRepo} from './types';
 import type {GitHubUser} from './types';
+import type {GraphQLPagedResult} from './types';
+import type {VulnerabilityAlertGraphQL} from './types';
 import {ensureExists} from '@codahq/packs-sdk';
 import {makeMetadataFormula} from '@codahq/packs-sdk';
 import {withQueryParams} from '@codahq/packs-sdk';
@@ -147,4 +149,102 @@ function parseLinkHeader(header: string): Record<string, string> {
     }
   });
   return result;
+}
+
+export async function getVulnerabilityAlerts(
+  [repoUrl]: any[],
+  context: ExecutionContext,
+  continuation: Continuation | undefined,
+): Promise<GenericSyncFormulaResult> {
+  const {owner, repo} = parseRepoUrl(repoUrl);
+  const url = apiUrl('/graphql');
+  const query = `
+    query {
+      repository(name: "${repo}", owner: "${owner}") {
+        vulnerabilityAlerts(first: 100${continuation?.afterCursor ? `, after: "${continuation?.afterCursor}"` : ''}) {
+          edges {
+            cursor
+            node {
+              securityVulnerability {
+                advisory {
+                  summary
+                  severity
+                  description
+                  id
+                  updatedAt
+                  withdrawnAt
+                }
+                package {
+                  ecosystem
+                  name
+                }
+                firstPatchedVersion {
+                  identifier
+                }
+              }
+              vulnerableManifestPath
+              vulnerableRequirements
+              dismissReason
+              dismissedAt
+              dismisser {
+                name
+                login
+              }
+              createdAt
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  console.log(continuation);
+  const response = await context.fetcher.fetch({
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/graphql',
+    },
+    url,
+    body: JSON.stringify({query}),
+  });
+  const alerts = response.body?.data?.repository?.vulnerabilityAlerts?.edges || [];
+  const result = alerts.map(parseAlert);
+  const afterCursor = alerts.length ? alerts[alerts.length - 1].cursor : undefined;
+  return {result, continuation: afterCursor ? {afterCursor} : undefined};
+}
+
+function parseAlert(vulnAlert: GraphQLPagedResult<VulnerabilityAlertGraphQL>) {
+  console.log(JSON.stringify(vulnAlert, null, 2));
+  const {
+    securityVulnerability: {
+      advisory: {summary: title, severity, description, id, updatedAt, withdrawnAt},
+      package: {ecosystem, name: packageName},
+      firstPatchedVersion,
+    },
+    vulnerableManifestPath,
+    vulnerableRequirements: vulnerableVersion,
+    dismissReason,
+    dismissedAt,
+    createdAt,
+    dismisser: {name: dismissedByName, login: dismissedByLogin},
+  } = vulnAlert.node;
+
+  return {
+    title,
+    severity,
+    description,
+    id,
+    ecosystem,
+    packageName,
+    vulnerableManifestPath,
+    vulnerableVersion,
+    patchedVersion: firstPatchedVersion?.identifier,
+    createdAt,
+    updatedAt,
+    withdrawnAt,
+    dismissedAt,
+    dismissReason,
+    dismissedByLogin,
+    dismissedByName,
+  };
 }

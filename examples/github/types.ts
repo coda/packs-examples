@@ -85,3 +85,37 @@ export interface PullRequestReviewResponse {
   state: string;
   html_url: string;
 }
+
+export interface VulnerabilityAlertGraphQL {
+  securityVulnerability: {
+    advisory: {
+      description: string;
+      id: string;
+      severity: string;
+      summary: string;
+      updatedAt: string | null;
+      withdrawnAt: string | null;
+    };
+    package: {
+      ecosystem: string;
+      name: string;
+    };
+    firstPatchedVersion: {
+      identifier: string;
+    };
+  };
+  vulnerableManifestPath: string;
+  vulnerableRequirements: string;
+  dismissReason: string | null;
+  dismissedAt: string | null;
+  createdAt: string | null;
+  dismisser: {
+    name: string;
+    login: string;
+  }
+}
+
+export interface GraphQLPagedResult<T> {
+  cursor: string;
+  node: T;
+}
