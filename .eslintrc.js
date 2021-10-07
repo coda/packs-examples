@@ -24,7 +24,7 @@ module.exports = {
       },],
       'object-shorthand': ['error', 'never'],
       'max-len': ['error', { 'code': 80, 'ignoreUrls': true, ignoreRegExpLiterals: true, ignoreStrings: true, ignorePattern: '^import ' }],
-      'quotes': ['error', 'double', {avoidEscape: false}],
+      'quotes': ['error', 'double', {avoidEscape: true}],
       'prefer-const': 'off',
       'prefer-let/prefer-let': 2,
       'prefer-template': 'off',
