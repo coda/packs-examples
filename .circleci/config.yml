@@ -28,6 +28,9 @@ jobs:
       - run:
           name: 'Compile'
           command: npm run compile
+      - run:
+          name: 'Lint'
+          command: npm run lint
 
 workflows:
   version: 2
