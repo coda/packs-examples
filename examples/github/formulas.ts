@@ -27,7 +27,7 @@ const pullRequestUrlParameter = makeParameter({
   type: ParameterType.String,
   name: "pullRequestUrl",
   description:
-    "The URL of the pull request. For example, 'https://github.com/[org]/[repo]/pull/[id]'.",
+    'The URL of the pull request. For example, "https://github.com/[org]/[repo]/pull/[id]".',
 });
 
 // A parameter that indicates what action to take on the review.
@@ -189,7 +189,7 @@ export const repoUrlParameter = makeParameter({
   type: ParameterType.String,
   name: "repoUrl",
   description:
-    "The URL of the repository to list pull requests from. For example 'https://github.com/[org]/[repo]'.",
+    'The URL of the repository to list pull requests from. For example, "https://github.com/[org]/[repo]".',
   // This autocomplete formula will list all of the repos that the current
   // user has access to and expose them as a searchable dropdown in the UI.
   // It fetches the GitHub repo objects and then runs a simple text search
@@ -216,7 +216,7 @@ export const repoUrlParameter = makeParameter({
 const baseParameterOptional = makeParameter({
   type: ParameterType.String,
   name: "base",
-  description: "The name of the base branch. For example, 'main'.",
+  description: 'The name of the base branch. For example, "main".',
   optional: true,
 });
 
@@ -224,7 +224,7 @@ const pullRequestStateOptional = makeParameter({
   type: ParameterType.String,
   name: "state",
   description:
-    "Returns pull requests in the given state. If unspecified, defaults to 'open'.",
+    'Returns pull requests in the given state. If unspecified, defaults to "open".',
   optional: true,
   autocomplete: makeSimpleAutocompleteMetadataFormula([
     {display: "Open pull requests only", value: PullRequestStateFilter.Open},
