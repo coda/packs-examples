@@ -4,11 +4,15 @@
 
 // export const personSchema = makeObjectSchema({
 //   type: ValueType.Object,
-//   id: 'email',
-//   primary: 'name',
+//   id: "email",
+//   primary: "name",
 //   properties: {
 //     email: {type: ValueType.String},
 //     name: {type: ValueType.String},
-//     dateOfBirth: {type: ValueType.String, codaType: ValueHintType.Date, fromKey: 'dob'},
+//     dateOfBirth: {
+//       type: ValueType.String,
+//       codaType: ValueHintType.Date,
+//       fromKey: "dob",
+//     },
 //   },
 // });

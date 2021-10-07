@@ -1,6 +1,6 @@
-import type {Format} from '@codahq/packs-sdk';
-import type {GenericSyncTable} from '@codahq/packs-sdk';
-import type {Formula} from '@codahq/packs-sdk';
+import type {Format} from "@codahq/packs-sdk";
+import type {Formula} from "@codahq/packs-sdk";
+import type {GenericSyncTable} from "@codahq/packs-sdk";
 
 export const formulas: Formula[] = [
   // Formula definitions go here, e.g.

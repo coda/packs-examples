@@ -4,7 +4,8 @@
 
 // A single response entry as described at https://dictionaryapi.com/products/json.
 // The http response from the API consists of an array of these objects.
-// For simplicity, we only include the subset of fields that care about for this pack.
+// For simplicity, we only include the subset of fields that care about for
+// this pack.
 export interface APIEntry {
   // One or more practical definitions of the word.
   shortdef: string[];
