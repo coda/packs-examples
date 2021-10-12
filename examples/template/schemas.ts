@@ -1,18 +1,15 @@
+import * as coda from "@codahq/packs-sdk";
+
 /*
- * Schemas for your formulas and sync table go here, e.g.
+ * Schemas for your formulas and sync tables go here, for example:
  */
 
-// export const personSchema = makeObjectSchema({
-//   type: ValueType.Object,
-//   id: "email",
-//   primary: "name",
-//   properties: {
-//     email: {type: ValueType.String},
-//     name: {type: ValueType.String},
-//     dateOfBirth: {
-//       type: ValueType.String,
-//       codaType: ValueHintType.Date,
-//       fromKey: "dob",
-//     },
-//   },
-// });
+export const WidgetSchema = coda.makeObjectSchema({
+  type: coda.ValueType.Object,
+  id: "widgetId",
+  primary: "widgetName",
+  properties: {
+    widgetId: {type: coda.ValueType.Number},
+    widgetName: {type: coda.ValueType.String},
+  },
+});

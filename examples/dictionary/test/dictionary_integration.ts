@@ -2,7 +2,7 @@ import {assert} from "chai";
 import {describe} from "mocha";
 import {executeFormulaFromPackDef} from "@codahq/packs-sdk/dist/development";
 import {it} from "mocha";
-import {manifest} from "../manifest";
+import {pack} from "../pack";
 
 describe("Dictionary pack integration test", () => {
   it("executes Define", async () => {
@@ -10,7 +10,7 @@ describe("Dictionary pack integration test", () => {
     // requires authentication, this requires that you've already run
     // `coda auth examples/dictionary/manifest.ts` to set up an API key.
     let response = await executeFormulaFromPackDef<any[]>(
-      manifest,
+      pack,
       "Define",
       ["coda"],
       undefined,

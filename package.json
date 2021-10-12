@@ -23,7 +23,7 @@
     "npm": ">=7"
   },
   "dependencies": {
-    "@codahq/packs-sdk": "0.4.5"
+    "@codahq/packs-sdk": "https://github.com/coda/packs-sdk#8b43cd48993cf1d78f3ec1d386dc057168039c56"
   },
   "devDependencies": {
     "@types/chai": "^4.2.22",

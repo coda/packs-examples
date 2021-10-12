@@ -18,43 +18,43 @@ pack.addFormula({
   resultType: coda.ValueType.Number,
   name: "Sine",
   description: "Returns the angle (in radians) whose sine is the given number",
-  execute: ([value]) => Math.sin(value),
   parameters: [RadiansParameter],
   examples: [{params: [0], result: 0}],
+  execute: ([value]) => Math.sin(value),
 });
 
 pack.addFormula({
   resultType: coda.ValueType.Number,
   name: "Cosine",
   description: "Returns the cosine of a number (in radians).",
-  execute: ([value]) => Math.cos(value),
   parameters: [RadiansParameter],
   examples: [{params: [0], result: 1}],
+  execute: ([value]) => Math.cos(value),
 });
 
 pack.addFormula({
   resultType: coda.ValueType.Number,
   name: "Tangent",
   description: "Returns the tangent of a number (in radians).",
-  execute: ([value]) => Math.tan(value),
   parameters: [RadiansParameter],
   examples: [{params: [0], result: 0}],
+  execute: ([value]) => Math.tan(value),
 });
 
 pack.addFormula({
   resultType: coda.ValueType.Number,
   name: "ToRadians",
   description: "Converts degrees to radians.",
-  execute: ([value]) => (value * Math.PI) / 180,
   parameters: [DegreesParameter],
   examples: [{params: [180], result: 3.14}],
+  execute: ([value]) => (value * Math.PI) / 180,
 });
 
 pack.addFormula({
   resultType: coda.ValueType.Number,
   name: "ToDegrees",
   description: "Converts radians to degrees.",
-  execute: ([value]) => (value * 180) / Math.PI,
   parameters: [RadiansParameter],
   examples: [{params: [3.14159], result: 180}],
+  execute: ([value]) => (value * 180) / Math.PI,
 });
