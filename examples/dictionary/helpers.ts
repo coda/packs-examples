@@ -1,4 +1,3 @@
-import type {CodaDefinition} from "./types";
 import type * as coda from "@codahq/packs-sdk";
 import type * as types from "./types";
 
@@ -7,7 +6,7 @@ const API_VERSION = "v3";
 export async function lookupDefinition(
   context: coda.ExecutionContext,
   word: string,
-): Promise<CodaDefinition[]> {
+): Promise<types.CodaDefinition[]> {
   let escapedWord = encodeURIComponent(word);
   let url = `https://www.dictionaryapi.com/api/${API_VERSION}/references/collegiate/json/${escapedWord}`;
   let response = await context.fetcher.fetch({method: "GET", url: url});
@@ -21,7 +20,7 @@ export async function lookupDefinition(
   return entries.map(parseEntry);
 }
 
-function parseEntry(entry: types.APIEntry): CodaDefinition {
+function parseEntry(entry: types.APIEntry): types.CodaDefinition {
   let {shortdef, fl, hwi, date, meta} = entry;
   return {
     id: meta.id,
