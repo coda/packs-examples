@@ -4,9 +4,9 @@ import {assert} from "chai";
 import {describe} from "mocha";
 import {executeFormulaFromPackDef} from "@codahq/packs-sdk/dist/development";
 import {it} from "mocha";
-import {manifest} from "../manifest";
 import {newJsonFetchResponse} from "@codahq/packs-sdk/dist/development";
 import {newMockExecutionContext} from "@codahq/packs-sdk/dist/development";
+import {pack} from "../pack";
 import * as sinon from "sinon";
 
 describe("Dictionary pack", () => {
@@ -39,7 +39,7 @@ describe("Dictionary pack", () => {
     // This is the heart of the test, where we actually execute the formula on a
     // given set of parameters, using our mock execution context.
     let response = await executeFormulaFromPackDef<any[]>(
-      manifest,
+      pack,
       "Define",
       ["foo"],
       context,
@@ -70,7 +70,7 @@ describe("Dictionary pack", () => {
   it("executes with an empty response", async () => {
     context.fetcher.fetch.returns(newJsonFetchResponse([]));
     let response = await executeFormulaFromPackDef(
-      manifest,
+      pack,
       "Define",
       ["unknown"],
       context,

@@ -4,6 +4,7 @@ import {GitHubReviewEvent} from "../types";
 import type {MockExecutionContext} from "@codahq/packs-sdk/dist/development";
 import type {MockSyncExecutionContext} from "@codahq/packs-sdk/dist/development";
 import type {PullRequestReviewResponse} from "../types";
+import {RepoUrlParameter} from "../pack";
 import {assert} from "chai";
 import * as chai from "chai";
 import chaiAsPromised from "chai-as-promised";
@@ -12,11 +13,10 @@ import {executeFormulaFromPackDef} from "@codahq/packs-sdk/dist/development";
 import {executeMetadataFormula} from "@codahq/packs-sdk/dist/development";
 import {executeSyncFormulaFromPackDef} from "@codahq/packs-sdk/dist/development";
 import {it} from "mocha";
-import {manifest} from "../manifest";
 import {newJsonFetchResponse} from "@codahq/packs-sdk/dist/development";
 import {newMockExecutionContext} from "@codahq/packs-sdk/dist/development";
 import {newMockSyncExecutionContext} from "@codahq/packs-sdk/dist/development";
-import {repoUrlParameter} from "../formulas";
+import {pack} from "../pack";
 import * as sinon from "sinon";
 
 chai.use(chaiAsPromised);
@@ -53,7 +53,7 @@ describe("Github pack", () => {
       // This is the heart of the test, where we actually execute the
       // formula on a given set of parameters, using our mock execution context.
       let response = await executeFormulaFromPackDef(
-        manifest,
+        pack,
         "ReviewPullRequest",
         [
           "https://github.com/some-org/some-repo/pull/234",
@@ -97,7 +97,7 @@ describe("Github pack", () => {
       // Comment action, that you actually send a comment body, so we make sure
       // that validation is working as expected.
       let responsePromise = executeFormulaFromPackDef(
-        manifest,
+        pack,
         "ReviewPullRequest",
         [
           "https://github.com/some-org/some-repo/pull/234",
@@ -190,7 +190,7 @@ describe("Github pack", () => {
 
       // This actually executes the entire sync.
       let syncedObjects = await executeSyncFormulaFromPackDef(
-        manifest,
+        pack,
         "PullRequests",
         ["https://github.com/some-org/some-repo"],
         syncContext,
@@ -243,7 +243,7 @@ describe("Github pack", () => {
       // Now actually execute the sync. This will keep fetching additional
       // pages of results until there is not continuation returned.
       let syncedObjects = await executeSyncFormulaFromPackDef(
-        manifest,
+        pack,
         "PullRequests",
         ["https://github.com/some-org/some-repo"],
         syncContext,
@@ -287,7 +287,7 @@ describe("Github pack", () => {
       // Invoke the metadata formula simulating that the user has searched
       // in the UI for 'some-query'.
       let results = await executeMetadataFormula(
-        repoUrlParameter.autocomplete!,
+        RepoUrlParameter.autocomplete!,
         {search: "some-query"},
         context,
       );
