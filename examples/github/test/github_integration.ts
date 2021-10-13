@@ -3,16 +3,16 @@ import {assert} from "chai";
 import {describe} from "mocha";
 import {executeSyncFormulaFromPackDef} from "@codahq/packs-sdk/dist/development";
 import {it} from "mocha";
-import {manifest} from "../manifest";
+import {pack} from "../pack";
 
 describe("GitHub pack integration test", () => {
   it("executes PullRequests sync", async () => {
     // Here we execute the sync using a real http fetcher. Since this pack
     // requires authentication, this requires that you've already run
-    // `coda auth examples/github/manifest.ts` to set up your OAuth credentials
+    // `coda auth examples/github/packs.ts` to set up your OAuth credentials
     // for GitHub.
     let response = await executeSyncFormulaFromPackDef(
-      manifest,
+      pack,
       "PullRequests",
       // This integration test assumes you have access to the packs-examples
       // repo, which you should if you're looking at this example!
@@ -25,7 +25,7 @@ describe("GitHub pack integration test", () => {
       undefined,
       {
         useRealFetcher: true,
-        manifestPath: require.resolve("../manifest"),
+        manifestPath: require.resolve("../pack"),
       },
     );
 

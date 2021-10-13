@@ -1,14 +1,5 @@
-import type {Continuation} from "@codahq/packs-sdk";
-import type {ExecutionContext} from "@codahq/packs-sdk";
-import type {FetchRequest} from "@codahq/packs-sdk";
-import type {FetchResponse} from "@codahq/packs-sdk";
-import type {GenericSyncFormulaResult} from "@codahq/packs-sdk";
-import type {GitHubPullRequest} from "./types";
-import type {GitHubRepo} from "./types";
-import type {GitHubUser} from "./types";
-import {ensureExists} from "@codahq/packs-sdk";
-import {makeMetadataFormula} from "@codahq/packs-sdk";
-import {withQueryParams} from "@codahq/packs-sdk";
+import * as coda from "@codahq/packs-sdk";
+import type * as types from "./types";
 
 const PULL_REQUEST_URL_REGEX =
   /^https:\/\/github\.com\/([^\/]+)\/([^\/]+)\/pull\/(\d+)/;
@@ -24,14 +15,14 @@ const DEFAULT_PAGE_SIZE = 100;
 // meaningful but we do so to future-proof things.
 export function apiUrl(path: string, params?: Record<string, any>): string {
   let url = `https://api.github.com${path}`;
-  return params ? withQueryParams(url, params) : url;
+  return params ? coda.withQueryParams(url, params) : url;
 }
 
 // This formula is used in the authentication definition in the manifest.
 // It returns a simple label for the current user's account so the account
 // can be identified in the UI.
-export const getConnectionName = makeMetadataFormula(async context => {
-  let request: FetchRequest = {
+export async function getConnectionName(context: coda.ExecutionContext) {
+  let request: coda.FetchRequest = {
     method: "GET",
     url: apiUrl("/user"),
     headers: {
@@ -39,8 +30,8 @@ export const getConnectionName = makeMetadataFormula(async context => {
     },
   };
   let response = await context.fetcher.fetch(request);
-  return (response.body as GitHubUser).login;
-});
+  return (response.body as types.GitHubUser).login;
+}
 
 // The user-facing formula uses a pull request url to identify PRs in a
 // user-friendly way. We parse such a url into its identifiers.
@@ -49,7 +40,7 @@ export function parsePullUrl(url: string): {
   repo: string;
   pullNumber: string;
 } {
-  let match = ensureExists(
+  let match = coda.ensureExists(
     PULL_REQUEST_URL_REGEX.exec(url),
     "Received an invalid pull request URL",
   );
@@ -63,7 +54,7 @@ export function parsePullUrl(url: string): {
 // The user-facing formula uses a url to identify repos in a user-friendly way.
 // We parse such a url into its identifiers.
 export function parseRepoUrl(url: string): {owner: string; repo: string} {
-  let match = ensureExists(
+  let match = coda.ensureExists(
     REPO_URL_REGEX.exec(url),
     "Received an invalid repo URL",
   );
@@ -77,8 +68,8 @@ export function parseRepoUrl(url: string): {owner: string; repo: string} {
 // call this repeatedly with a continuation if the user has access to more
 // repos than can fit on one page (100).
 export async function getRepos(
-  context: ExecutionContext,
-  continuation?: Continuation,
+  context: coda.ExecutionContext,
+  continuation?: coda.Continuation,
 ) {
   let url = continuation?.nextUrl
     ? (continuation.nextUrl as string)
@@ -91,7 +82,7 @@ export async function getRepos(
 
   let nextUrl = nextUrlFromLinkHeader(result);
   return {
-    result: result.body as GitHubRepo[],
+    result: result.body as types.GitHubRepo[],
     continuation: nextUrl ? {nextUrl: nextUrl} : undefined,
   };
 }
@@ -102,9 +93,9 @@ export async function getRepos(
 // to fetch a subsequent result page.
 export async function getPullRequests(
   [repoUrl, base, state]: any[],
-  context: ExecutionContext,
-  continuation: Continuation | undefined,
-): Promise<GenericSyncFormulaResult> {
+  context: coda.SyncExecutionContext,
+): Promise<coda.GenericSyncFormulaResult> {
+  let {continuation} = context.sync;
   let {owner, repo} = parseRepoUrl(repoUrl);
   let params = {per_page: DEFAULT_PAGE_SIZE, base: base, state: state};
   let url = apiUrl(`/repos/${owner}/${repo}/pulls`, params);
@@ -128,7 +119,7 @@ export async function getPullRequests(
 // with the packs infrastructure because the schema declares
 // `fromKey` properties in order to rename keys, so this function exists
 // mostly to do massaging beyond what can be done with `fromKey`.
-function parsePullRequest(pr: GitHubPullRequest) {
+function parsePullRequest(pr: types.GitHubPullRequest) {
   return {
     ...pr,
     repo: pr.head && pr.head.repo,
@@ -139,7 +130,9 @@ function parsePullRequest(pr: GitHubPullRequest) {
 }
 
 // See if GitHub has given us the url of a next page of results.
-function nextUrlFromLinkHeader(result: FetchResponse<any>): string | undefined {
+function nextUrlFromLinkHeader(
+  result: coda.FetchResponse<any>,
+): string | undefined {
   let parsedHeader =
     typeof result.headers.link === "string"
       ? parseLinkHeader(result.headers.link)
