@@ -1,4 +1,3 @@
-import type {APIEntry} from "./types";
 import type {CodaDefinition} from "./types";
 import type * as coda from "@codahq/packs-sdk";
 import type * as types from "./types";
@@ -22,7 +21,7 @@ export async function lookupDefinition(
   return entries.map(parseEntry);
 }
 
-function parseEntry(entry: APIEntry): CodaDefinition {
+function parseEntry(entry: types.APIEntry): CodaDefinition {
   let {shortdef, fl, hwi, date, meta} = entry;
   return {
     id: meta.id,
