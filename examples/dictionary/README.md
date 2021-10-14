@@ -7,9 +7,9 @@ with Merriam-Webster.
 
 ## Running the Example
 
-Run `coda auth examples/dictionary/manifest.ts` and enter your API key.
+Run `coda auth examples/dictionary/pack.ts` and enter your API key.
 
-Then run `coda execute examples/dictionary/manifest.ts Define coda --fetch` to look
+Then run `coda execute examples/dictionary/pack.ts Define coda --fetch` to look
 up definitions for a word, in this case `coda`.
 
 ## Running the Tests
@@ -24,7 +24,7 @@ The unittests use a mock http fetcher and do not connect to a real API.
 
 There is also an integration test, which makes real http requests to the API.
 To run successfully, this test requires that you've set up an API key already
-using `coda auth examples/dictionary/manifest.ts`.
+using `coda auth examples/dictionary/pack.ts`.
 
 ```bash
 mocha --require ts-node/register examples/dictionary/test/dictionary_integration.ts
