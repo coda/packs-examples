@@ -18,7 +18,7 @@ export function apiUrl(path: string, params?: Record<string, any>): string {
   return params ? coda.withQueryParams(url, params) : url;
 }
 
-// This formula is used in the authentication definition in the manifest.
+// This formula is used in the authentication definition in pack.ts.
 // It returns a simple label for the current user's account so the account
 // can be identified in the UI.
 export async function getConnectionName(context: coda.ExecutionContext) {

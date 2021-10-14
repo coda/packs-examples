@@ -16,7 +16,7 @@ during our private alpha).
 
 ## Running the Example
 
-Run `coda auth examples/github/manifest.ts`. You'll be prompted to enter you client id
+Run `coda auth examples/github/pack.ts`. You'll be prompted to enter you client id
 and client secret, and then your browser will open and begin GitHub's OAuth flow.
 After the flow completes, the access token for that account will saved locally
 for use when executing formulas and syncs, so you only have to do this once. But you can
@@ -26,13 +26,13 @@ becomes invalid.
 To sync pull requests and output them to the console, you can run:
 
 ```bash
-coda execute examples/github/manifest.ts PullRequests --fetch
+coda execute examples/github/pack.ts PullRequests --fetch
 ```
 
 To create a review on a pull request, you can run:
 
 ```bash
-coda execute examples/github/manifest.ts ReviewPullRequest https://github.com/<your-org>/<your-repo>/pull/<your-pr> COMMENT "Some comment" --fetch
+coda execute examples/github/pack.ts ReviewPullRequest https://github.com/<your-org>/<your-repo>/pull/<your-pr> COMMENT "Some comment" --fetch
 ```
 
 Note that this will actually update your pull request in GitHub! So be careful and make
@@ -41,7 +41,7 @@ sure you don't inadvertently e.g. approve a real PR if you're just exploring.
 To execute the example `PullRequests` table sync, run:
 
 ```bash
-coda execute examples/github/manifest.ts PullRequests https://github.com/<your-org>/<your-repo> --fetch
+coda execute examples/github/pack.ts PullRequests https://github.com/<your-org>/<your-repo> --fetch
 ```
 
 This will fetch all of the pull requests in that repo, using multiple requests if there are multiple result
@@ -62,7 +62,7 @@ The unittests use a mock http fetcher and do not connect to a real API.
 
 There is also an integration test, which makes real http requests to the API.
 To run successfully, this test requires that you've already setup an access token
-using `coda auth examples/github/manifest.ts`.
+using `coda auth examples/github/pack.ts`.
 
 ```bash
 mocha --require ts-node/register examples/github/test/github_integration.ts
