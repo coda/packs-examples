@@ -1,6 +1,6 @@
 import * as coda from "@codahq/packs-sdk";
 
-export const pack = coda.newPack({version: "1.1"});
+export const pack = coda.newPack();
 
 const DegreesParameter = coda.makeParameter({
   type: coda.ParameterType.Number,
