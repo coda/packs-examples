@@ -2,7 +2,7 @@ import * as coda from "@codahq/packs-sdk";
 import * as helpers from "./helpers";
 import * as schemas from "./schemas";
 
-export const pack = coda.newPack({version: "1.0"});
+export const pack = coda.newPack();
 
 /**
  * An example formula definition, which calls out to a helper file

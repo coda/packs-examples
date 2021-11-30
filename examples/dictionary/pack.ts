@@ -2,7 +2,7 @@ import * as coda from "@codahq/packs-sdk";
 import * as helpers from "./helpers";
 import * as schemas from "./schemas";
 
-export const pack = coda.newPack({version: "1.0"});
+export const pack = coda.newPack();
 
 // The Merriam-Webster API uses an API token, which should be included in
 // request urls in a "key=" parameter, so we configure that here. When

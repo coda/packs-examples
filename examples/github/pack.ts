@@ -3,7 +3,7 @@ import * as helpers from "./helpers";
 import * as schemas from "./schemas";
 import * as types from "./types";
 
-export const pack = coda.newPack({version: "1.0"});
+export const pack = coda.newPack();
 
 // This tells Coda which domain the pack make requests to. Any fetcher
 // requests to other domains won't be allowed.
