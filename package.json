@@ -8,7 +8,8 @@
     "integration": "mocha --require ts-node/register examples/**/*_integration.ts",
     "compile": "tsc --noEmit",
     "lint": "find . -name \"*.ts\" | grep -v /node_modules/ | grep -v .d.ts | xargs node_modules/.bin/eslint",
-    "lint-fix": "find . -name \"*.ts\" | grep -v /node_modules/ | grep -v .d.ts | xargs node_modules/.bin/eslint --fix"
+    "lint-fix": "find . -name \"*.ts\" | grep -v /node_modules/ | grep -v .d.ts | xargs node_modules/.bin/eslint --fix",
+    "postinstall": "npx patch-package"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,7 @@
   },
   "homepage": "https://github.com/coda/packs-examples#readme",
   "engines": {
-    "npm": ">=7"
+    "npm": ">=8"
   },
   "dependencies": {
     "@codahq/packs-sdk": "^0.5.0"
