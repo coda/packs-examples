@@ -1,12 +1,69 @@
 diff --git a/node_modules/mold-source-map/package.json b/node_modules/mold-source-map/package.json
-index 6ae458d..97230a0 100644
+index b61fa21..17ad905 100644
 --- a/node_modules/mold-source-map/package.json
 +++ b/node_modules/mold-source-map/package.json
-@@ -2,7 +2,6 @@
-   "name": "mold-source-map",
-   "version": "0.4.0",
-   "description": "Mold a source map that is almost perfect for you into one that is.",
--  "main": "mold-source-map.js",
-   "scripts": {
-     "test": "tap test/*.js"
+@@ -1,26 +1,32 @@
+ {
+-  "_from": "https://registry.npmjs.org/mold-source-map/-/mold-source-map-0.4.0.tgz",
++  "_args": [
++    [
++      "mold-source-map@0.4.0",
++      "/Users/huayang/code/packs-examples"
++    ]
++  ],
++  "_from": "mold-source-map@0.4.0",
+   "_id": "mold-source-map@0.4.0",
+   "_inBundle": false,
+-  "_integrity": "sha512-Y0uA/sDKVuPgLd7BmaJOai+fqzjrOlR6vZgx5cJIvturI/xOPQPgbf3X7ZbzJd6MvqQ6ucIfK8dSteFyc2Mw2w==",
++  "_integrity": "sha1-z2fgsxxHq5uttcnCVlGGISe7gxc=",
+   "_location": "/mold-source-map",
+   "_phantomChildren": {},
+   "_requested": {
+-    "type": "remote",
+-    "raw": "mold-source-map@https://registry.npmjs.org/mold-source-map/-/mold-source-map-0.4.0.tgz",
++    "type": "version",
++    "registry": true,
++    "raw": "mold-source-map@0.4.0",
+     "name": "mold-source-map",
+     "escapedName": "mold-source-map",
+-    "rawSpec": "https://registry.npmjs.org/mold-source-map/-/mold-source-map-0.4.0.tgz",
+-    "saveSpec": "https://registry.npmjs.org/mold-source-map/-/mold-source-map-0.4.0.tgz",
+-    "fetchSpec": "https://registry.npmjs.org/mold-source-map/-/mold-source-map-0.4.0.tgz"
++    "rawSpec": "0.4.0",
++    "saveSpec": null,
++    "fetchSpec": "0.4.0"
    },
+   "_requiredBy": [
+-    "/"
++    "/exorcist"
+   ],
+   "_resolved": "https://registry.npmjs.org/mold-source-map/-/mold-source-map-0.4.0.tgz",
+-  "_shasum": "cf67e0b31c47ab9badb5c9c25651862127bb8317",
+-  "_spec": "mold-source-map@https://registry.npmjs.org/mold-source-map/-/mold-source-map-0.4.0.tgz",
+-  "_where": "/private/var/folders/n1/7qfgvcqn04j0py98bvnsnd500000gp/T/tmp-67420QYYUw5pxy3MH",
++  "_spec": "0.4.0",
++  "_where": "/Users/huayang/code/packs-examples",
+   "author": {
+     "name": "Thorsten Lorenz",
+     "email": "thlorenz@gmx.de",
+@@ -29,12 +35,10 @@
+   "bugs": {
+     "url": "https://github.com/thlorenz/mold-source-map/issues"
+   },
+-  "bundleDependencies": false,
+   "dependencies": {
+     "convert-source-map": "^1.1.0",
+     "through": "~2.2.7"
+   },
+-  "deprecated": false,
+   "description": "Mold a source map that is almost perfect for you into one that is.",
+   "devDependencies": {
+     "browserify": "^10.2.0",
+@@ -55,7 +59,6 @@
+     "browserify"
+   ],
+   "license": "MIT",
+-  "main": "mold-source-map.js",
+   "name": "mold-source-map",
+   "repository": {
+     "type": "git",
