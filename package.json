@@ -20,10 +20,14 @@
   },
   "homepage": "https://github.com/coda/packs-examples#readme",
   "engines": {
-    "npm": ">=7"
+    "npm": ">=7",
+    "node": ">=14"
   },
   "dependencies": {
     "@codahq/packs-sdk": "^0.8.1"
+  },
+  "resolutions": {
+    "nanoid": "^3.1.31"
   },
   "devDependencies": {
     "@types/chai": "^4.3.0",
