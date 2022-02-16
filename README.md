@@ -5,11 +5,11 @@ https://github.com/coda/packs-sdk
 
 ## Prerequisites
 
-Make sure you have `node`, `typescript`, and `npm` installed. TODO: flesh out recommended steps for installing these.
+Make sure you have `node`, `typescript`, `npm` and `yarn` installed. TODO: flesh out recommended steps for installing these.
 
 ## One-time Setup
 
-To be able to work with the examples in this repo, simply run `npm install` to install dependencies.
+To be able to work with the examples in this repo, simply run `yarn` to install dependencies.
 
 ## Setting Up Your Own Project
 
@@ -28,16 +28,16 @@ npm install --global @codahq/packs-sdk
 ### Single-Project Install (Recommended)
 
 It's easier to manage dependencies and avoid version conflicts across projects
-if you create an npm project for your pack and install the SDK and other dependencies
+if you create a yarn project for your pack and install the SDK and other dependencies
 locally.
 
 Create a new project directory if you haven't already and initialize your project:
 
 ```bash
-# Initialize npm and follow prompts.
-npm init
+# Initialize yarn and follow prompts.
+yarn init
 # Install the Coda Packs SDK locally in your project.
-npm install --save @codahq/packs-sdk
+yarn add @codahq/packs-sdk
 ```
 
 Update your path so you can easily use the `coda` commandline (CLI) that ships with the SDK:
@@ -65,11 +65,11 @@ coda execute examples/trigonometry/pack.ts Cosine 0
 
 ## Running Example Tests
 
-Each of the accompanying examples include sample unittests. You can run them all with `npm test`.
+Each of the accompanying examples include sample unittests. You can run them all with `yarn test`.
 Each example's readme explains how to run those tests individually.
 
 There is also an integration test suite that runs tests that actually connect to the
-APIs used in the example packs. You can run this with `npm run integration`. For this
+APIs used in the example packs. You can run this with `yarn run integration`. For this
 to run successfully, you must have set up credentials for each pack. See the readme
 for each example for instructions on how to set up credentials, and how to
 run that example's integration test individually.
