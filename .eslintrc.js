@@ -49,5 +49,11 @@ module.exports = {
           camelcase: 'off',
         },
       },
+      {
+        files: ['examples/template/**/*.ts'],
+        rules: {
+          '@typescript-eslint/consistent-type-imports': 'off'
+        },
+      },
     ],
   };

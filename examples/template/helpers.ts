@@ -1,4 +1,4 @@
-import type * as coda from "@codahq/packs-sdk";
+import * as coda from "@codahq/packs-sdk";
 
 /**
  * You can put the complicated business logic of your pack in this file,
