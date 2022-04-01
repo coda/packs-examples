@@ -45,7 +45,7 @@
     "eslint-plugin-filenames": "^1.3.2",
     "eslint-plugin-local": "^1.0.0",
     "eslint-plugin-prefer-let": "^3.0.1",
-    "mocha": "^9.1.4",
+    "mocha": "^9.2.2",
     "sinon": "^13.0.1",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.4",
