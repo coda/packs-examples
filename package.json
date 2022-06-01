@@ -46,7 +46,7 @@
     "eslint-plugin-local": "^1.0.0",
     "eslint-plugin-prefer-let": "^3.0.1",
     "mocha": "^9.1.4",
-    "sinon": "^13.0.1",
+    "sinon": "^14.0.0",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.4",
     "json-schema": ">=0.4.0"
