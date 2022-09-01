@@ -30,7 +30,7 @@
     "nanoid": "^3.1.31"
   },
   "devDependencies": {
-    "@types/chai": "^4.3.1",
+    "@types/chai": "^4.3.3",
     "@types/chai-as-promised": "^7.1.5",
     "@types/mocha": "^9.0.0",
     "@types/node": "^18.6.3",
