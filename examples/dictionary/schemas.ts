@@ -1,12 +1,6 @@
 import * as coda from "@codahq/packs-sdk";
 
 export const DefinitionSchema = coda.makeObjectSchema({
-  type: coda.ValueType.Object,
-  // The "primary" property tells Coda which of your object's properties
-  // should be used as a label for your object. Pack objects will be rendered
-  // as a chip showing the label, and the rest of the fields will show up
-  // when hovering over the chip.
-  primary: "headword",
   properties: {
     id: {type: coda.ValueType.String, required: true},
     definitions: {
@@ -19,6 +13,11 @@ export const DefinitionSchema = coda.makeObjectSchema({
     firstUse: {type: coda.ValueType.String},
     offensive: {type: coda.ValueType.Boolean, required: true},
   },
+  // The display property tells Coda which of your object's properties
+  // should be used as a label for your object. Pack objects will be rendered
+  // as a chip showing the label, and the rest of the fields will show up
+  // when hovering over the chip.
+  displayProperty: "headword",
 });
 
 export const DefinitionArraySchema = coda.makeSchema({
