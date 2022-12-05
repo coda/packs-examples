@@ -9,7 +9,7 @@ with Merriam-Webster.
 
 Run `coda auth examples/dictionary/pack.ts` and enter your API key.
 
-Then run `coda execute examples/dictionary/pack.ts Define coda --fetch` to look
+Then run `coda execute examples/dictionary/pack.ts Define coda` to look
 up definitions for a word, in this case `coda`.
 
 ## Running the Tests

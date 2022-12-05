@@ -31,6 +31,9 @@ jobs:
       - run:
           name: 'Lint'
           command: npm run lint
+      - run:
+          name: 'Validate'
+          command: npm run validate
 
 workflows:
   version: 2

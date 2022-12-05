@@ -4,10 +4,6 @@ import * as coda from "@codahq/packs-sdk";
 // in many other GitHub objects.
 // https://docs.github.com/en/free-pro-team@latest/rest/reference/users#get-a-user
 export const UserSchema = coda.makeObjectSchema({
-  type: coda.ValueType.Object,
-  id: "id",
-  // This is the property that will render as a label on the object in the UI.
-  primary: "login",
   // We list only the subset of fields we care about, the actual user objects
   // are much larger.
   properties: {
@@ -32,6 +28,10 @@ export const UserSchema = coda.makeObjectSchema({
       required: true,
     },
   },
+  // This is the property that will render as a label on the object in the UI.
+  displayProperty: "login",
+  // This is the property that will be a unique key for the row.
+  idProperty: "id",
 });
 
 // The tiny subset of fields for a Team that we care about. We don't fetch
@@ -39,10 +39,6 @@ export const UserSchema = coda.makeObjectSchema({
 // e.g. the teams requested to review a PR.
 // https://docs.github.com/en/free-pro-team@latest/rest/reference/teams#get-a-team-by-name
 export const TeamSchema = coda.makeObjectSchema({
-  type: coda.ValueType.Object,
-  id: "id",
-  // This is the property that will render as a label on the object in the UI.
-  primary: "name",
   // We list only the subset of fields we care about, the actual team objects
   // are much larger.
   properties: {
@@ -55,15 +51,15 @@ export const TeamSchema = coda.makeObjectSchema({
       required: true,
     },
   },
+  // This is the property that will render as a label on the object in the UI.
+  displayProperty: "name",
+  // This is the property that will be a unique key for the row.
+  idProperty: "id",
 });
 
 // The response when creating a pull review request.
 // https://docs.github.com/en/free-pro-team@latest/rest/reference/pulls#create-a-review-for-a-pull-request
 export const PullRequestReviewResponseSchema = coda.makeObjectSchema({
-  type: coda.ValueType.Object,
-  id: "id",
-  // This is the property that will render as a label on the object in the UI.
-  primary: "body",
   // We list only the subset of fields we care about.
   properties: {
     id: {type: coda.ValueType.Number, required: true},
@@ -82,15 +78,16 @@ export const PullRequestReviewResponseSchema = coda.makeObjectSchema({
       required: true,
     },
   },
+  // This is the property that will render as a label on the object in the UI.
+  displayProperty: "body",
+  // This is the property that will be a unique key for the row.
+  idProperty: "id",
 });
 
 // The handful of fields we care about for a Repo object. These are embedded
 // in PR objects.
 // https://docs.github.com/en/free-pro-team@latest/rest/reference/repos#get-a-repository
 export const RepoSchema = coda.makeObjectSchema({
-  type: coda.ValueType.Object,
-  primary: "name",
-  id: "id",
   properties: {
     id: {type: coda.ValueType.Number, required: true},
     name: {type: coda.ValueType.String, required: true},
@@ -107,6 +104,8 @@ export const RepoSchema = coda.makeObjectSchema({
       required: true,
     },
   },
+  displayProperty: "name",
+  idProperty: "id",
 });
 
 // A pull request object, as we would like to present it to Coda users. Many
@@ -120,20 +119,6 @@ export const RepoSchema = coda.makeObjectSchema({
 //
 // https://docs.github.com/en/free-pro-team@latest/rest/reference/pulls#get-a-pull-request
 export const PullRequestSchema = coda.makeObjectSchema({
-  type: coda.ValueType.Object,
-  // In a sync table, the id is used to uniquely identify the object across
-  // multiple syncs. When this table is re-synced any row that matches this
-  // id will be replaced, rather than appending the object as a new row.
-  id: "url",
-  // This is the property that will render as a label on the object in the UI.
-  primary: "title",
-  // These are the subset of the `properties` below that should be automatically
-  // created as columns when this table is first created in the UI. The
-  // remainder of the fields can be easily added as columns manually by the
-  // user at any time. We choose only to feature a handful of highly-relevant
-  // columns to keep tables manageable at creation time and avoid overwhelming
-  // users with too many fields.
-  featured: ["url", "author", "created", "modified", "closed", "state", "body"],
   properties: {
     title: {type: coda.ValueType.String, required: true},
     author: {
@@ -199,4 +184,19 @@ export const PullRequestSchema = coda.makeObjectSchema({
       fromKey: "requested_teams",
     },
   },
+  // This is the property that will render as a label on the object in the UI.
+  displayProperty: "title",
+  // In a sync table, the ID property is used to uniquely identify the object
+  // across multiple syncs. When this table is re-synced any row that matches
+  // this id will be replaced, rather than appending the object as a new row.
+  idProperty: "url",
+  // These are the subset of the `properties` above that should be automatically
+  // created as columns when this table is first created in the UI. The
+  // remainder of the fields can be easily added as columns manually by the
+  // user at any time. We choose only to feature a handful of highly-relevant
+  // columns to keep tables manageable at creation time and avoid overwhelming
+  // users with too many fields.
+  featuredProperties: [
+    "url", "author", "created", "modified", "closed", "state", "body"
+  ],
 });
