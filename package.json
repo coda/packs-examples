@@ -25,7 +25,7 @@
     "node": ">=14"
   },
   "dependencies": {
-    "@codahq/packs-sdk": "^1.2.2"
+    "@codahq/packs-sdk": "^1.2.3"
   },
   "resolutions": {
     "nanoid": "^3.1.31"
