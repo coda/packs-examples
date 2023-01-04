@@ -31,7 +31,7 @@
     "nanoid": "^3.1.31"
   },
   "devDependencies": {
-    "@types/chai": "^4.3.3",
+    "@types/chai": "^4.3.4",
     "@types/chai-as-promised": "^7.1.5",
     "@types/mocha": "^10.0.1",
     "@types/node": "^18.11.18",
@@ -39,7 +39,7 @@
     "@typescript-eslint/eslint-plugin": "5.38.1",
     "@typescript-eslint/experimental-utils": "5.38.1",
     "@typescript-eslint/parser": "5.38.1",
-    "chai": "^4.3.4",
+    "chai": "^4.3.7",
     "chai-as-promised": "^7.1.1",
     "eslint": "8.31.0",
     "eslint-plugin-ban": "^1.6.0",
