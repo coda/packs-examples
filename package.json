@@ -28,7 +28,7 @@
     "@codahq/packs-sdk": "^1.2.3"
   },
   "resolutions": {
-    "nanoid": "^3.1.31"
+    "nanoid": "^4.0.0"
   },
   "devDependencies": {
     "@types/chai": "^4.3.4",
