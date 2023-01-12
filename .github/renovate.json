@@ -2,5 +2,13 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "local>coda/renovate-config"
+  ],
+
+  "packageRules": [
+    {
+      "description": "Pin the cimg/node version to 14.* to match package.json",
+      "matchPackageNames": ["cimg/node"],
+      "allowedVersions": "14.*"
+    }
   ]
 }
