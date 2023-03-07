@@ -27,9 +27,6 @@
   "dependencies": {
     "@codahq/packs-sdk": "1.2.3"
   },
-  "resolutions": {
-    "nanoid": "3.2.0"
-  },
   "devDependencies": {
     "@types/chai": "4.3.4",
     "@types/chai-as-promised": "7.1.5",
