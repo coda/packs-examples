@@ -1,6 +1,6 @@
 # GitHub
 
-This is a more substantive example pack that connects to GitHub using OAuth2 authentication,
+This is a more substantive example Pack that connects to GitHub using OAuth2 authentication,
 and implements a table that syncs various pull requests for one or more repos that the
 user has access to, as well as an action formula to post a pull request review.
 
@@ -11,8 +11,7 @@ lives at https://docs.github.com/en/free-pro-team@latest/developers/apps/creatin
 When creating a GitHub OAuth app you'll need to set **`http://localhost:3000/oauth`**
 as your "Authorization callback URL" in order to run these examples locally. To run them
 on Coda after uploading & releasing, your authorization callback URL must change to be
-**`https://coda.io/packsAuth/oauth2`** (or https://packs.adhoc.coda.io/packsAuth/oauth2
-during our private alpha).
+**`https://coda.io/packsAuth/oauth2/{PACK_ID}`**.
 
 ## Running the Example
 
@@ -26,13 +25,13 @@ becomes invalid.
 To sync pull requests and output them to the console, you can run:
 
 ```bash
-coda execute examples/github/pack.ts PullRequests --fetch
+coda execute examples/github/pack.ts PullRequests
 ```
 
 To create a review on a pull request, you can run:
 
 ```bash
-coda execute examples/github/pack.ts ReviewPullRequest https://github.com/<your-org>/<your-repo>/pull/<your-pr> COMMENT "Some comment" --fetch
+coda execute examples/github/pack.ts ReviewPullRequest https://github.com/<your-org>/<your-repo>/pull/<your-pr> COMMENT "Some comment"
 ```
 
 Note that this will actually update your pull request in GitHub! So be careful and make
@@ -41,7 +40,7 @@ sure you don't inadvertently e.g. approve a real PR if you're just exploring.
 To execute the example `PullRequests` table sync, run:
 
 ```bash
-coda execute examples/github/pack.ts PullRequests https://github.com/<your-org>/<your-repo> --fetch
+coda execute examples/github/pack.ts PullRequests https://github.com/<your-org>/<your-repo>
 ```
 
 This will fetch all of the pull requests in that repo, using multiple requests if there are multiple result
@@ -52,7 +51,7 @@ parameter to the sync.)
 
 ## Running the Tests
 
-Run the unittests just for this pack by using:
+Run the unittests just for this Pack by using:
 
 ```bash
 mocha --require ts-node/register examples/github/test/github_test.ts
