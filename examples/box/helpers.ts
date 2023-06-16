@@ -3,7 +3,6 @@ import type { Folder } from "./types";
 import type { User } from "./types";
 import * as coda from "@codahq/packs-sdk";
 import * as mime from "mime-types";
-import { url } from "inspector";
 
 export async function searchFolders(context: coda.ExecutionContext,
   search: string): Promise<Folder[]> {
