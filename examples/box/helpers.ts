@@ -3,11 +3,13 @@ import type { Folder } from "./types";
 import type { User } from "./types";
 import * as coda from "@codahq/packs-sdk";
 import * as mime from "mime-types";
+import { url } from "inspector";
 
 export async function searchFolders(context: coda.ExecutionContext,
   search: string): Promise<Folder[]> {
   let url = coda.withQueryParams("https://api.box.com/2.0/search", {
     type: "folder",
+    // If no query has been entered, search for "folder" to find all folders.
     query: search || "folder",
     limit: 100,
     fields: "id,name",

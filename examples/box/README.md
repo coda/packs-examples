@@ -5,14 +5,14 @@ This is a small example Pack that demonstrates how to create an action formula t
 ## Setup
 
 To run the example code and actually connect to Box, you'll need to create a Custom App
-with Box and get a client id and client secret. This can be done through their developer console: https://app.box.com/developers/console.
+with Box and get a client id and client secret. This can be done using the [Box developer console](https://app.box.com/developers/console).
 
 When configuring the OAuth settings you'll need to add **`http://localhost:3000/oauth`**
 as your "Redirect URIs" in order to run these examples locally. To run them
 on Coda after uploading & releasing, your authorization callback URL must change to be
 **`https://coda.io/packsAuth/oauth2/{PACK_ID}`**.
 
-Run `coda auth examples/box/pack.ts`. You'll be prompted to enter you client id
+Run `coda auth examples/box/pack.ts`. You'll be prompted to enter your client id
 and client secret, and then your browser will open and begin Box's OAuth flow.
 After the flow completes, the access token for that account will saved locally
 for use when executing formulas and syncs, so you only have to do this once. But you can
