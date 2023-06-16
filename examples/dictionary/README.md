@@ -14,7 +14,7 @@ up definitions for a word, in this case `coda`.
 
 ## Running the Tests
 
-Run the unittests just for this pack by using:
+Run the unittests just for this Pack by using:
 
 ```bash
 mocha --require ts-node/register examples/dictionary/test/dictionary_test.ts
