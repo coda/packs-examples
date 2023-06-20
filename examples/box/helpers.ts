@@ -23,7 +23,7 @@ export async function searchFolders(context: coda.ExecutionContext,
 export async function getUser(context: coda.ExecutionContext): Promise<User> {
   let response = await context.fetcher.fetch({
     method: "GET",
-    url: "https://api.box.com/2.0/users/me"
+    url: "https://api.box.com/2.0/users/me",
   });
   return response.body;
 }

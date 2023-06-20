@@ -46,7 +46,7 @@ pack.addFormula({
             value: folder.id,
           };
         });
-      }
+      },
     }),
   ],
   resultType: coda.ValueType.String,
@@ -63,7 +63,7 @@ pack.addFormula({
     });
     let file = download.body;
     if (!filename) {
-      filename = getFilename(fileUrl, download.headers)
+      filename = getFilename(fileUrl, download.headers);
     }
     let contentType = download.headers["content-type"] as string;
 
@@ -88,12 +88,12 @@ pack.addFormula({
       method: "POST",
       url: "https://upload.box.com/api/2.0/files/content",
       headers: {
-        ...form.getHeaders()
+        ...form.getHeaders(),
       },
       body: form.getBuffer(),
     });
 
     // Return the ID of the uploaded file.
     return upload.body.entries[0].id;
-  }
+  },
 });
