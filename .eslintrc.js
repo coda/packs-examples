@@ -28,6 +28,8 @@ module.exports = {
       'prefer-const': 'off',
       'prefer-let/prefer-let': 2,
       'prefer-template': 'off',
+      'comma-dangle': ['error', 'always-multiline'],
+      'semi': ['error', 'always',],
     },
     overrides: [
       {
