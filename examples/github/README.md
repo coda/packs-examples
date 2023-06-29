@@ -25,7 +25,7 @@ becomes invalid.
 To sync pull requests and output them to the console, you can run:
 
 ```bash
-coda execute examples/github/pack.ts PullRequests
+coda execute examples/github/pack.ts PullRequests https://github.com/<your-org>/<your-repo>
 ```
 
 To create a review on a pull request, you can run:
