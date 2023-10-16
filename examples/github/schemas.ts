@@ -197,6 +197,12 @@ export const PullRequestSchema = coda.makeObjectSchema({
   // columns to keep tables manageable at creation time and avoid overwhelming
   // users with too many fields.
   featuredProperties: [
-    "url", "author", "created", "modified", "closed", "state", "body",
+    "url",
+    "author",
+    "created",
+    "modified",
+    "closed",
+    "state",
+    "body",
   ],
 });

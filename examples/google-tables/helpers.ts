@@ -1,7 +1,7 @@
 import type {Column} from "./types";
 import type {Table} from "./types";
 import * as coda from "@codahq/packs-sdk";
-import { getConverter } from "./convert";
+import {getConverter} from "./convert";
 
 const BaseUrl = "https://area120tables.googleapis.com/v1alpha1";
 const PageSize = 100;
@@ -12,8 +12,9 @@ export function getTableUrl(tableName: string): string {
 }
 
 // Get the available tables from the API.
-export async function getTables(context: coda.ExecutionContext)
-  : Promise<Table[]> {
+export async function getTables(
+  context: coda.ExecutionContext,
+): Promise<Table[]> {
   let url = coda.withQueryParams(coda.joinUrl(BaseUrl, "tables"), {
     pageSize: PageSize,
   });
@@ -27,7 +28,9 @@ export async function getTables(context: coda.ExecutionContext)
 
 // Get a specific table from the API.
 export async function getTable(
-  context: coda.ExecutionContext, tableUrl: string): Promise<Table> {
+  context: coda.ExecutionContext,
+  tableUrl: string,
+): Promise<Table> {
   let response = await context.fetcher.fetch({
     method: "GET",
     url: tableUrl,
@@ -37,8 +40,11 @@ export async function getTable(
 }
 
 // Get a page of table rows from the API.
-export async function getRows(context: coda.ExecutionContext, tableUrl: string,
-  pageToken?: string): Promise<{ rows: any[], nextPageToken?: string }> {
+export async function getRows(
+  context: coda.ExecutionContext,
+  tableUrl: string,
+  pageToken?: string,
+): Promise<{rows: any[]; nextPageToken?: string}> {
   let url = coda.withQueryParams(coda.joinUrl(tableUrl, "rows"), {
     view: "COLUMN_ID_VIEW",
     pageSize: PageSize,
@@ -52,8 +58,10 @@ export async function getRows(context: coda.ExecutionContext, tableUrl: string,
 }
 
 // Update a table row using the API.
-export async function updateRow(context: coda.UpdateSyncExecutionContext,
-  row: any) {
+export async function updateRow(
+  context: coda.UpdateSyncExecutionContext,
+  row: any,
+) {
   let url = coda.withQueryParams(coda.joinUrl(BaseUrl, row.name), {
     view: "COLUMN_ID_VIEW",
   });
@@ -77,9 +85,11 @@ export async function updateRow(context: coda.UpdateSyncExecutionContext,
   }
 }
 
-export function getPropertySchema(column: Column, table: Table,
-  context: coda.ExecutionContext)
-  : coda.Schema & coda.ObjectSchemaProperty | undefined {
+export function getPropertySchema(
+  column: Column,
+  table: Table,
+  context: coda.ExecutionContext,
+): (coda.Schema & coda.ObjectSchemaProperty) | undefined {
   let converter = getConverter(context, column, table);
   let schema = converter.getSchema();
   if (column.lookupDetails) {
@@ -99,8 +109,12 @@ export function getPropertySchema(column: Column, table: Table,
   return schema;
 }
 
-export function formatRowForSchema(row: any, table: Table,
-  context: coda.ExecutionContext, label: string): any {
+export function formatRowForSchema(
+  row: any,
+  table: Table,
+  context: coda.ExecutionContext,
+  label: string,
+): any {
   let result: Record<string, any> = {
     name: row.name,
     rowLabel: label,
@@ -119,8 +133,11 @@ export function formatRowForSchema(row: any, table: Table,
   return result;
 }
 
-export function formatRowForApi(row: any, table: Table,
-  context: coda.ExecutionContext): any {
+export function formatRowForApi(
+  row: any,
+  table: Table,
+  context: coda.ExecutionContext,
+): any {
   let result: Record<string, any> = {
     name: row.name,
     values: {},
@@ -137,5 +154,3 @@ export function formatRowForApi(row: any, table: Table,
   }
   return result;
 }
-
-

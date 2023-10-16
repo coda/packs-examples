@@ -1,13 +1,13 @@
-import type { RowsContinuation } from "./types";
+import type {RowsContinuation} from "./types";
 import * as coda from "@codahq/packs-sdk";
 import {formatRowForApi} from "./helpers";
 import {formatRowForSchema} from "./helpers";
-import { getPropertySchema } from "./helpers";
+import {getPropertySchema} from "./helpers";
 import {getRows} from "./helpers";
 import {getTable} from "./helpers";
 import {getTableUrl} from "./helpers";
 import {getTables} from "./helpers";
-import { updateRow } from "./helpers";
+import {updateRow} from "./helpers";
 
 export const pack = coda.newPack();
 
@@ -65,7 +65,9 @@ pack.addDynamicSyncTable({
     };
     for (let column of table.columns) {
       let property = getPropertySchema(column, table, context);
-      if (!property) { continue; }
+      if (!property) {
+        continue;
+      }
       schema.properties[column.name] = property;
       schema.featuredProperties!.push(column.name);
     }
@@ -95,11 +97,11 @@ pack.addDynamicSyncTable({
     description: "Syncs the data.",
     parameters: [],
     execute: async function (args, context) {
-      let { pageToken, rowNumber = 1 } =
-        (context.sync.continuation ?? {}) as RowsContinuation;
+      let {pageToken, rowNumber = 1} = (context.sync.continuation ??
+        {}) as RowsContinuation;
       let tableUrl = context.sync.dynamicUrl!;
       let table = await getTable(context, tableUrl);
-      let { rows, nextPageToken } = await getRows(context, tableUrl, pageToken);
+      let {rows, nextPageToken} = await getRows(context, tableUrl, pageToken);
       let formattedRows = rows.map((row: any) => {
         return formatRowForSchema(row, table, context, String(rowNumber++));
       });
@@ -164,10 +166,7 @@ pack.setUserAuthentication({
   type: coda.AuthenticationType.OAuth2,
   authorizationUrl: "https://accounts.google.com/o/oauth2/v2/auth",
   tokenUrl: "https://oauth2.googleapis.com/token",
-  scopes: [
-    "profile",
-    "https://www.googleapis.com/auth/tables",
-  ],
+  scopes: ["profile", "https://www.googleapis.com/auth/tables"],
   additionalParams: {
     access_type: "offline",
     prompt: "consent",
@@ -183,5 +182,3 @@ pack.setUserAuthentication({
 });
 
 pack.addNetworkDomain("googleapis.com");
-
-
