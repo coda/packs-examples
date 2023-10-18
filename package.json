@@ -21,8 +21,8 @@
   },
   "homepage": "https://github.com/coda/packs-examples#readme",
   "engines": {
-    "npm": ">=7",
-    "node": ">=14"
+    "npm": ">=9",
+    "node": ">=18"
   },
   "dependencies": {
     "@codahq/packs-sdk": "^1.5.1",
