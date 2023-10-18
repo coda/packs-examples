@@ -1,4 +1,6 @@
+import type {CodaRow} from "./types";
 import type {Column} from "./types";
+import type {Row} from "./types";
 import type {Table} from "./types";
 import * as coda from "@codahq/packs-sdk";
 import {getConverter} from "./convert";
@@ -44,7 +46,7 @@ export async function getRows(
   context: coda.ExecutionContext,
   tableUrl: string,
   pageToken?: string,
-): Promise<{rows: any[]; nextPageToken?: string}> {
+): Promise<{rows: Row[]; nextPageToken?: string}> {
   let url = coda.withQueryParams(coda.joinUrl(tableUrl, "rows"), {
     view: "COLUMN_ID_VIEW",
     pageSize: PageSize,
@@ -60,7 +62,7 @@ export async function getRows(
 // Update a table row using the API.
 export async function updateRow(
   context: coda.UpdateSyncExecutionContext,
-  row: any,
+  row: Row,
 ) {
   let url = coda.withQueryParams(coda.joinUrl(BaseUrl, row.name), {
     view: "COLUMN_ID_VIEW",
@@ -76,7 +78,11 @@ export async function updateRow(
     });
     return response.body;
   } catch (error) {
-    if (coda.StatusCodeError.isStatusCodeError(error)) {
+    if (
+      coda.StatusCodeError.isStatusCodeError(error) &&
+      // Don't swallow 401's, since they are needed to trigger an OAuth refresh.
+      error.statusCode !== 401
+    ) {
       if (error.body?.error) {
         throw new coda.UserVisibleError(error.body.error.message);
       }
@@ -101,6 +107,8 @@ export function getPropertySchema(
       "To change the value, edit the corresponding relationship column.";
     schema.mutable = false;
   }
+  // If mutability hasn't been specified by either the converter or the lookup
+  // logic above, fallback to the readonly field of the column.
   if (schema.mutable === undefined) {
     schema.mutable = !column.readonly;
   }
@@ -110,12 +118,12 @@ export function getPropertySchema(
 }
 
 export function formatRowForSchema(
-  row: any,
+  row: Row,
   table: Table,
   context: coda.ExecutionContext,
   label: string,
-): any {
-  let result: Record<string, any> = {
+): CodaRow {
+  let result: CodaRow = {
     name: row.name,
     rowLabel: label,
   };
@@ -134,11 +142,11 @@ export function formatRowForSchema(
 }
 
 export function formatRowForApi(
-  row: any,
+  row: CodaRow,
   table: Table,
   context: coda.ExecutionContext,
-): any {
-  let result: Record<string, any> = {
+): Row {
+  let result: Row = {
     name: row.name,
     values: {},
   };

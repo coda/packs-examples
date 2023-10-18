@@ -22,6 +22,11 @@ export interface Column {
   relationshipDetails: RelationshipDetails;
 }
 
+export interface Row {
+  name: string;
+  values: Record<string, any>;
+}
+
 interface Label {
   name: string;
   id: string;
@@ -74,6 +79,12 @@ export interface TablesTimestamp {
 }
 
 // Custom types for this Pack.
+
+export interface CodaRow extends Record<string, any> {
+  name: string;
+  rowLabel: string;
+  updateTime?: string;
+}
 
 export interface RowsContinuation extends coda.Continuation {
   pageToken: string;

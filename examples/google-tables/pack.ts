@@ -1,3 +1,4 @@
+import type {CodaRow} from "./types";
 import type {RowsContinuation} from "./types";
 import * as coda from "@codahq/packs-sdk";
 import {formatRowForApi} from "./helpers";
@@ -49,6 +50,16 @@ pack.addDynamicSyncTable({
       };
     });
   },
+  searchDynamicUrls: async function (context, search) {
+    let tables = await getTables(context);
+    let results = tables.map(table => {
+      return {
+        display: table.displayName,
+        value: getTableUrl(table.name),
+      };
+    });
+    return coda.autocompleteSearchObjects(search, results, "display", "value");
+  },
   getName: async function (context) {
     let tableUrl = context.sync!.dynamicUrl!;
     let table = await getTable(context, tableUrl);
@@ -90,7 +101,6 @@ pack.addDynamicSyncTable({
     if (column.labels) {
       return column.labels.map(label => label.name);
     }
-    return undefined;
   },
   formula: {
     name: "SyncTable",
@@ -102,7 +112,7 @@ pack.addDynamicSyncTable({
       let tableUrl = context.sync.dynamicUrl!;
       let table = await getTable(context, tableUrl);
       let {rows, nextPageToken} = await getRows(context, tableUrl, pageToken);
-      let formattedRows = rows.map((row: any) => {
+      let formattedRows = rows.map(row => {
         return formatRowForSchema(row, table, context, String(rowNumber++));
       });
       let continuation: RowsContinuation | undefined;
@@ -125,7 +135,7 @@ pack.addDynamicSyncTable({
       // Create an async job for each update.
       let jobs = updates.map(async update => {
         // Convert the row back to an API format.
-        let row = formatRowForApi(update.newValue, table, context);
+        let row = formatRowForApi(update.newValue as CodaRow, table, context);
 
         // Prune unchanged values.
         for (let columnId of Object.keys(row.values)) {
