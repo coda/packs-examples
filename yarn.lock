@@ -1200,10 +1200,10 @@
   resolved "https://registry.yarnpkg.com/@types/mime-types/-/mime-types-2.1.3.tgz#0688436864f87a0c8e33ca12be60cd791cc24b36"
   integrity sha512-bvxCbHeeS7quxS7uOJShyoOQj/BfLabhF6mk9Rmr+2MRfW8W1yxyyL/0GTxLFTHen41GrIw4K3D4DrLouhb8vg==
 
-"@types/mocha@10.0.1":
-  version "10.0.1"
-  resolved "https://registry.npmjs.org/@types/mocha/-/mocha-10.0.1.tgz"
-  integrity sha512-/fvYntiO1GeICvqbQ3doGDIP97vWmvFt83GKguJ6prmQM2iXZfFcq6YE8KteFyRtX2/h5Hf91BYvPodJKFYv5Q==
+"@types/mocha@10.0.3":
+  version "10.0.3"
+  resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-10.0.3.tgz#4804fe9cd39da26eb62fa65c15ea77615a187812"
+  integrity sha512-RsOPImTriV/OE4A9qKjMtk2MnXiuLLbcO3nCXK+kvq4nr0iMfFgpjaX3MPLb6f7+EL1FGSelYvuJMV6REH+ZPQ==
 
 "@types/node@18.17.12":
   version "18.17.12"
