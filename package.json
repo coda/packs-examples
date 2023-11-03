@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@types/chai": "4.3.5",
-    "@types/chai-as-promised": "7.1.5",
+    "@types/chai-as-promised": "7.1.7",
     "@types/content-disposition": "0.5.5",
     "@types/mime-types": "2.1.1",
     "@types/mocha": "10.0.1",
