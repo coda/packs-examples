@@ -94,8 +94,32 @@ abstract class ColumnConverter<T, C> {
     this.table = table;
   }
 
-  // Each implementation must define the property schema.
-  abstract getSchema(): coda.Schema & coda.ObjectSchemaProperty;
+  getSchema(): coda.Schema & coda.ObjectSchemaProperty {
+    let schema = this._getBaseSchema();
+    schema.fromKey = this.column.id;
+    schema.fixedId = this.column.id;
+
+    // Deterine mutability.
+    if (this.column.lookupDetails) {
+      // This is a column that depends on a relationship, so it can't be edited
+      // directly.
+      let relationship = this.column.lookupDetails.relationshipColumn;
+      schema.description =
+        `This is a lookup column, using the relationship "${relationship}". ` +
+        "To change the value, edit the corresponding relationship column.";
+      schema.mutable = false;
+    }
+    // If mutability hasn't been specified by either the converter or the lookup
+    // logic above, fallback to the readonly field of the column.
+    if (schema.mutable === undefined) {
+      schema.mutable = !this.column.readonly;
+    }
+
+    return schema;
+  }
+
+  // Each implementation must define the base property schema.
+  abstract _getBaseSchema(): coda.Schema & coda.ObjectSchemaProperty;
 
   // Default to passing through the value as-is, in both directions.
   formatValueForSchema(value: T): C {
@@ -107,7 +131,7 @@ abstract class ColumnConverter<T, C> {
 }
 
 class TextColumnConverter extends ColumnConverter<string, string> {
-  getSchema() {
+  _getBaseSchema() {
     return coda.makeSchema({
       type: coda.ValueType.String,
     });
@@ -115,7 +139,7 @@ class TextColumnConverter extends ColumnConverter<string, string> {
 }
 
 class NumberColumnConverter extends ColumnConverter<number, number> {
-  getSchema() {
+  _getBaseSchema() {
     return coda.makeSchema({
       type: coda.ValueType.Number,
     });
@@ -123,7 +147,7 @@ class NumberColumnConverter extends ColumnConverter<number, number> {
 }
 
 class BooleanColumnConverter extends ColumnConverter<boolean, boolean> {
-  getSchema() {
+  _getBaseSchema() {
     return coda.makeSchema({
       type: coda.ValueType.Boolean,
     });
@@ -131,7 +155,7 @@ class BooleanColumnConverter extends ColumnConverter<boolean, boolean> {
 }
 
 class DateColumnConverter extends ColumnConverter<TablesDate, string> {
-  getSchema() {
+  _getBaseSchema() {
     return coda.makeSchema({
       type: coda.ValueType.String,
       codaType: coda.ValueHintType.Date,
@@ -157,7 +181,7 @@ class DateColumnConverter extends ColumnConverter<TablesDate, string> {
 }
 
 class DateTimeColumnConverter extends ColumnConverter<TablesDateTime, string> {
-  getSchema() {
+  _getBaseSchema() {
     return coda.makeSchema({
       type: coda.ValueType.String,
       codaType: coda.ValueHintType.DateTime,
@@ -201,7 +225,7 @@ class DateTimeColumnConverter extends ColumnConverter<TablesDateTime, string> {
 }
 
 class PersonColumnConverter extends ColumnConverter<string, PersonReference> {
-  getSchema() {
+  _getBaseSchema() {
     return coda.makeObjectSchema({
       codaType: coda.ValueHintType.Person,
       properties: {
@@ -226,7 +250,7 @@ class PersonColumnConverter extends ColumnConverter<string, PersonReference> {
 }
 
 class SelectListColumnConverter extends ColumnConverter<string, string> {
-  getSchema() {
+  _getBaseSchema() {
     return coda.makeSchema({
       type: coda.ValueType.String,
       codaType: coda.ValueHintType.SelectList,
@@ -250,16 +274,16 @@ class MultiSelectListColumnConverter extends ColumnConverter<
     );
   }
 
-  getSchema() {
+  _getBaseSchema() {
     return coda.makeSchema({
       type: coda.ValueType.Array,
-      items: this.selectListConverter.getSchema(),
+      items: this.selectListConverter._getBaseSchema(),
     });
   }
 }
 
 class DriveFilesColumnConverter extends ColumnConverter<DriveFile[], string[]> {
-  getSchema() {
+  _getBaseSchema() {
     return coda.makeSchema({
       type: coda.ValueType.Array,
       items: {
@@ -281,7 +305,7 @@ class DriveFilesColumnConverter extends ColumnConverter<DriveFile[], string[]> {
 }
 
 class FilesColumnConverter extends ColumnConverter<TablesFile[], string[]> {
-  getSchema() {
+  _getBaseSchema() {
     return coda.makeSchema({
       type: coda.ValueType.Array,
       items: {
@@ -299,7 +323,7 @@ class FilesColumnConverter extends ColumnConverter<TablesFile[], string[]> {
 }
 
 class LocationColumnConverter extends ColumnConverter<TablesLocation, string> {
-  getSchema() {
+  _getBaseSchema() {
     return coda.makeSchema({
       type: coda.ValueType.String,
       // Can't reasonably edit these in Coda.
@@ -316,7 +340,7 @@ class RelationshipColumnConverter extends ColumnConverter<
   string,
   RowReference
 > {
-  getSchema() {
+  _getBaseSchema() {
     let referenceSchema = coda.makeReferenceSchemaFromObjectSchema(
       BaseRowSchema,
       "Table",
@@ -343,7 +367,7 @@ class TimestampColumnConverter extends ColumnConverter<
   TablesTimestamp,
   string
 > {
-  getSchema() {
+  _getBaseSchema() {
     return coda.makeSchema({
       type: coda.ValueType.String,
       codaType: coda.ValueHintType.DateTime,
@@ -368,7 +392,7 @@ class TimestampColumnConverter extends ColumnConverter<
 }
 
 class UnknownColumnConverter extends ColumnConverter<any, string> {
-  getSchema() {
+  _getBaseSchema() {
     return coda.makeSchema({
       type: coda.ValueType.String,
       mutable: false,
@@ -388,10 +412,10 @@ class ListColumnConverter extends ColumnConverter<any[], any[]> {
     this.baseConverter = baseConverter;
   }
 
-  getSchema() {
+  _getBaseSchema() {
     return coda.makeSchema({
       type: coda.ValueType.Array,
-      items: this.baseConverter.getSchema(),
+      items: this.baseConverter._getBaseSchema(),
     });
   }
 
@@ -416,8 +440,8 @@ class UnwrapColumnConverter extends ColumnConverter<any[], any> {
     this.baseConverter = baseConverter;
   }
 
-  getSchema() {
-    return this.baseConverter.getSchema();
+  _getBaseSchema() {
+    return this.baseConverter._getBaseSchema();
   }
 
   formatValueForSchema(list: any[]) {

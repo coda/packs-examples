@@ -97,24 +97,7 @@ export function getPropertySchema(
   context: coda.ExecutionContext,
 ): (coda.Schema & coda.ObjectSchemaProperty) | undefined {
   let converter = getConverter(context, column, table);
-  let schema = converter.getSchema();
-  if (column.lookupDetails) {
-    // This is a column that depends on a relationship, so it can't be edited
-    // directly.
-    let relationship = column.lookupDetails.relationshipColumn;
-    schema.description =
-      `This is a lookup column, using the relationship "${relationship}". ` +
-      "To change the value, edit the corresponding relationship column.";
-    schema.mutable = false;
-  }
-  // If mutability hasn't been specified by either the converter or the lookup
-  // logic above, fallback to the readonly field of the column.
-  if (schema.mutable === undefined) {
-    schema.mutable = !column.readonly;
-  }
-  schema.fromKey = column.id;
-  schema.fixedId = column.id;
-  return schema;
+  return converter.getSchema();
 }
 
 export function formatRowForSchema(
