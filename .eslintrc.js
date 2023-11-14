@@ -14,7 +14,7 @@ module.exports = {
       project: ['./tsconfig.json'],
       sourceType: 'module',
     },
-    plugins: ['ban', 'filenames', 'local', 'prefer-let', '@typescript-eslint'],
+    plugins: ['ban', 'filenames', 'local', 'prefer-let', '@typescript-eslint', 'prettier'],
     settings: {},
     rules: {
       '@typescript-eslint/restrict-plus-operands': 'error',
@@ -30,6 +30,7 @@ module.exports = {
       'prefer-template': 'off',
       'comma-dangle': ['error', 'always-multiline'],
       'semi': ['error', 'always',],
+      'prettier/prettier': 'error',
     },
     overrides: [
       {

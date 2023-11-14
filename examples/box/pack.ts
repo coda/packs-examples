@@ -30,13 +30,15 @@ pack.addFormula({
     coda.makeParameter({
       type: coda.ParameterType.String,
       name: "filename",
-      description: "The filename to upload to. Default: the original filename of the file.",
+      description:
+        "The filename to upload to. Default: the original filename of the file.",
       optional: true,
     }),
     coda.makeParameter({
       type: coda.ParameterType.String,
       name: "folderId",
-      description: "The ID of the folder to upload to. Default: the root folder.",
+      description:
+        "The ID of the folder to upload to. Default: the root folder.",
       optional: true,
       autocomplete: async function (context, search) {
         let folders = await searchFolders(context, search);
