@@ -75,6 +75,7 @@ pack.addSyncTable({
 });
 
 // Create a JWT using the application ID and private key in credentials.ts.
+// See https://developer.vonage.com/en/getting-started/concepts/authentication#json-web-tokens
 function createJwt(context: coda.ExecutionContext) {
   let now = Date.now() / 1000;
   let header = {
