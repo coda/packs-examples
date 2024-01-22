@@ -1212,10 +1212,10 @@
   resolved "https://registry.yarnpkg.com/@types/jsrsasign/-/jsrsasign-10.5.12.tgz#39ca12e576249f1a5494943d1c0c49c9087bf13d"
   integrity sha512-sOA+eVnHU+FziThpMhuqs/tjFKe5gHVJKIS7g1BzhXP+e2FS8OvtzM0K3IzFxVksDOr98Gz5FJiZVxZ9uFoHhw==
 
-"@types/luxon@3.3.1":
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/@types/luxon/-/luxon-3.3.1.tgz#08727da7d81ee6a6c702b9dc6c8f86be010eb4dc"
-  integrity sha512-XOS5nBcgEeP2PpcqJHjCWhUCAzGfXIU8ILOSLpx2FhxqMW9KdxgCGXNOEKGVBfveKtIpztHzKK5vSRVLyW/NqA==
+"@types/luxon@3.4.2":
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/@types/luxon/-/luxon-3.4.2.tgz#e4fc7214a420173cea47739c33cdf10874694db7"
+  integrity sha512-TifLZlFudklWlMBfhubvgqTXRzLDI5pCbGa4P8a3wPyUQSW+1xQ5eDsreP9DWHX3tjq1ke96uYG/nwundroWcA==
 
 "@types/mime-types@2.1.3":
   version "2.1.3"
@@ -3401,10 +3401,10 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
-luxon@3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/luxon/-/luxon-3.4.0.tgz#17cb754efecbf76994f05b2a3f1f91fad7ddfde7"
-  integrity sha512-7eDo4Pt7aGhoCheGFIuq4Xa2fJm4ZpmldpGhjTYBNUYNCN6TIEP6v7chwwwt3KRp7YR+rghbfvjyo3V5y9hgBw==
+luxon@3.4.4:
+  version "3.4.4"
+  resolved "https://registry.yarnpkg.com/luxon/-/luxon-3.4.4.tgz#cf20dc27dc532ba41a169c43fdcc0063601577af"
+  integrity sha512-zobTr7akeGHnv7eBOXcRgMeCP6+uyYsczwmeRCauvpvaAltgNyTbLH/+VaEAPUeWBT+1GuNmz4wC/6jtQzbbVA==
 
 make-error@^1.1.1:
   version "1.3.6"
