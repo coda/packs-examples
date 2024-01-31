@@ -35,7 +35,7 @@
   "devDependencies": {
     "@types/chai": "4.3.9",
     "@types/chai-as-promised": "7.1.7",
-    "@types/content-disposition": "0.5.7",
+    "@types/content-disposition": "0.5.8",
     "@types/jsrsasign": "10.5.12",
     "@types/luxon": "3.3.1",
     "@types/mime-types": "2.1.3",
