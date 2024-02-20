@@ -98,8 +98,9 @@ abstract class ColumnConverter<T, C> {
     let schema = this._getBaseSchema();
     schema.fromKey = this.column.id;
     schema.fixedId = this.column.id;
+    schema.displayName = this.column.name;
 
-    // Deterine mutability.
+    // Determine mutability.
     if (this.column.lookupDetails) {
       // This is a column that depends on a relationship, so it can't be edited
       // directly.
