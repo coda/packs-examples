@@ -1209,10 +1209,10 @@
   resolved "https://registry.npmjs.org/@types/chai/-/chai-4.3.4.tgz"
   integrity sha512-KnRanxnpfpjUTqTCXslZSEdLfXExwgNxYPdiO2WGUj8+HDjFi8R3k5RVKPeSCzLjCcshCAtVO2QBbVuAV4kTnw==
 
-"@types/chai@4.3.12":
-  version "4.3.12"
-  resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.3.12.tgz#b192fe1c553b54f45d20543adc2ab88455a07d5e"
-  integrity sha512-zNKDHG/1yxm8Il6uCCVsm+dRdEsJlFoDu73X17y09bId6UwoYww+vFBsAcRzl8knM1sab3Dp1VRikFQwDOtDDw==
+"@types/chai@4.3.16":
+  version "4.3.16"
+  resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.3.16.tgz#b1572967f0b8b60bf3f87fe1d854a5604ea70c82"
+  integrity sha512-PatH4iOdyh3MyWtmHVFXLWCCIhUbopaltqddG9BzB+gMIzee2MJrvd+jouii9Z3wzQJruGWAm7WOMjgfG8hQlQ==
 
 "@types/content-disposition@0.5.8":
   version "0.5.8"
