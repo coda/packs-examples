@@ -29,7 +29,7 @@
     "content-disposition": "0.5.4",
     "form-data": "4.0.0",
     "jsrsasign": "11.1.0",
-    "luxon": "3.4.4",
+    "luxon": "3.5.0",
     "mime-types": "2.1.35"
   },
   "devDependencies": {
