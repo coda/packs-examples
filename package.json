@@ -25,7 +25,7 @@
     "node": ">=18"
   },
   "dependencies": {
-    "@codahq/packs-sdk": "^1.7.5",
+    "@codahq/packs-sdk": "^1.8.4",
     "content-disposition": "0.5.4",
     "form-data": "4.0.0",
     "jsrsasign": "11.1.0",
