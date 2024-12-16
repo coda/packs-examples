@@ -1177,6 +1177,13 @@
     "@smithy/util-buffer-from" "^2.1.1"
     tslib "^2.5.0"
 
+"@thisismanta/pessimist@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@thisismanta/pessimist/-/pessimist-1.2.0.tgz#303b4da06a3894db4b97311cf25f54d5ca6c128c"
+  integrity sha512-rm8/zjNMuO9hPYhEMavVIIxmvawJJB8mthvbVXd74XUW7V/SbgmtDBQjICbCWKjluvA+gh+cqi7dv85/jexknA==
+  dependencies:
+    lodash "^4.17.21"
+
 "@tsconfig/node10@^1.0.7":
   version "1.0.8"
   resolved "https://registry.npmjs.org/@tsconfig/node10/-/node10-1.0.8.tgz"
@@ -2353,10 +2360,13 @@ eslint-plugin-filenames@1.3.2:
     lodash.snakecase "4.1.1"
     lodash.upperfirst "4.3.1"
 
-eslint-plugin-local@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/eslint-plugin-local/-/eslint-plugin-local-1.0.0.tgz"
-  integrity sha512-bcwcQnKL/Iw5Vi/F2lG1he5oKD2OGjhsLmrcctkWrWq5TujgiaYb0cj3pZgr3XI54inNVnneOFdAx1daLoYLJQ==
+eslint-plugin-local@6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-local/-/eslint-plugin-local-6.0.0.tgz#5f2f203b88ea7b14708040d6724df26935f8ac8e"
+  integrity sha512-pvy/pTTyanEKAqpYqy/SLfd4TdiAQ/yFO+GRXDGvGQa2vEUGtmlEjmWQXBDGSk790j4nrAB/7ipqPQY3nLduDg==
+  dependencies:
+    "@thisismanta/pessimist" "^1.2.0"
+    chalk "^4.0.0"
 
 eslint-plugin-prefer-let@3.0.1:
   version "3.0.1"
@@ -3300,6 +3310,11 @@ lodash.upperfirst@4.3.1:
   version "4.3.1"
   resolved "https://registry.npmjs.org/lodash.upperfirst/-/lodash.upperfirst-4.3.1.tgz"
   integrity sha1-E2Xt9DFIBIHvDRxolXpe2Z1J984=
+
+lodash@^4.17.21:
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
 log-symbols@4.1.0:
   version "4.1.0"
