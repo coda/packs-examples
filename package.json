@@ -33,8 +33,7 @@
     "mime-types": "2.1.35"
   },
   "devDependencies": {
-    "@types/chai": "5.0.1",
-    "@types/chai-as-promised": "8.0.1",
+    "@types/chai": "4.3.16",
     "@types/content-disposition": "0.5.8",
     "@types/jsrsasign": "10.5.15",
     "@types/luxon": "3.4.2",
@@ -45,8 +44,7 @@
     "@typescript-eslint/eslint-plugin": "8.24.0",
     "@typescript-eslint/experimental-utils": "5.62.0",
     "@typescript-eslint/parser": "8.24.0",
-    "chai": "5.2.0",
-    "chai-as-promised": "8.0.1",
+    "chai": "4.5.0",
     "eslint": "9.20.1",
     "eslint-plugin-ban": "2.0.0",
     "eslint-plugin-filenames": "1.3.2",

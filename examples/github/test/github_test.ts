@@ -6,8 +6,6 @@ import type {MockSyncExecutionContext} from "@codahq/packs-sdk/dist/development"
 import type {PullRequestReviewResponse} from "../types";
 import {RepoUrlParameter} from "../pack";
 import {assert} from "chai";
-import * as chai from "chai";
-import chaiAsPromised from "chai-as-promised";
 import {describe} from "mocha";
 import {executeFormulaFromPackDef} from "@codahq/packs-sdk/dist/development";
 import {executeMetadataFormula} from "@codahq/packs-sdk/dist/development";
@@ -18,8 +16,7 @@ import {newMockExecutionContext} from "@codahq/packs-sdk/dist/development";
 import {newMockSyncExecutionContext} from "@codahq/packs-sdk/dist/development";
 import {pack} from "../pack";
 import * as sinon from "sinon";
-
-chai.use(chaiAsPromised);
+import {willBeRejectedWith} from "../../../lib/test_utils";
 
 describe("Github pack", () => {
   describe("ReviewPullRequest", () => {
@@ -105,7 +102,7 @@ describe("Github pack", () => {
         ],
         context,
       );
-      await assert.isRejected(
+      await willBeRejectedWith(
         responsePromise,
         /Comment parameter must be provided for Comment or Request Changes actions\./,
       );
