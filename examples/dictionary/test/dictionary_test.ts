@@ -34,7 +34,7 @@ describe("Dictionary pack", () => {
       },
     };
     let fakeEntries = [fakeEntry];
-    context.fetcher.fetch.returns(newJsonFetchResponse(fakeEntries));
+    context.fetcher.fetch.resolves(newJsonFetchResponse(fakeEntries));
 
     // This is the heart of the test, where we actually execute the formula on a
     // given set of parameters, using our mock execution context.
@@ -68,7 +68,7 @@ describe("Dictionary pack", () => {
   // cannot find the input word, so we simulate that here, and make sure
   // that our implementation doesn't throw any errors.
   it("executes with an empty response", async () => {
-    context.fetcher.fetch.returns(newJsonFetchResponse([]));
+    context.fetcher.fetch.resolves(newJsonFetchResponse([]));
     let response = await executeFormulaFromPackDef(
       pack,
       "Define",
