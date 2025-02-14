@@ -1,17 +1,17 @@
 'use strict';
 Object.defineProperty(exports, '__esModule', {value: true});
-const experimental_utils_1 = require('@typescript-eslint/experimental-utils');
+exports.rule = exports.MessageIds = void 0;
+const typescript_estree_1 = require('@typescript-eslint/typescript-estree');
 var MessageIds;
-(function(MessageIds) {
+(function (MessageIds) {
   MessageIds['MultipleSpecifiersFound'] = 'MultipleSpecifiersFound';
-})((MessageIds = exports.MessageIds || (exports.MessageIds = {})));
-exports.rule = {
+})(MessageIds || (exports.MessageIds = MessageIds = {}));
+exports.rule = Object.freeze({
+  defaultOptions: [],
   meta: {
     type: 'problem',
     docs: {
-      category: 'Stylistic Issues',
-      description: `Requires a single specifier per import statement.`,
-      recommended: false,
+      description: 'Requires a single specifier per import statement.',
       url: '',
     },
     fixable: 'code',
@@ -32,14 +32,17 @@ exports.rule = {
                 const importName = spec.local.name;
                 let importText = 'import ';
                 switch (spec.type) {
-                  case experimental_utils_1.AST_NODE_TYPES.ImportDefaultSpecifier:
+                  case typescript_estree_1.AST_NODE_TYPES.ImportDefaultSpecifier:
                     importText += `${importName} from `;
                     break;
-                  case experimental_utils_1.AST_NODE_TYPES.ImportNamespaceSpecifier:
+                  case typescript_estree_1.AST_NODE_TYPES.ImportNamespaceSpecifier:
                     importText += `* as ${importName} from `;
                     break;
-                  case experimental_utils_1.AST_NODE_TYPES.ImportSpecifier:
-                    const importSourceName = spec.imported.name;
+                  case typescript_estree_1.AST_NODE_TYPES.ImportSpecifier:
+                    const importSourceName =
+                      spec.imported.type === typescript_estree_1.AST_NODE_TYPES.Identifier
+                        ? spec.imported.name
+                        : spec.imported.value;
                     if (importSourceName !== importName) {
                       importText += `{${importSourceName} as ${importName}} from `;
                     } else {
@@ -57,4 +60,4 @@ exports.rule = {
       },
     };
   },
-};
+});
