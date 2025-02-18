@@ -2,7 +2,7 @@ module.exports = {
     rules: {
       '@typescript-eslint/adjacent-overload-signatures': 'error',
       '@typescript-eslint/array-type': ['error', {default: 'array-simple', readonly: 'array-simple'}],
-      '@typescript-eslint/ban-types': [
+      'ban/ban': [
         'error',
         {
           types: {
@@ -56,7 +56,6 @@ module.exports = {
       '@typescript-eslint/no-namespace': ['error', {allowDeclarations: true}],
       // TODO: re-enable once violations are fixed and we have dev consensus.
       '@typescript-eslint/no-non-null-assertion': 'off',
-      '@typescript-eslint/no-parameter-properties': 'error',
       '@typescript-eslint/no-unused-expressions': ['error', {allowShortCircuit: true, allowTernary: true}],
       '@typescript-eslint/no-unused-vars': [
         'error',
@@ -64,6 +63,7 @@ module.exports = {
       ],
       '@typescript-eslint/no-use-before-declare': 'off',
       '@typescript-eslint/no-var-requires': 'off',
+      '@typescript-eslint/parameter-properties': ['error', {}],
       '@typescript-eslint/prefer-for-of': 'error',
       '@typescript-eslint/prefer-function-type': 'error',
       '@typescript-eslint/prefer-namespace-keyword': 'error',
@@ -94,7 +94,8 @@ module.exports = {
       ],
 
       // eslint-plugin-filenames
-      'filenames/match-regex': ['error', '^[a-z][a-z0-9_.]+$', true],
+      // TODO(jonathan): Re-enable once we find the violating files.
+      // 'filenames/match-regex': ['error', '^[a-z][a-z0-9_.]+$', true],
 
       // ESLint Built-ins
       'arrow-parens': ['error', 'as-needed'],

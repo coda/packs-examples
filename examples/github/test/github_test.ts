@@ -6,8 +6,6 @@ import type {MockSyncExecutionContext} from "@codahq/packs-sdk/dist/development"
 import type {PullRequestReviewResponse} from "../types";
 import {RepoUrlParameter} from "../pack";
 import {assert} from "chai";
-import * as chai from "chai";
-import chaiAsPromised from "chai-as-promised";
 import {describe} from "mocha";
 import {executeFormulaFromPackDef} from "@codahq/packs-sdk/dist/development";
 import {executeMetadataFormula} from "@codahq/packs-sdk/dist/development";
@@ -18,8 +16,7 @@ import {newMockExecutionContext} from "@codahq/packs-sdk/dist/development";
 import {newMockSyncExecutionContext} from "@codahq/packs-sdk/dist/development";
 import {pack} from "../pack";
 import * as sinon from "sinon";
-
-chai.use(chaiAsPromised);
+import {willBeRejectedWith} from "../../../lib/test_utils";
 
 describe("Github pack", () => {
   describe("ReviewPullRequest", () => {
@@ -48,7 +45,7 @@ describe("Github pack", () => {
         html_url: "https://some-review-url.com",
       };
       // Register the fake response with our mock fetcher.
-      context.fetcher.fetch.returns(newJsonFetchResponse(fakeReviewResponse));
+      context.fetcher.fetch.resolves(newJsonFetchResponse(fakeReviewResponse));
 
       // This is the heart of the test, where we actually execute the
       // formula on a given set of parameters, using our mock execution context.
@@ -105,7 +102,7 @@ describe("Github pack", () => {
         ],
         context,
       );
-      await assert.isRejected(
+      await willBeRejectedWith(
         responsePromise,
         /Comment parameter must be provided for Comment or Request Changes actions\./,
       );
@@ -186,7 +183,7 @@ describe("Github pack", () => {
       let pr1 = makeFakePullRequest({title: "pull request 1", number: 111});
       let pr2 = makeFakePullRequest({title: "pull request 2", number: 222});
       // Set up our mock fetcher to return a valdi result page with 2 fake PRs.
-      syncContext.fetcher.fetch.returns(newJsonFetchResponse([pr1, pr2]));
+      syncContext.fetcher.fetch.resolves(newJsonFetchResponse([pr1, pr2]));
 
       // This actually executes the entire sync.
       let syncedObjects = await executeSyncFormulaFromPackDef(
@@ -233,12 +230,12 @@ describe("Github pack", () => {
           method: "GET",
           url: "https://api.github.com/repos/some-org/some-repo/pulls?per_page=100",
         })
-        .returns(page1Response)
+        .resolves(page1Response)
         .withArgs({
           method: "GET",
           url: "https://api.github.com/next-page-url",
         })
-        .returns(page2Response);
+        .resolves(page2Response);
 
       // Now actually execute the sync. This will keep fetching additional
       // pages of results until there is not continuation returned.
@@ -282,7 +279,7 @@ describe("Github pack", () => {
         name: "repo 2 matches some-query",
         html_url: "https://repo-2-url",
       };
-      context.fetcher.fetch.returns(newJsonFetchResponse([repo1, repo2]));
+      context.fetcher.fetch.resolves(newJsonFetchResponse([repo1, repo2]));
 
       // Invoke the metadata formula simulating that the user has searched
       // in the UI for 'some-query'.
