@@ -20,6 +20,7 @@ const compat = new FlatCompat({
 });
 
 export default [...compat.extends("./tools/eslint/base_rules.js"), {
+    files: ["**/*.ts"],
     plugins: {
         ban,
         filenames,
