@@ -1,4 +1,4 @@
-import {assert} from "chai";
+import {assert} from 'chai';
 
 export async function willBeRejected<ErrorT = any>(
   promise: Promise<any>,
@@ -9,16 +9,16 @@ export async function willBeRejected<ErrorT = any>(
     return err;
   }
 
-  throw new Error("Promise unexpectedly resolved");
+  throw new Error('Promise unexpectedly resolved');
 }
 
 export async function willBeRejectedWith<T, ErrorT = any>(
   promise: Promise<T>,
   matcher?: RegExp,
 ): Promise<ErrorT> {
-  let error = await willBeRejected(promise);
+  const error = await willBeRejected(promise);
   if (matcher) {
-    assert.match(error, matcher, "Promise was rejected with unexpected error.");
+    assert.match(error, matcher, 'Promise was rejected with unexpected error.');
   }
   return error as ErrorT;
 }

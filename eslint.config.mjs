@@ -21,13 +21,12 @@ const compat = new FlatCompat({
 
 export default [...compat.extends("./tools/eslint/base_rules.js"), {
     files: ["**/*.ts"],
+
     plugins: {
         ban,
         filenames,
         local,
-        "prefer-let": preferLet,
         "@typescript-eslint": typescriptEslint,
-        prettier,
     },
 
     languageOptions: {
@@ -48,11 +47,21 @@ export default [...compat.extends("./tools/eslint/base_rules.js"), {
         },
     },
 
-    settings: {},
-
     rules: {
         "@typescript-eslint/restrict-plus-operands": "error",
+    },
 
+    settings: {},
+}, {
+    files: ["examples/**/*.ts"],
+
+    plugins: {
+        "prefer-let": preferLet,
+        "@typescript-eslint": typescriptEslint,
+        prettier,
+    },
+    
+    rules: {
         "@typescript-eslint/no-unused-vars": ["error", {
             varsIgnorePattern: "_.*|response|datasourceUrl|MySchema",
             argsIgnorePattern: "_.*|context|param",
