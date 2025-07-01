@@ -51,7 +51,7 @@
     "eslint-plugin-prefer-let": "4.0.0",
     "eslint-plugin-prettier": "5.2.3",
     "json-schema": "0.4.0",
-    "mocha": "11.1.0",
+    "mocha": "11.7.1",
     "prettier": "3.5.1",
     "sinon": "19.0.2",
     "ts-node": "10.9.2",
