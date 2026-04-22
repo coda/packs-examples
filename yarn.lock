@@ -3305,10 +3305,10 @@ jsonpath-plus@10.2.0:
     "@jsep-plugin/regex" "^1.0.4"
     jsep "^1.4.0"
 
-jsrsasign@11.1.0:
-  version "11.1.0"
-  resolved "https://registry.yarnpkg.com/jsrsasign/-/jsrsasign-11.1.0.tgz#195e788102731102fbf3e36b33fde28936f4bf57"
-  integrity sha512-Ov74K9GihaK9/9WncTe1mPmvrO7Py665TUfUKvraXBpu+xcTWitrtuOwcjf4KMU9maPaYn0OuaWy0HOzy/GBXg==
+jsrsasign@11.1.1:
+  version "11.1.1"
+  resolved "https://registry.yarnpkg.com/jsrsasign/-/jsrsasign-11.1.1.tgz#a6a213e52b835fd6292fae9903a165921578fc13"
+  integrity sha512-6w95OOXH8DNeGxakqLndBEqqwQ6A70zGaky1oxfg8WVLWOnghTfJsc5Tknx+Z88MHSb1bGLcqQHImOF8Lk22XA==
 
 just-extend@^6.2.0:
   version "6.2.0"
