@@ -2488,10 +2488,10 @@ eslint-plugin-local@6.0.0:
     "@thisismanta/pessimist" "^1.2.0"
     chalk "^4.0.0"
 
-eslint-plugin-prefer-let@4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-prefer-let/-/eslint-plugin-prefer-let-4.0.0.tgz#c5fe70b0a65dfa47e681c0ebff36f53487455749"
-  integrity sha512-X4ep5PMO1320HKaNC9DM5+p6XvOhwv+RcqGjhv3aiw9iAtHhiFtdIUB5l0Zya0iM22ys2BGKzrNI9Xpw/ZHooQ==
+eslint-plugin-prefer-let@4.2.2:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-prefer-let/-/eslint-plugin-prefer-let-4.2.2.tgz#62ff9b81381293f3d8755e4155a39c1be7ff871e"
+  integrity sha512-FkCmQwZtc4nf6EKDKEYW/lWtApDXxsJA/VXWQQemLhIWWho676CJdgt53AMubOrSOTzzep0dBMP9zVFCCCdxsw==
   dependencies:
     requireindex "~1.2.0"
 
