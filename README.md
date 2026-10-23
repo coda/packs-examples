@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This repository has moved to [superhuman/plugins-examples](https://github.com/superhuman/plugins-examples).
+
 # Coda Packs Examples
 
 This repository contains some example code and templates for Coda Packs built with [Coda's Packs SDK][docs_home]. These sample Packs assume you are developing locally using the Pack CLI, as they include multiple source files and tests.
